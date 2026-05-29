@@ -6,14 +6,6 @@ user_locked: true
 
 # Contact Profiling Skill V2.0
 
-## Trigger Words
-
-用户描述客户言行 / 对客户感到困惑 / 提到即将拜访 / 分享公开信息(LinkedIn、演讲、文章)/ 提到具体职位(CFO、CTO、VP),或随口提到客户名字时主动召出 — 不要等用户明确说"分析这个客户"。
-
-> **这个 Skill 做什么**:帮 User 把对客户的零散观察,整理成一份**说清楚这份判断有多准、记下了哪里前后不一致、能指导下次怎么做的分析报告**。同时让 User 在对话里慢慢学会自己怎么看人。
-
-> **V2.0 跟 V1.6 的区别**:架构上拆成 **Control(指令层)+ Record(记录层)+ View(视图层)+ Translator(翻译模块)**。分析方法论完全继承 V1.6,改的是"怎么组织"。详见 `.kiro/specs/contact-profiling-v2/dev-guide.md`。
-
 ## Inputs
   - name: User 对话
     required: true

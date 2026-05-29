@@ -6,21 +6,9 @@ user_locked: true
 
 # Engagement Plan Skill
 
-## Trigger Words
 
-"engagement plan", "opportunity review", "deal strategy", "win plan", "how do I approach this deal", "help me plan this opportunity", "商机管理", "商机推进", "拜访规划", "stakeholder mapping", "deal approach", "meeting cadence planning", "key person analysis", "how to advance an opportunity", "关键人分析", "见谁", "怎么推这个商机", "这个客户怎么打", "deal节奏", "谁是decision maker", "人的策略". Also invoke when the agent learns about a new opportunity from a sales rep — every opportunity deserves an EP.
 
----
-
-## 1. Purpose
-
-The Engagement Plan is a **people-centric action plan** for a specific opportunity. It answers:
-- Who are the key people involved in this deal?
-- What's each person's current stance and what do we need from them?
-- How many meetings will it take, and what should each one accomplish?
-- What actually happened vs. what was planned?
-
-## 2. Generation Workflow — Pre-Generation Dialogue
+## 1. Generation Workflow — Pre-Generation Dialogue
 
 EP generation is **NOT** a one-shot output. When the agent learns about a new opportunity, it enters a conversational preparation phase with sales before generating.
 
@@ -69,7 +57,7 @@ Agent 正式生成 Engagement Plan
 
 ---
 
-## 3. Core Rules
+## 2. Core Rules
 
 ### Rule 1: Opportunity Snapshot — 数据来源
 
@@ -156,7 +144,7 @@ EP does NOT determine whether an opportunity should advance to the next sales st
 
 ---
 
-## 4. EP Template
+## 3. EP Template
 
 ⚠️ **职责分工：** SKILL.md 定义策略和决策逻辑（什么时候做什么、skill 之间怎么协作、fallback 策略）。Reference file 定义每个字段的执行标准（怎么写、写法公式、质量验证、示例）。Agent 生成任何 EP 内容前必须先读 reference file。
 
@@ -168,7 +156,7 @@ Read [references/engagement-plan.md](references/engagement-plan.md) before gener
 
 ---
 
-## 5. Relationship with Other Skills
+## 4. Relationship with Other Skills
 
 **调用顺序指引（跟随模板 Section 顺序）：**
 
@@ -224,7 +212,7 @@ Read [references/engagement-plan.md](references/engagement-plan.md) before gener
 
 
 
-## 6. Document Output
+## 5. Document Output
 
 ### Default: HTML (Material Design 3)
 

@@ -6,19 +6,8 @@ user_locked: true
 
 # Executive Briefing Skill
 
-## Trigger Words
 
-"EBC", "executive briefing", "internal briefing", "leadership briefing", "EBC preparation", "executive visit", "领导拜访", "高管简报". Also trigger when: sales mentions VP/SVP/GM joining a customer meeting, EP Roadmap milestone type is EBC or leadership briefing, sales asks "高管要去客户那边需要准备什么", "领导下周要拜访客户", "这个 milestone 是 EBC 级别的", or any scenario where AWS executive participation requires a structured preparation document. If the meeting involves any AWS executive (VP+) going to a customer, this skill should be invoked.
-
-
-## 1. Purpose
-
-The Executive Briefing Document prepares **AWS executives** for high-level customer engagements. It is the **sole preparation document** for:
-- **EBC visits** — External executive briefing center engagements (mandatory)
-- **Internal leadership briefing** — AWS senior leadership joining a customer visit
-
-
-## 2. Generation Workflow — Pre-Generation Dialogue
+## 1. Generation Workflow — Pre-Generation Dialogue
 
 EB generation is **NOT** a one-shot output. EBC/高管拜访准备通常涉及多方协调，agent 和 sales 在生成前需要对话确认。
 
@@ -74,7 +63,7 @@ Agent 正式生成 Executive Briefing
 
 ---
 
-## 3. Core Rules
+## 2. Core Rules
 
 ### Rule 1: Always Build the Bigger Picture
 After generating an Executive Briefing, check if an EP exists. If not, auto-create one.
@@ -127,7 +116,7 @@ Every piece of information must carry a provenance label so sales knows the conf
 
 ---
 
-## 4. EB Template
+## 3. EB Template
 
 ⚠️ **SKILL.md vs references/executive-briefing.md 的职责边界：**
 - **SKILL.md**（本文件）= 规则、流程、依赖关系、调用逻辑 — agent 的行为指令
@@ -145,7 +134,7 @@ Read [references/executive-briefing.md](references/executive-briefing.md) before
 
 ---
 
-## 5. Attendee Background Dimensions
+## 4. Attendee Background Dimensions
 
 For each customer attendee, cover in one focused paragraph:
 
@@ -157,7 +146,7 @@ For each customer attendee, cover in one focused paragraph:
 
 ---
 
-## 6. Company Profile Dimensions
+## 5. Company Profile Dimensions
 
 Cover in one focused paragraph:
 
@@ -170,7 +159,7 @@ Cover in one focused paragraph:
 
 
 
-## 7. Document Output
+## 6. Document Output
 
 ### Default: HTML (Material Design 3)
 

@@ -19,9 +19,6 @@ This skill is built on four truths from the Customer Business Insight methodolog
 Your deliverable is not a pitch deck. It is a **single, stitched-together conversation** that an AM or SA can deliver in 3–5 minutes and use to earn the next meeting. The deliverable is named the **identified potential opportunity**.
 
 
-## Trigger words: 
-Triggers on phrases like 'BTTROC', ‘where's opportunities', 'identify opporunities', 'do i have opportunities in this customer'. This skill consumes the Top strategic initiative from the busienss-insight skill plus the reference-matched solutions from the solutions-search skill and competitive-intelligence skill.
-
 ## Procedure — Control / Record / View
 
 Every run of this skill executes three stages, in this fixed order:

@@ -6,23 +6,8 @@ user_locked: true
 
 # Post-Meeting Report Skill
 
-## Trigger Words
 
-"post-meeting report", "meeting notes", "follow-up after meeting", "meeting debrief", "visit report", "what happened in the meeting", "just finished meeting", "debrief time", "meeting recap", "capture meeting outcomes", "update EP after meeting", "拜访复盘", "会议纪要", "会后总结", "刚见完客户", "开完会了", "今天拜访了". Also trigger when user provides meeting transcripts, audio recordings, or post-visit notes that need structuring into a report, even if they don't explicitly say "PMR".
-
-## 1. Purpose
-
-The Post-Meeting Report captures what happened during a customer visit and feeds insights back into the Engagement Plan. It works for both Call Plan visits and Executive Briefing visits.
-
-**Position in the Closed-Loop Flow:**
-```
-Call Plan → Visit → PMR → Update EP (+ Opp Progression stage review) → Next Call Plan → ...
-Executive Briefing → Visit → PMR → Update EP (+ Opp Progression stage review) → Next interaction → ...
-```
-
----
-
-## 2. Input
+## 1. Input
 
 The agent accepts any of the following:
 - **Verbal debrief** — sales rep describes what happened in conversation
@@ -34,7 +19,7 @@ The agent structures whatever input it receives into the PMR template. If input 
 
 ---
 
-## 3. Core Rules
+## 2. Core Rules
 
 ### Rule 1: Close the Loop
 After generating a PMR:
@@ -68,7 +53,7 @@ Every piece of information must carry a provenance label so sales knows the conf
 
 ---
 
-## 4. PMR Template
+## 3. PMR Template
 
 Read [references/post-meeting-report.md](references/post-meeting-report.md) before generating. The template has 4 core sections + 1 handoff:
 
@@ -80,7 +65,7 @@ Read [references/post-meeting-report.md](references/post-meeting-report.md) befo
 
 ---
 
-## 5. EP Update Rules
+## 4. EP Update Rules
 
 When updating the EP from a PMR, **agent directly edits the EP file** and then asks sales to review:
 
@@ -96,7 +81,7 @@ After updating, always ask sales to review the EP changes.
 
 ---
 
-## 6. Agent Recommendation & Referrals
+## 5. Agent Recommendation & Referrals
 
 After each PMR, provide:
 
@@ -127,7 +112,7 @@ After each PMR, provide:
 
 ---
 
-## 7. Customer Recap Email
+## 6. Customer Recap Email
 
 After completing the PMR, ask: "Would you like me to draft a customer recap email based on this report?"
 
@@ -186,7 +171,7 @@ Sales reviews and edits before sending same day. Customer-facing content only.
 
 
 
-## 8. Document Output
+## 7. Document Output
 
 ### Default: HTML (Material Design 3)
 

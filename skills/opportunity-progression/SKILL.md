@@ -11,55 +11,6 @@ Opportunity progression analysis tool. Upload your Scorecard to receive MEDDPICC
 Structure: **Procedure 1 (Control) / Procedure 2 (Model) / Procedure 3 (View)**. Each phase in Control follows the form `call M.X → render view:phaseN.Z → WAIT`. Model produces only structured values; View contains only templates with placeholders (no logic); Control orchestrates.
 
 
----
-
-## Trigger Patterns (for sales-agent-orchestrator)
-
-This section tells the Dali orchestrator when to route user intent to `opportunity-progression`, and when to defer to other skills. The skill itself does not enforce these patterns — the orchestrator is the authority. The patterns below describe scenarios for which this skill is the right answer.
-
-**Route to `opportunity-progression` when:**
-
-- User explicitly requests MEDDPICC / EDDIC analysis, scoring, stage assessment, or "deal health" review.
-  - 中文：评估卡 / Scorecard 分析 / MEDDPICC 评估 / 商机进展 / 商机阶段评估 / deal health / 阶段是否对齐
-  - English: "score this deal", "MEDDPICC review", "stage assessment", "deal health check", "is this stuck"
-- User uploads a Scorecard `.xlsx` file (orchestrator detects file extension + content shape).
-- User describes opportunity progression challenges:
-  - 中文：商机卡住了 / 推不动 / 不知道怎么推 / EB 还没接触 / 这单要不要推到下一阶段 / 季度 forecast 这单稳吗
-  - English: "deal stuck / can't move forward / not sure how to advance / haven't talked to EB / can this go to next stage / forecast confidence on this deal"
-- After foundational skills (`account-context` / `contact-profiling` / `competitive-intelligence`) have been run, recommend as natural next step ("现在我们对客户和竞争都有概念了，要不要跑 MEDDPICC 评估这单的 health？").
-- Before scheduled review events: pipeline review, weekly forecast call, quarterly business review (QBR), GM 1-on-1, deal team sync.
-
-**Do NOT route to `opportunity-progression` (defer to sibling skills) when:**
-
-- User asks about a specific contact's persona / behavior → defer to `contact-profiling` / `cxo-personas`.
-- User wants competitive intel only (battlecard, win/loss, displacement) → defer to `competitive-intelligence`.
-- User wants strategic account synthesis (SWOT / TOWS / "should we even pursue this account") → defer to `business-insight`.
-- User wants to draft customer-facing narrative for an EBC / executive briefing → defer to `bttroc` / `executive-briefing`.
-- User wants to plan a single meeting / call → defer to `call-plan` / `engagement-plan`.
-- User wants to debrief a meeting just held → defer to `post-meeting-report`.
-- User wants to roleplay a customer conversation → defer to `simulator`.
-
-**Output suitability (orchestrator can use this to plan downstream actions):**
-
-- **Phase 1A Auto-Inference path** (`scorecard_source = "auto-inferred-accepted"`): suitable for quick-pulse health check, conversational deal review, or when the rep doesn't have time to fill a Scorecard. Marked with V.0.7 banner; precision is med/low. Not suitable for management review.
-- **Phase 1A Upload / Form path** (`scorecard_source = "upload" | "form"`): suitable for management review, GM 1-on-1, QBR, sales kickoff. Precision is high.
-- **Phase 7 HTML / PDF / Word**: shareable artifact. PDF preferred for management review (page-break optimized); HTML for in-tool viewing; Word for offline editing.
-- **M.24 Model snapshot** (`~/.dali/opportunity-progression/snapshots/...`): machine-to-machine. Used by other Dali skills or downstream tools (e.g., a future "Snapshot Diff" skill, CRM writeback, cross-opportunity rollup).
-
-**Re-trigger patterns (when to re-run the skill on the same opportunity):**
-
-- Scorecard data updated → re-run with new upload.
-- Significant deal event (EB meeting held, EDP signed, competitor displaced) → re-run to capture new state.
-- Quarterly cadence even without explicit event → at least once per quarter for active opportunities.
-- After running Phase 4 delegated skills (`account-context` / `solutions-search` / `competitive-intelligence`) — those skills' fresh output materially changes Phase 4 / Phase 5 outputs.
-
-**Cross-skill orchestration hint:**
-
-- If the user's intent is "evaluate this deal end-to-end" and the orchestrator has not yet run foundational skills, suggest running `account-context` and `contact-profiling` first, then `opportunity-progression` (so Phase 1A Option C / Phase 4 / Phase 5 have rich context to consume).
-- Conversely, if the user has already run foundational skills, route directly to `opportunity-progression` and offer Phase 1A Option C as the default Scorecard source (since context is already present).
-
----
-
 ## Global Rules
 
 - **Input boundary:** Scorecard (.xlsx) matching tier locked in Phase 1 — EDDIC for Simple, MEDDPICC for Strategic. Commodity needs no Scorecard.

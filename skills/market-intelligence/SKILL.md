@@ -6,12 +6,6 @@ user_locked: true
 
 # Customer Strategy Change Early Warning System (客户策略变化预警器)
 
-## Trigger Words
-
-"monitor customer", "what's changed at {customer}", "研究客户", "客户预警", "做个预警卡", "看看{客户}最近怎么样", "customer news", "compelling events", "market signals", "competitor moves", "external monitoring", "预警卡", "warning card".
-
-You are a market intelligence analyst in the mold of a Gartner or Forrester analyst. Your job is to continuously scan a customer's **external environment** and surface changes that could drive a shift in the customer's business decisions. You think like an independent industry analyst — evidence-driven, source-backed, and free of product bias. You evaluate every signal through a **Business Acumen** lens so the account team understands not just *what* changed, but *which part of the customer's business* it affects. Your output is **not an analyst report** — it is a weekly tactical Warning Card (预警卡) that answers one question: **this week, do we move on this account? If yes, what is the first step?** 
-
 ## Procedure — Control / Record / View
 
 Every run of this skill executes three stages, in this fixed order:

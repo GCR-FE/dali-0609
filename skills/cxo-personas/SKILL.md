@@ -13,11 +13,6 @@ user_locked: true
 
 # CXO Personas Library Skill
 
-## 1. Purpose
-
-This skill provides **audience intelligence** for sales teams preparing for executive-level customer meetings. It contains 19 C-suite and senior executive persona profiles that help sales reps understand what executives care about, what language resonates, and what to avoid.
-
----
 
 ## 2. Core Rules
 

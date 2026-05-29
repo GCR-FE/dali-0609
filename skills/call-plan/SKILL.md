@@ -6,22 +6,10 @@ user_locked: true
 
 # Call Plan Skill
 
-## Trigger Words
-
-"call plan", "meeting prep", "customer visit", "visit preparation", "prep for my call", "help me prepare for tomorrow", "I have a meeting with", "拜访准备", "客户拜访", "明天见客户聊什么", "怎么跟这个 CTO 聊", "帮我想想怎么开场", or any variation implying preparation for an upcoming customer interaction. Also invoke when an EP Roadmap next milestone is approaching, sales shares a meeting invite or calendar event, sales mentions an upcoming customer meeting without explicitly requesting a call plan, or any scenario where an AWS sales rep needs structured preparation for a specific external customer interaction.
-
-## 1. Purpose
-
-The Call Plan prepares AWS sales team members before **external customer meetings**. It is generated based on sales input, Engagement Plan context, and the current sales stage.
-
-**Position in the Closed-Loop Flow:**
-```
-EP → Call Plan → Visit → PMR → Update EP (+ Opp Progression stage review) → Next Call Plan → ...
-```
 
 ---
 
-## 2. Core Rules
+## 1. Core Rules
 
 ### Rule 1: Always Build the Bigger Picture
 After generating a Call Plan, check if an Engagement Plan exists for this customer. If not, auto-create one — every opportunity deserves a strategic wrapper. Never ask permission to create an EP.
@@ -70,7 +58,7 @@ Do not fabricate meeting objectives, attendee roles, customer stance, or expecte
 
 ---
 
-## 3. Input
+## 2. Input
 
 Call Plan accepts input from two paths:
 
@@ -103,7 +91,7 @@ Then:
 
 ---
 
-## 4. Generation Workflow — Pre-Generation Dialogue
+## 3. Generation Workflow — Pre-Generation Dialogue
 
 Call Plan generation is **NOT** a one-shot output. It follows a conversational preparation phase where agent and sales collaborate to confirm inputs, clarify unknowns, and answer each other's questions.
 
@@ -157,7 +145,7 @@ Agent generates Call Plan
 
 ---
 
-## 5. Stage-Aware Framework
+## 4. Stage-Aware Framework
 
 Six stages: **Prospect → Qualified → Technical Validation → Business Validation → Committed → Closed/Launched**
 
@@ -183,7 +171,7 @@ For every Call Plan, prepare **industry-relevant use cases** and **customer refe
 
 ---
 
-## 6. Call Plan Template
+## 5. Call Plan Template
 
 ⚠️ **Responsibility boundary between SKILL.md and references/call-plan.md:**
 - **SKILL.md** (this file) = rules, workflows, dependencies, invocation logic — behavioral instructions for the agent
@@ -203,7 +191,7 @@ Read [references/call-plan.md](references/call-plan.md) before generating. The t
 
 ---
 
-## 7. Relationship with Other Skills
+## 6. Relationship with Other Skills
 
 | Skill | Relationship | How to Access | If Unavailable |
 |--------|-------------|---------------|----------------|
@@ -219,7 +207,7 @@ Read [references/call-plan.md](references/call-plan.md) before generating. The t
 
 ---
 
-## 8. Document Quality Standards
+## 7. Document Quality Standards
 
 Before delivering, validate:
 - [ ] All attendees identified with roles + relevant persona/profiling loaded
@@ -232,7 +220,7 @@ Before delivering, validate:
 
 ---
 
-## 9. Information Insufficient Fallback
+## 8. Information Insufficient Fallback
 
 1. **Never block.** Generate best-effort version with available information.
 2. **Never hallucinate.** Mark gaps as `[TBC]` with actionable context — explain **why** it matters and **how** it would improve the document.
@@ -243,7 +231,7 @@ Before delivering, validate:
 
 ---
 
-## 10. Language & Tone
+## 9. Language & Tone
 
 - **Professional but approachable** — not stiff, not casual
 - **Action-oriented** — active voice, lead with verbs
@@ -255,7 +243,7 @@ Before delivering, validate:
 
 ---
 
-## 11. Document Output
+## 10. Document Output
 
 ### Default: HTML (Material Design 3)
 

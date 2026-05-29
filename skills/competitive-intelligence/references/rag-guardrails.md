@@ -93,7 +93,27 @@ Section 12 (Coverage Honesty) is expanded to a **mandatory structural disclosure
 
 Silent gaps break the seller in the meeting. A seller who knows "we have no current Alibaba Cloud pricing content for your Indonesia customer" can plan around it; a seller who receives silently-substituted China content labeled "Alibaba pricing" will embarrass themselves and AWS.
 
-## Required Confidence Labels Per Dimension
+## Guardrail 9 — Competitor Official-Documentation Sourcing (对手官方文档取证)
+
+Competitor-side facts (SLA, region/AZ counts, per-region service availability, published/list pricing, quotas, compliance certifications, GA vs preview status) drift faster than any curated CI page can track. They must be grounded in the **competitor's own official documentation source** — the peer of the AWS Documentation MCP — never inferred, never carried forward from a stale `compete/` page as if current:
+
+| Competitor | Official documentation source | Access |
+|------------|------------------------------|--------|
+| Azure | Microsoft Learn MCP `https://learn.microsoft.com/api/mcp` | Remote MCP, no auth ✅ |
+| GCP | Gemini Cloud Assist MCP `https://geminicloudassist.googleapis.com` / `cloud.google.com/docs` | MCP needs GCP auth |
+| AliCloud | OpenAPI MCP / `alibabacloud.com/help` | MCP needs AccessKey |
+| Tencent Cloud | `cloud.tencent.com/developer/mcp` / `intl.cloud.tencent.com/document` | Per-product / portal |
+| Oracle (OCI) | OCI/ADB MCP / `docs.oracle.com` | MCP needs OCI auth |
+
+Rules:
+
+- **Label as `vendor self-reported`** — a competitor's own docs are marketing-adjacent; an SLA or "lowest price" claim from the vendor is a claim, not an independent benchmark. Triangulate against `./references/` (Guardrail 3) before treating it as fact in customer-facing material.
+- **Record the retrieval date** on every competitor fact. Vendor docs change without notice; an undated competitor fact is unusable.
+- **Confidence cap:** Only Microsoft Learn MCP is a no-auth docs-search MCP equivalent to the AWS Documentation MCP, so an Azure fact retrieved live can reach **Moderate/Strong** if triangulated. For GCP / AliCloud / Tencent / Oracle, when only the docs *portal* (not a live MCP) is reachable, **cap the dimension at Thin** and disclose the access limitation.
+- **Pricing & benchmarks still pass Guardrails 6 & 7** — re-calculate the math from the vendor's raw unit prices; do not quote the vendor's aggregate "X% cheaper" claim.
+- **Unreachable source = explicit gap.** If the competitor's official documentation cannot be reached (auth wall, MCP disabled, portal change), state it in Coverage Honesty (Guardrail 8). Do **not** substitute a curated CI page and present it as the vendor's current docs.
+
+
 
 Every dimension in the final output must carry a confidence label:
 

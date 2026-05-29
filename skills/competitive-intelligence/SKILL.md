@@ -18,10 +18,30 @@ Reading order:
 1. `references/INDEX.md` — identify which vendor(s) and scenario(s) match the request
 2. `references/compete/<vendor>.md` — overall vendor positioning
 3. `references/battlecards/<scenario>.md` — scenario-specific depth
+4. Official Vendor Documentation
+5. Last resort is: web_search or general internet browsing. 
+
+### Official Vendor Documentation (competitor-side fact grounding)
+
+The curated `./references/` pages carry the **AWS positioning, talk tracks, and compete motion** — that is the irreplaceable core. But competitor-side *facts* (current SLA, region/AZ counts, service availability by region, list/published pricing, quotas, compliance certifications, GA vs preview status) drift fast and must be grounded in the **competitor's own official documentation**, the same way AWS-side claims ground in the **AWS Documentation MCP** (`aws_docs` / `aws_knowledge`). Never infer or fabricate a competitor fact.
+
+Each competitor's official documentation source — the equivalent of the AWS Documentation MCP:
+
+| Competitor | Official documentation source (AWS Documentation MCP equivalent) | Access method | Maturity |
+|---|---|---|---|
+| **Azure** | Microsoft Learn MCP Server — `https://learn.microsoft.com/api/mcp` | Remote MCP (streamable HTTP), **no auth** | ✅ True documentation-search MCP, directly equivalent to AWS Documentation MCP |
+| **GCP** | Gemini Cloud Assist remote MCP — `https://geminicloudassist.googleapis.com`; docs portal `cloud.google.com/docs` | Remote MCP (**needs Google Cloud auth**) | ⚠️ Ops/assist-oriented, not a pure docs-search MCP |
+| **AliCloud** | Alibaba Cloud OpenAPI MCP Server (`alibabacloud.com/help/en/openapi/user-guide/openapi-mcp-server-guide`); Documentation Center `alibabacloud.com/help` | MCP **needs AccessKey credentials** | ⚠️ API-invocation MCP, not docs search |
+| **Tencent Cloud** | Tencent Cloud per-product MCP (`cloud.tencent.com/developer/mcp`); docs `intl.cloud.tencent.com/document` | Per-product MCP / official docs portal | ⚠️ No single unified docs MCP |
+| **Oracle (OCI)** | OCI / Autonomous AI Database MCP (`docs.oracle.com/.../use-mcp-server.html`); docs `docs.oracle.com` | MCP DB/ops-oriented, **needs OCI auth** | ⚠️ No unified docs MCP |
+
+**Honesty rule for vendor docs:** Only **Microsoft Learn** offers a clean, no-auth documentation-search MCP that is a true peer of the AWS Documentation MCP. For GCP / AliCloud / Tencent / Oracle, the official MCP servers are API- or ops-oriented and require credentials; when no MCP path is reachable, fall back to the vendor's **official documentation portal** (above) and label the dimension's confidence as **Thin** at best. When citing a competitor fact, mark it **vendor self-reported**, record the **retrieval date**, and pass it through the RAG guardrails (`references/rag-guardrails.md`, esp. Guardrail 6 pricing re-calc and Guardrail 7 benchmark methodology). If a vendor's official documentation cannot be reached, **state the gap in Coverage Honesty** — never substitute a curated CI page as if it were the vendor's own current docs.
+
+MCP wiring for these sources lives in `.kiro/settings/mcp.json` (Microsoft Learn enabled by default; the credential-gated servers are listed disabled with setup notes).
+
+Ground **AWS-side** claims in `./references/` + the AWS Documentation MCP, and **competitor-side** claims in `./references/` + the competitor's official documentation source above. If anything is found through the open search on internet, state that explicitly.
 
 If the references folder does not cover the requested competitor or scenario, **state the coverage gap explicitly** and do not fabricate data.
-
-Do not use web_search or public internet.
 
 ## Core Objective
 Given a named competitor, and an AWS opportunity, and the contested workload or strategic action, return:
@@ -36,7 +56,7 @@ Given a named competitor, and an AWS opportunity, and the contested workload or 
 8. **Watch-outs and traps** — known places where the competitor wins or where the AWS narrative fails if misdelivered
 9. **Seller takeaways** — 3–5 crisp, memorable one-liners the seller can internalize before the meeting
 
-All grounded in `./references/` data content or AWS Documentation, all dated, all traceable.
+All grounded in `./references/` data content, AWS Documentation (for AWS-side claims), or the competitor's official documentation source (for competitor-side facts), all dated, all traceable.
 
 
 ### Required Input
