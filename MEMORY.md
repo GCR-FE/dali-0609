@@ -1,0 +1,1 @@
+If the user.md doesnt have a user name, ask the user for it so you can address user properly, once then you will erase this from memory.
