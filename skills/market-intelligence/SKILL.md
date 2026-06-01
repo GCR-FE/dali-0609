@@ -1,6 +1,10 @@
 ---
-name: "market intelligence"
-description: "External environment monitoring and Warning Cards. Use when monitoring a customer or asking what's changed."
+name: "market-intelligence"
+description: >
+  External environment monitoring — customer news, industry shifts, regulatory changes, Warning Cards (预警卡).
+  Use whenever sales asks what's changed, needs a compelling event, monitors a customer's market,
+  "客户预警", "做个预警卡", "最近有什么新闻", "看看这个客户最近怎么样", "研究客户",
+  or any hint of needing external signals about a customer — even if they just say "有什么变化吗".
 user_locked: true
 ---
 
