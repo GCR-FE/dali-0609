@@ -79,7 +79,7 @@ If the user explicitly names a skill or uses an unambiguous keyword, route immed
 | BTTROC / CXO narrative / executive pitch / 有什么机会 / identify opportunity | → `bttroc` |
 | engagement plan / EP / 商机策略 / 怎么打这个单 / 人的策略 / 关键人分析 | → `engagement-plan` |
 | call plan / 拜访计划 / 会前准备 / 拜访准备 / 客户拜访 / 明天见客户 | → `call-plan` |
-| executive briefing / EBC / 高管简报 / 领导拜访 | → `executive-briefing` |
+| executive briefing / EBC / 高管简报 / 高管拜访 | → `executive-briefing` |
 | 会后 / debrief / PMR / 会议总结 / 拜访复盘 / 刚见完客户 | → `post-meeting-report` |
 | MEDDPICC / EDDIC / opportunity progression / 商机推进 / scorecard / deal health | → `opportunity-progression` |
 | 联系人分析 / 这个人怎么样 / stakeholder / contact profile / 客户画像 | → `contact-profiling` |
