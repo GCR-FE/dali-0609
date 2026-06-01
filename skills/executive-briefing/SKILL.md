@@ -1,6 +1,11 @@
 ---
 name: executive-briefing
-description: "Internal briefing for AWS executive customer visits. Use when preparing an EBC or leadership visit."
+description: >
+  Briefing document to prepare AWS executives for customer interactions — covers EBC visits
+  and any scenario where AWS VP+ joins a customer meeting.
+  Use whenever sales mentions EBC, executive visit, or a VP/SVP/GM joining a meeting,
+  "EBC", "高管简报", "高管拜访", "VP要去见客户", "高管要去客户那边需要准备什么",
+  or any hint of executive participation — even without saying "executive briefing".
 user_locked: true
 ---
 
