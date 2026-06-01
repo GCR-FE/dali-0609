@@ -1,13 +1,10 @@
 ---
 name: cxo-personas
 description: >
-  CXO Persona Library for sales teams. Provides 19 C-suite and senior executive persona profiles
-  organized across 6 categories. Powers persona-driven meeting preparation across Call Plan,
-  Executive Briefing, and Engagement Plan documents. Includes Title Mapping, Topic Routing,
-  and Cross-Persona Dynamics for buying committee analysis.
-  Triggers on: "CXO persona", "executive persona", "persona profile", "who is the CFO",
-  "how to talk to a CTO", "buying committee", "stakeholder analysis", "executive meeting",
-  "C-suite preparation", "高管画像", "人物画像".
+  19 C-suite and senior executive persona profiles — priorities, pain points, KPIs, objections by role.
+  Use whenever sales asks about an executive's priorities, how to talk to a CTO/CFO/CIO,
+  "高管画像", "这个CTO关心什么", "CFO的痛点", "怎么跟VP聊",
+  or any need to understand what a specific executive role cares about — even if they just name a title.
 user_locked: true
 ---
 
