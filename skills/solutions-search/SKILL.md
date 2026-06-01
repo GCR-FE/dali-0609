@@ -1,6 +1,10 @@
 ---
 name: "solutions-search"
-description: "AWS references matched to strategic initiatives."
+description: >
+  Finds AWS reference architectures, case studies, and proven solution patterns that match a customer's strategic needs.
+  Use whenever sales asks for similar customers, proven architectures, what AWS has done before,
+  "有没有类似案例", "参考架构", "其他客户怎么做的", "有没有成功案例", "解决方案",
+  or any hint of looking for prior art — even if they just say "有没有别人做过".  
 user_locked: true
 ---
 
