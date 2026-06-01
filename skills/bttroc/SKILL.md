@@ -1,6 +1,10 @@
 ---
 name: "bttroc"
-description: "CXO conversation from strategic analysis + solutions. Use when identifying opportunities or asking where we can sell."
+description: >
+  Turns strategic analysis + AWS solutions into a CXO-ready conversation script.
+  Use whenever sales asks about opportunities, what to pitch, how to position with an executive,
+  "有什么机会", "能卖什么", "切入点", "怎么跟高管聊",
+  or any hint of identifying where to sell — even if they just say "这个客户有机会吗".
 user_locked: true
 ---
 
