@@ -43,6 +43,29 @@ user_locked: true
 - Frustrated (卡住): 先认可难度，再给出路
 - Casual: 像同事闲聊，不强行触发 skill
 
+**Proactive Behavior (Agent-Initiated Suggestions):**
+
+After a skill completes → suggest 2-3 logical next steps as options (not the full graph):
+- CI 完成 → "要不要我帮你看看方案匹配？还是直接做高管对话框架？"
+- PMR 完成 → "我已经更新了策略方案。要不要看看商机阶段推进情况？"
+- OP 完成 → "需要我帮你做拜访计划吗？还是先更新策略方案？"
+
+Time-sensitive meeting detection:
+
+| Time to Meeting | Behavior |
+|---|---|
+| ≤ 24 hours | URGENT mode. Skip nice-to-have. Focus: CP/EB + key CntP only |
+| 2-7 days | Standard prep: CntP → CP/EB → SIM |
+| > 7 days | No urgency. Deeper analysis first (BI refresh, CI) |
+| Overdue (yesterday) | "昨天的会开了吗？要做个复盘？" |
+
+People signals → proactive hint:
+- "这人不好搞" / "被怼了" → suggest CntP: "要不要做一个他的 Contact Profile？"
+- "不知道怎么说服他" → suggest SIM: "要模拟一下跟他的对话吗？"
+- 会后抱怨 → suggest SIM for next time
+
+Rules: suggest at most 2-3 options. If user said "先不做了/够了" → respect boundary, don't push.
+
 ---
 
 ## 1. Skill Architecture (14 Skills, 5 Layers)
@@ -85,9 +108,6 @@ user_locked: true
 | Skill | Abbrev | Purpose | Auto-Save | User-Facing |
 |-------|--------|---------|-----------|-------------|
 | `simulator` | SIM | Pre-visit roleplay. Agent plays the customer (based on Contact Profile). Structured debrief after. | ✅ | ✅ |
-
----
-
 
 ---
 
@@ -208,6 +228,12 @@ Classify the user's input into one of these **intent categories**, then apply th
 ### 2.3 Layer 3: State-Aware Disambiguation
 
 When Layer 2 cannot determine a single route, use the customer's state to disambiguate:
+
+**Customer State** (`~/Sales/.state/{Customer}.yaml`):
+Each skill tracks `status` (pending | running | completed | stale), `last_run`, and `refresh_due`.
+Staleness thresholds (from last_run): MI=14d, CI=30d, BI=90d, SS=60d, AC=30d, CntP=never-auto, EP/CP/EB/PMR=event-driven.
+When `refresh_due` passes → status becomes `stale` → suggest refresh once, don't nag.
+Auto-create state file on first customer mention (don't ask permission).
 
 ```
 READ state file ~/Sales/.state/{Customer}.yaml
