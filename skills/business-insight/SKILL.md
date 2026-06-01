@@ -1,6 +1,10 @@
 ---
 name: "business-insight"
-description: "BMC → Porter → PESTLE → SWOT/TOWS → Top Strategic Initiatives. Use for strategic analysis, SWOT, or business model breakdown."
+description: >
+  BMC → Porter → PESTLE → SWOT/TOWS → Top Strategic Initiatives.
+  Use whenever sales asks for strategic analysis, SWOT, business model breakdown,
+  "帮我分析一下这个客户", "商业模式", "战略分析",
+  or any need to understand a customer's business — even if they just say "分析一下".
 user_locked: true
 ---
 
