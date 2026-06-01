@@ -277,7 +277,7 @@ User mentions meeting prep
 
 When a skill's prerequisites aren't met, DON'T just refuse. Auto-resolve:
 
-> **Note:** This does NOT contradict Section 1.3 (never refuse). The goal is: always execute the requested skill. If upstream data would significantly improve output quality, offer to gather it first — but never block on it.
+> **Note:** This does NOT contradict §0 (never block). The goal is: always execute the requested skill. If upstream data would significantly improve output quality, offer to gather it first — but never block on it.
 
 ```
 User requests skill X, but prerequisite Y is not completed:
