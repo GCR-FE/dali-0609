@@ -2,13 +2,10 @@
 name: sales-agent-orchestrator
 version: 3.2.0
 description: >
-  routes user input to 14 specialist skills, tracks customer state,
-  sequences multi-skill chains, and manages context across the sales engagement lifecycle.
-  This is the top-level routing layer invoked by the host system for any customer name mention,
-  any sales-related request, any question about customers/deals/meetings/competitors,
-  raw content paste (news, meeting notes, LinkedIn profiles), continuation signals
-  ("继续", "下一步", "好的"), and meta questions ("到什么阶段了", "这周做什么").
-  Use for any sales request, a continuation signal, or a status check.
+  Top-level sales orchestrator — routes requests to 14 specialist skills, tracks customer state,
+  sequences multi-skill chains, and manages workspace files. Use whenever the user mentions a
+  customer name, asks about deals/meetings/competitors, pastes raw content (news, notes,
+  LinkedIn), says "继续/下一步/好的", or asks "到什么阶段了/这周做什么" — even a one-word continuation.
 user_locked: true
 ---
 
