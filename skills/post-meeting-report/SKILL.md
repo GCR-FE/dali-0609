@@ -1,6 +1,10 @@
 ---
 name: post-meeting-report
-description: "Post-visit debrief with EP auto-sync. Use after finishing a meeting to debrief or capture notes."
+description: >
+  Post-meeting debrief — structures meeting outcomes, insights, action items, and customer follow-up emails.
+  Use whenever sales finishes a meeting or visit and needs to capture what happened,
+  "拜访复盘", "会议纪要", "会后总结", "刚见完客户", "开完会了", "今天拜访了",
+  or provides a transcript, recording, or notes to structure — even if they just say "刚开完会".  
 user_locked: true
 ---
 
