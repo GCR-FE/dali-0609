@@ -1,6 +1,10 @@
 ---
 name: "competitive-intelligence"
-description: "Competitive tactics against non-AWS cloud providers."
+description: >
+  Competitive battlecards and positioning against any non-AWS provider or incumbent vendor.
+  Use whenever sales mentions a competitor (Azure, 阿里云, GCP, Huawei, Oracle, Snowflake等),
+  asks how to win or differentiate, "竞争对手", "怎么打", "客户在用xx", "跟xx怎么比",
+  or any hint of competitive positioning — even if they just say "对手是谁".
 user_locked: true
 ---
 
