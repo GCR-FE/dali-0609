@@ -1,6 +1,10 @@
 ---
 name: engagement-plan
-description: "People-centric deal strategy and meeting roadmap. Use when planning how to approach or win a deal."
+description: >
+  People-centric deal strategy — who to engage, how to win, meeting roadmap, and execution tracking.
+  Use whenever sales asks how to approach or win a deal, plan an opportunity, map stakeholders,
+  "怎么打这个单", "商机推进", "拜访规划", "关键人分析", "见谁", "这个客户怎么打",
+  or any hint of deal-level planning — even if they just say "怎么推这个商机".
 user_locked: true
 ---
 
