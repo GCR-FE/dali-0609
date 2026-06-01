@@ -1,6 +1,10 @@
 ---
 name: "account-context"
-description: "Structured customer context for downstream skills."
+description: >
+  Machine-to-machine foundation skill. Produces structured customer context
+  (org chart, IT landscape, competitive landscape, buying behavior) from public web research.
+  Use whenever any skill needs customer background data before performing its own analysis
+  — never called directly by users, always invoked by other skills as a data source.
 user_locked: true
 ---
 
