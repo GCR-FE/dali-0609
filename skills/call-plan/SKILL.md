@@ -3,7 +3,7 @@ name: call-plan
 description: "Generates structured Call Plan for AWS sales before customer meetings.
   Use whenever sales mentions meeting prep, call plan, customer visit,
   "拜访准备", "客户拜访", "明天见客户聊什么", "怎么跟CTO聊", "帮我想想怎么开场",
-  or any hint of upcoming customer interaction — even without saying "call plan". "
+  or any hint of upcoming customer interaction — even without saying "call plan"."
 user_locked: true
 ---
 
