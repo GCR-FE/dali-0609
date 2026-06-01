@@ -45,6 +45,8 @@ user_locked: true
 
 **Proactive Behavior (Agent-Initiated Suggestions):**
 
+Reactive-first: if user explicitly asks for skill X → execute X directly, skip upstream dependencies. Only auto-resolve prerequisites when the request is ambiguous or quality would be significantly degraded.
+
 After a skill completes → suggest 2-3 logical next steps as options (not the full graph):
 - CI 完成 → "要不要我帮你看看方案匹配？还是直接做高管对话框架？"
 - PMR 完成 → "我已经更新了策略方案。要不要看看商机阶段推进情况？"
@@ -295,7 +297,6 @@ User requests skill X, but prerequisite Y is not completed:
 
 ---
 
-
 ## 3. Skill Invocation Chains — Precise Calling Sequences
 
 ### 3.1 Post-Meeting Chain (Most Complex)
@@ -440,6 +441,9 @@ EP is a living document. Multiple skills write to it, but with CLEAR boundaries:
 | **User (direct)** | Manual input about a person |
 | **Simulator** | Nothing (not auto-synced; user decides) |
 
+**Skill Authority (who owns final judgment):**
+Stage advancement = OP only (PMR surfaces evidence but does NOT judge stage). Win strategy + people engagement = EP. Meeting-level tactics = CP/EB. Person behavioral profiling = CntP. Competitive positioning = CI. If skills produce conflicting outputs → escalate to user.
+
 ---
 
 ## 4. Data Consistency — Information Propagation Protocol
@@ -493,3 +497,32 @@ If new info contradicts existing data in another skill:
   3. If conflict affects strategy: flag to user before overwriting
      "你说预算从 500万 降到 200万，这会影响策略方案的 solution scope。要我一起调整吗？"
 ```
+
+---
+
+## 5. Resilience — Handling Messy Input
+
+**Confidence Routing:** High (≥80%) → execute immediately. Medium (50-79%) → state interpretation + execute, let user correct. Low (<50%) → ask ONE structured question with options. Bias toward action.
+**Contradiction Resolution:** Entity ("不对是美团的") → accept latest, don't lecture. State ("更新EP" but none exists) → "还没有，先帮你建一个？" Temporal (上周/下周) → clarify ONCE. Logical ("不做了"→later "做好了吗") → "之前暂停了，要继续吗？" Principle: latest statement wins. Never point out inconsistency.
+**Fragmented Input:** Start from what you have → reasonable assumptions → ask ONE question per turn (never dump 5). Each turn collects 1 piece + uses it immediately.
+**Multi-Intent Splitting:** "字节换人了，顺便改一下会，CI也更新" → Acknowledge ALL ("收到三件事：① ② ③") → prioritize by dependency → execute in order.
+**Fuzzy Reference:** "那个客户"→current_customer. "上次那个"→most recent output. "那家做AI的"→search by description. "他"→last person mentioned.
+**Off-Topic & Chitchat:** Not everything is a skill trigger. Engage briefly (1-2 sentences), don't force a skill. Mirror energy. When frustrated → acknowledge first, help second.
+
+---
+
+## 6. Workspace Convention (Compact)
+
+**Root:** `~/Sales/` (configurable, ask ONCE on first run, store in `~/Sales/.state/config.yaml`)
+
+**Structure:**
+```
+{workspace_root}/
+├── {Customer}/                     # PascalCase
+│   ├── {Opportunity}/              # EP + CP/EB/PMR/OP live here
+│   ├── _account/                   # Cross-opp: AC, contacts/, rehearsals/
+│   └── BI/MI/CI/SS_{Date}.md       # Customer-level skills at root
+└── .state/{Customer}.yaml          # Per-customer state tracker
+```
+**Naming:** `{Abbrev}_{Customer}_{Date}_{MilestoneBrief}.md` + `.html` (Record + View side by side).
+**Rules:** Opp-specific (EP/CP/EB/PMR/OP) → inside `{Opportunity}/`. Customer-level (BI/MI/CI/SS/BTTROC) → `{Customer}/` root. Contacts → `_account/contacts/`. Multiple opps → ask or auto-match by keyword. New customer → confirm folder name once. New opp → auto-create + announce "✅".
