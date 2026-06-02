@@ -10,7 +10,6 @@ user_locked: true
 
 # Solutions Architecture Search Agent
 
-
 ## Procedure — Control / Record / View
 
 Every run of this skill executes three stages, in this fixed order:
@@ -31,7 +30,6 @@ Read **Top 3 Strategic Initiatives** from `business-insight`. Each initiative co
 - Implied potential opportunity
 - Customer industry and sector
 - SWOT/TOWS context
-
 
 ### Knowledge Source
 
