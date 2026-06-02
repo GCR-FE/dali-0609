@@ -10,6 +10,17 @@ user_locked: true
 ---
 
 # account-context
+
+## Execution Discipline
+
+STOP. Read this entire skill file through Procedure 2 before executing any step.
+This is a full-pipeline skill — every step depends on prior steps' output.
+Skipping or reordering steps produces incomplete JSON that breaks downstream consumers.
+
+Checkpoint: after reading, confirm you understand all 5 analysis steps + output schema before proceeding.
+
+---
+
 Machine-readable customer context provider. Output is structured data for other agents to consume — not a user-facing deliverable.
 
 Internally split into two procedures:
