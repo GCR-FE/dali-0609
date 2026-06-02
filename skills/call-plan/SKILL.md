@@ -13,6 +13,14 @@ user_locked: true
 
 ---
 
+## Execution Discipline
+
+STOP. Read this entire skill file before executing.
+This skill has mandatory references that must be loaded at specific stages — do NOT skip them.
+Do NOT begin the Pre-Generation Dialogue until you understand all 10 sections.
+
+---
+
 ## 1. Core Rules
 
 ### Rule 1: Always Build the Bigger Picture
@@ -183,7 +191,7 @@ For every Call Plan, prepare **industry-relevant use cases** and **customer refe
 
 Agent reads SKILL.md first for workflow and rules, then reads references for template structure and writing guidance. The two files do not duplicate the same definitions.
 
-Read [references/call-plan.md](references/call-plan.md) before generating. The template has 7 sections:
+**REQUIRED: Load `references/call-plan.md` before generating any Call Plan.** This file defines the template structure and writing standards for all 7 sections. The `<!-- AGENT GUIDANCE -->` comment blocks provide supplementary generation guidance for each template section.
 
 1. **Meeting Details** — Attendees, roles, logistics, opportunity context from EP
 2. **Target Meeting Outcomes** — Dual-perspective (customer vs. ours) + stage progression target
