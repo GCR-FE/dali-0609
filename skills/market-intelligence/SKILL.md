@@ -10,6 +10,17 @@ user_locked: true
 
 # Customer Strategy Change Early Warning System (客户策略变化预警器)
 
+## Execution Discipline
+
+**STOP.** Read this entire file before producing any output.
+
+This skill executes three Procedures in fixed order — Control → Record → View. No step may be skipped or reordered.
+
+- Step 2 (Public Speech Scan): **REQUIRED: Load `templates/PUBLIC_SPEECH_TEMPLATE.md`** before writing the Public Speech Summary.
+- Step 3 (Build Warning Card): **REQUIRED: Load `templates/WARNING_CARD.md`** before writing any Warning Card content — it contains the renderer contract and fill-in template that `scripts/inject.py` parses.
+- Procedure 2 (Record): **REQUIRED: Load `templates/REASONING_TEMPLATE.md`** before writing the reasoning appendix.
+- Procedure 3 (View): **REQUIRED: Load `templates/WARNING_CARD_REFERENCE.html`** as the canonical design reference for the HTML deliverable.
+
 ## Procedure — Control / Record / View
 
 Every run of this skill executes three stages, in this fixed order:
@@ -254,7 +265,9 @@ Customer name uses Pinyin for Chinese companies (e.g., `MI_Haier_2026-05-12.md`)
 
 ## Procedure 3: View -  DETERMINISTIC HTML → PDF
 
-Every Warning Card produced by this skill ships as **an HTML file that auto-exports to PDF**. The HTML is the canonical rendering surface — no other renderer is used. Use the reference HTML at `templates/WARNING_CARD_REFERENCE.html`.
+Every Warning Card produced by this skill ships as **an HTML file that auto-exports to PDF**. The HTML is the canonical rendering surface — no other renderer is used.
+
+**REQUIRED: Load `templates/WARNING_CARD_REFERENCE.html`** — this is the canonical design. Every run produces an HTML file that matches it structurally.
 
 ### Deterministic output — four locked-in rules
 
@@ -266,7 +279,7 @@ Every Warning Card produced by this skill ships as **an HTML file that auto-expo
 
 ### Programmatic rendering (scripts/)
 
-Two scripts power the HTML → PDF pipeline:
+**REQUIRED: Run `scripts/parser.py` then `scripts/inject.py`** to produce the HTML deliverable. Do not hand-generate HTML.
 
 - `scripts/parser.py` — Parses Warning Card markdown and Reasoning appendix markdown into structured Python dataclasses (`Card`, `Signal`, `OpportunityRow`, `Reasoning`, etc.). Pure data extraction, no side effects.
 - `scripts/inject.py` — Reads a parsed Card + optional Reasoning, produces a complete HTML deliverable matching the design system in `templates/WARNING_CARD_REFERENCE.html`.
