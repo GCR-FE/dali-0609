@@ -250,8 +250,10 @@ EP does NOT determine whether an opportunity should advance to the next sales st
 
 ### Default: HTML (Material Design 3)
 
+**REQUIRED: Load `templates/sample_data.json` before generating output — this defines the expected JSON structure.**
+
 Every EP is rendered as a styled HTML file using `templates/engagement-plan.html.j2`. The agent:
-1. Generates structured data (JSON) from the EP content
+1. Generates structured data (JSON) matching the schema in `sample_data.json`
 2. Fills the template via `templates/render_ep.py`
 3. Outputs the rendered HTML file
 
