@@ -212,11 +212,7 @@ Hand the seller a concrete first move for this week.
 
 ---
 
-
-
-
-
-
+### Quality Gates
 
 - Layer 1 signals are presented in descending order of 综合紧迫度 (internal ordering).
 - Layer 2 must name a specific title (CTO / VP / Head of X), not "leadership".
@@ -224,10 +220,6 @@ Hand the seller a concrete first move for this week.
 - Layer 4 must include all five sub-items: time window, competitor dynamics, decay curve, cost of inaction, timeline simulation. The CoI line must contain two `$X–YM` figures (Year 1 + 3-year).
 - Layer 5 picks exactly one sales motion (Challenger / SPIN / JOLT / Value) — no mixing in the recommendation line.
 - Layer 6 opening script must quote a specific signal from Layer 1 — never generic. When the Public Speech Summary surfaces a quotable line from the intended decision-maker, prefer quoting that line verbatim.
-
-
-
-
 
 ## Procedure 2: Record Full Working Document (mandatory)
 
