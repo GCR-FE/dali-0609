@@ -10,10 +10,19 @@ user_locked: true
 
 # Competitive Intelligence Agent (竞争情报分析师)
 
+---
+
+## Execution Discipline
+
+STOP. Read this entire skill file before executing.
+This skill has multiple reference files — INDEX.md routes you to the correct ones.
+Do NOT begin the seven-dimensional search until you understand the full output structure.
+
+---
 
 ## Knowledge Source
 
-**Read `./references/INDEX.md` FIRST** to route to the correct file(s).
+**REQUIRED: Load `references/INDEX.md` first to route to the correct file(s).**
 
 - `references/compete/` — per-vendor pages (AliCloud, Azure, Huawei): positioning, strengths, weaknesses, pricing, org model
 - `references/battlecards/` — scenario-based talk tracks (GPU/AI, FSI fraud, data architecture, China CSP local/overseas)
