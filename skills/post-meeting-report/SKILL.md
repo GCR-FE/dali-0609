@@ -10,6 +10,14 @@ user_locked: true
 
 # Post-Meeting Report Skill
 
+## Execution Discipline
+
+**STOP.** Read this entire file before producing any output.
+
+This skill executes: Input → PMR Generation → EP Update → Referrals → Email Draft. No step may be skipped.
+
+- §3 (PMR Template): **REQUIRED: Load `references/post-meeting-report.md`** before generating any PMR content — it contains the full template structure and agent guidance.
+- §7 (Document Output): **REQUIRED: Load `templates/sample_data.json`** for the output JSON schema, then render via `templates/render_pmr.py` using `templates/post-meeting-report.html.j2`.
 
 ## 1. Input
 
@@ -59,7 +67,7 @@ Every piece of information must carry a provenance label so sales knows the conf
 
 ## 3. PMR Template
 
-Read [references/post-meeting-report.md](references/post-meeting-report.md) before generating. The template has 4 core sections + 1 handoff:
+**REQUIRED: Load [references/post-meeting-report.md](references/post-meeting-report.md)** before generating. The template has 4 core sections + 1 handoff:
 
 1. **Outcome Assessment** — Auto-pulled objectives/criteria from related document + result (✅ Achieved / ⚠️ Partial / ❌ Not achieved) + stage progression result
 2. **Meeting Notes** — Customer sentiment per attendee + key findings with source and implication
@@ -165,22 +173,12 @@ Sales reviews and edits before sending same day. Customer-facing content only.
 
 ---
 
-
-
-
-
-
-
----
-
-
-
 ## 7. Document Output
 
 ### Default: HTML (Material Design 3)
 
-Every PMR is rendered as a styled HTML file using `templates/post-meeting-report.html.j2`. The agent:
-1. Generates structured data (JSON) from the PMR content
+**REQUIRED: Load `templates/sample_data.json`** for the JSON schema. Then render via `templates/render_pmr.py` using `templates/post-meeting-report.html.j2`. The agent:
+1. Generates structured data (JSON) matching the schema in `sample_data.json`
 2. Fills the template via `templates/render_pmr.py`
 3. Outputs the rendered HTML file
 
