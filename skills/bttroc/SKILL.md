@@ -10,6 +10,18 @@ user_locked: true
 
 # BTTROC — Break Through The Resistance Of Change
 
+## Execution Discipline
+
+STOP. Read this entire skill file through Procedure 3 before executing any step.
+Three procedures execute in strict order: Control → Record → View.
+Skipping steps produces an ungrounded script that the AM cannot use in front of a CXO.
+Within Control, all six reasoning steps (2.1–2.6) must complete before producing any output.
+
+Hard rules:
+- Do NOT write the conversation script until Step 2.4 (archetype diagnosis) is done
+- Do NOT render HTML until Procedure 2 (Record) has written to disk and verified
+
+---
 
 ## Philosophy
 
