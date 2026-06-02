@@ -11,6 +11,16 @@ user_locked: true
 
 # Executive Briefing Skill
 
+---
+
+## Execution Discipline
+
+STOP. Read this entire skill file before executing.
+This skill has a mandatory reference file that defines template structure and writing standards.
+Do NOT begin the Pre-Generation Dialogue until you understand all rules and the EB template structure.
+
+---
+
 
 ## 1. Generation Workflow — Pre-Generation Dialogue
 
