@@ -26,9 +26,19 @@ If Record fails, stop. Do not render View from in-memory state.
 
 ---
 
+## Execution Discipline
+
+STOP. Read this entire skill file before executing.
+Step 1 requires loading reference/bi.md — this is the core analytical process, not optional background.
+Do NOT start research until bi.md is fully loaded and understood.
+
+---
+
 ## Procedure 1: Control
 
-### Step 1: Conduct research and gather information - follow bi.md as the core analytical process. 
+### Step 1: Conduct research and gather information
+
+**REQUIRED: Load `reference/bi.md` before any research begins.** This file IS the core analytical process — every prompt block must be executed in sequence. 
 - Use bocha_web_search
 - Use bocha_ai_search
 - use agent-browser on baidu.com as search engine. 
@@ -76,7 +86,9 @@ Customer name uses Pinyin for Chinese companies (e.g., `AA_Haier_2026-05-12.md`)
 
 ## Procedure 3: View — HTML → PDF
 
-Every Output produced by this skill ships as **an HTML file that auto-exports to PDF**. The HTML is the canonical rendering surface — no other renderer is used. Use the reference html in /assets folder.
+**REQUIRED: Load `assets/OUTPUT_REFERENCE.html` before generating any HTML output.**
+
+Every Output produced by this skill ships as **an HTML file that auto-exports to PDF**. The HTML is the canonical rendering surface — no other renderer is used.
 
 
 ## Quality Standards
