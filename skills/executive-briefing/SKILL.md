@@ -129,7 +129,7 @@ Every piece of information must carry a provenance label so sales knows the conf
 
 Agent 生成 EB 时先读 SKILL.md 确认流程和规则，再读 references 获取模板结构和写作指导。两者不重复定义同一件事。
 
-Read [references/executive-briefing.md](references/executive-briefing.md) before generating. The template has 5 sections:
+**REQUIRED: Load `references/executive-briefing.md` before generating any EB content.** The template has 5 sections:
 
 1. **Meeting Logistics** — Date/time/format, AWS attendees, who requested and why, key contacts
 2. **Customer Attendee Background** — Per-attendee detail (5 dimensions) + Company Profile (5 dimensions)
@@ -168,8 +168,10 @@ Cover in one focused paragraph:
 
 ### Default: HTML (Material Design 3)
 
+**REQUIRED: Load `templates/sample_data.json` before generating output — this defines the expected JSON structure.**
+
 Every Executive Briefing is rendered as a styled HTML file using `templates/executive-briefing.html.j2`. The agent:
-1. Generates structured data (JSON) from the EB content
+1. Generates structured data (JSON) matching the schema in `sample_data.json`
 2. Fills the template via `templates/render_eb.py`
 3. Outputs the rendered HTML file
 
