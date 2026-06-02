@@ -29,6 +29,18 @@ The agent accepts any of the following:
 
 The agent structures whatever input it receives into the PMR template. If input is sparse, generate best-effort and ask targeted follow-up questions (max 3).
 
+### Output Sequence
+
+Every PMR run outputs in two stages:
+
+1. **Quick Summary (immediate)** — deliver first, within 30 seconds:
+   - Action Items (owner + deadline)
+   - Key Findings (bullet list)
+   
+2. **Full PMR (follows)** — complete 7-section report + EP update + referrals + email draft
+
+Do not wait for the full PMR to finish before delivering the Quick Summary.
+
 ---
 
 ## 2. Core Rules
