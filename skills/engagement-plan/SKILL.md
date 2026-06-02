@@ -10,7 +10,15 @@ user_locked: true
 
 # Engagement Plan Skill
 
+---
 
+## Execution Discipline
+
+STOP. Read this entire skill file before executing.
+This skill has a mandatory reference file that defines field-level execution standards.
+Do NOT begin the Pre-Generation Dialogue until you understand all rules and the EP template structure.
+
+---
 
 ## 1. Generation Workflow — Pre-Generation Dialogue
 
@@ -174,7 +182,7 @@ EP does NOT determine whether an opportunity should advance to the next sales st
 
 ⚠️ **职责分工：** SKILL.md 定义策略和决策逻辑（什么时候做什么、skill 之间怎么协作、fallback 策略）。Reference file 定义每个字段的执行标准（怎么写、写法公式、质量验证、示例）。Agent 生成任何 EP 内容前必须先读 reference file。
 
-Read [references/engagement-plan.md](references/engagement-plan.md) before generating. The template has 3 sections:
+**REQUIRED: Load `references/engagement-plan.md` before generating any EP content.** The template has 3 sections:
 
 1. **Opportunity Snapshot + Win Strategy** — Key opp info pulled from Opportunity Progression Skill, plus deal-level win theme
 2. **Engagement Plan (搞定人 + 搞定事)** — Per-person analysis (engagement priority, role, stance, what they care about, profiling, what we need, how to win) followed by Engagement Roadmap (full opportunity roadmap from now to close), Next Milestone Detail card (triggers Call Plan), and Estimate & Contingency (with Plan B scenarios)
