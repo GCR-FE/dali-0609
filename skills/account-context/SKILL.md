@@ -1,10 +1,11 @@
 ---
 name: "account-context"
 description: >
-  Machine-to-machine foundation skill. Produces structured customer context
-  (org chart, IT landscape, competitive landscape, buying behavior) from public web research.
-  Use whenever any skill needs customer background data before performing its own analysis
-  — never called directly by users, always invoked by other skills as a data source.
+  Load when another skill needs structured customer context as input — org chart,
+  relationship map, IT landscape, competitive footprint, buying behavior.
+  Runs public web research and outputs machine-readable JSON to disk.
+  NOT for: market trends or industry outlook (use market-intelligence),
+  nor competitor company profiles (use competitive-intelligence).
 user_locked: true
 ---
 
