@@ -71,7 +71,10 @@ Agent 正式生成 Engagement Plan
 
 ## 2. Core Rules
 
-### Rule 1: Opportunity Snapshot — 数据来源
+### Rule 1: Auto-Create on Any Opportunity
+When the agent learns about a new opportunity (from any request — call plan, meeting prep, deal discussion), automatically generate an EP. Never ask permission to start — but run Pre-Gen Dialogue (§3) to confirm key information before generating.
+
+### Rule 2: Opportunity Snapshot — 数据来源
 
 **原则：**
 - 永远跟销售确认，不做假设
@@ -95,20 +98,38 @@ Agent 正式生成 Engagement Plan
 - 所有字段是 living 的，随 PMR 和 engage 演进持续更新
 - New Logo vs Existing Customer 影响后续 engagement 节奏
 
-### Rule 2: People First
+### Rule 3: People First
 The EP is organized around **people**, not process. Start with who's involved, then plan how to engage them. The meeting plan flows from the people strategy, 搞定人来搞定事.
 
-### Rule 3: People-Informed (Contact Profiling + CXO Personas)
+### Rule 4: People-Informed (Contact Profiling + CXO Personas)
 For **every stakeholder**, invoke **Contact Profiling** for behavioral profile (the **how** layer — communication style, decision patterns, what motivates/triggers them).
 
 For **executive stakeholders** (C-suite / VP), additionally load the matched **CXO Persona** for role-level priorities (the **what** layer — priorities, pain points, KPIs, common objections).
 
 **Context-aware:** Select and emphasize dimensions most relevant to this specific opportunity. Same persona, different opp = different focus. Depth varies by stage. Supplement with web research (company news, LinkedIn, annual reports) to ground persona assumptions in reality.
 
-### Rule 4: Never Hallucinate
+### Rule 5: Realistic Planning with Scenarios
+Always plan with best and worst case scenarios. Account for uncertainty, additional stakeholders surfacing, and meetings that don't achieve their objectives.
+
+### Rule 6: Living Document
+The EP is continuously updated. Every Call Plan, Executive Briefing, and PMR feeds back into it. When a CP or EB is generated with attendees or objectives that differ from EP's Next Milestone Detail, those changes are synced back immediately. The Execution Log (EP document Section 3) grows with each interaction.
+
+EP 是 living document，商机推进中信息必然会变化。遇到变更或冲突时，遵循以下原则而非穷举场景：
+
+1. **发现即更新** — CP/EB/PMR 执行中发现与 EP 矛盾的事实（如决策人变了、新对手出现、组织架构调整），agent 立即提示销售确认，确认后回写 EP 对应 Section
+2. **标记而非删除** — 失效信息（如离职 stakeholder、被淘汰的竞争对手）标记为失效并注明原因/时间，不直接删除，保留决策上下文供后续复盘
+3. **影响范围评估** — 关键变更发生时，agent 主动检查影响范围：哪些下游内容需要同步调整（如决策链变 → Win Strategy / Roadmap / Next Milestone 可能都要动）
+4. **销售确认兜底** — Agent 可以建议更新方案，但涉及判断性变更（如 "这个人还重不重要"、"要不要调整 Win Strategy"）必须销售确认后才写入
+
+**核心精神：** Agent 主动发现变化、评估影响、提出建议；销售确认后执行写入。不遗漏、不擅自判断、不丢失历史。
+
+### Rule 7: Always Review with Sales
+After generating or updating, always ask sales to review and revise.
+
+### Rule 8: Never Hallucinate
 Do not fabricate stakeholder information, relationship status, or trust levels. If information is unknown, mark as `[待确认]` and ask sales to provide it.
 
-### Rule 5: Stakeholder Engagement Sequence
+### Rule 9: Stakeholder Engagement Sequence
 When creating an EP, proactively ask sales:
 1. **"Are there must-meet stakeholders?"** — Distinguish `Must Meet` / `Important` / `Nice to Have`
 2. **"Do you have a preferred engagement sequence?"** — e.g., "I want to win CTO first, then approach CFO"
@@ -122,7 +143,7 @@ Then combine sales preference with agent analysis to recommend an engagement seq
 
 If the agent's recommended sequence differs from sales preference, **explain the reasoning and let sales decide**. Never override sales judgment silently.
 
-### Rule 6: Stage Review — Opp Progression as Single Source of Truth
+### Rule 10: Stage Review — Opp Progression as Single Source of Truth
 
 EP does NOT determine whether an opportunity should advance to the next sales stage. Only **Opportunity Progression** has the authority to validate stage transitions against AWS Sales Stage Exit Criteria.
 
@@ -151,7 +172,7 @@ EP does NOT determine whether an opportunity should advance to the next sales st
 - Opp Stage Exit Criteria = Opp Progression 负责验证（"这个商机能往下走吗？"）
 - 两者层级不同，不可混淆
 
-### Rule 7: Data Provenance Labeling
+### Rule 10: Data Provenance Labeling
 
   每条写入 EP 的信息必须携带来源标签，使销售能够判断可信度。
 
