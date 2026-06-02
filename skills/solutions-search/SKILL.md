@@ -19,11 +19,6 @@ Every run of this skill executes three stages, in this fixed order:
 2. **Procedure 2: Record** — write the complete unsummarized work product to a local markdown file. Mandatory.
 3. **Procedure 3: View** — render the results into a designed HTML page via `templates/render_ss.py` (Jinja2 pipeline). Visual reference: `./templates/OUTPUT_REFERENCE.html`.
 
-
-
-
-
-
 ## Procedure 1: Control - Core Objective (mandatory)
 
 Given the **Top 3 Strategic Initiatives** from the `business-insight` skill, search the local knowledge base (`./references/`) for **proven architectures and case studies from customers in the same or adjacent industry facing the same business context**, and return ranked, evidence-backed **Solutions 搜索结果**. You should also search AWS service information from aws_docs and aws_knowledge.
