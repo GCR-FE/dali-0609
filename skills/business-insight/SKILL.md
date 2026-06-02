@@ -47,10 +47,6 @@ Do NOT start research until bi.md is fully loaded and understood.
 ### Step 2: conduct full swot and tows analysis, and then rank the top 1-3 initiatives that company is likely to pursue as a conclusion. The swot/tows should be done based on the findings of bmc, pestle, and porter's five forces.
 
 
-
-
-
-
 ## Procedure 2: Record Full Working Document (mandatory)
 
 Save the complete unsummarized work product as markdown to disk. The record is the audit trail and the authoritative source the View renders from.
@@ -74,16 +70,6 @@ Filename `BI_{Customer}_{YYYY-MM-DD}.md`
 Customer name uses Pinyin for Chinese companies (e.g., `AA_Haier_2026-05-12.md`).
 
 
-
-
-
-
-
-
-
-
-
-
 ## Procedure 3: View — HTML → PDF
 
 **REQUIRED: Load `assets/OUTPUT_REFERENCE.html` before generating any HTML output.**
@@ -93,7 +79,7 @@ Every Output produced by this skill ships as **an HTML file that auto-exports to
 
 ## Quality Standards
 
-- Every quantitative anchor is traceable to a specific Step 1–3 finding.
+- Every quantitative anchor is traceable to a specific Step 1–2 finding.
 - The one-sentence diagnosis names an actual structural tension, not a generic "digital transformation" or "macro headwinds" statement.
 - The three conclusions tell one argument: *crisis → strategic bet at risk → partner window*.
 - cite source, and only look for information from company financial filings and well-known industry analysis report and your training data.
