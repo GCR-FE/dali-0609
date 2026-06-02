@@ -40,7 +40,10 @@ Read **Top 3 Strategic Initiatives** from `business-insight`. Each initiative co
 
 ### Knowledge Source
 
-- `references/INDEX.md` — industry routing index
+**REQUIRED: Load `references/INDEX.md`** for industry routing, then load the matching industry file from `references/industries/`.
+
+**REQUIRED: Load `references/search-keywords.json`** to compose structured search queries (7 dimensions: industry verticals, workload services, challenge patterns, scale/performance terms, compliance constraints, Well-Architected pillars, and composite search phrases).
+
 - `references/industries/` — per-industry pages (8 industries): Solution Maps, Asset Cards with KPI, customer references, AWS services
 - AWS documentation through aws_docs and aws_knowledge.
 
@@ -197,12 +200,6 @@ Rank recommendations per initiative by:
 
 Prefer production-validated cases with published customer outcomes over theoretical architectures.
 
-
-
-
-
-
-
 ## Procedure 2: Record Full Working Document (mandatory)
 
 Save the complete unsummarized work product as markdown to disk. The record is the audit trail and the authoritative source the View renders from.
@@ -245,11 +242,13 @@ Render the Procedure 1 results into a designed HTML page. The complete output is
 
 ### Rendering Pipeline
 
+**REQUIRED: Load `templates/sample_data.json`** for the complete JSON schema example. Then render:
+
 1. **Generate structured data (JSON)** from the Procedure 1 analysis results following the schema defined in `templates/render_ss.py` (see DATA_SCHEMA).
 2. **Fill the Jinja2 template** via `python templates/render_ss.py input.json output.html`.
 3. **Output the rendered HTML file** — styled with Material Design 3 (Google Sans, MD3 color tokens, 28px rounded cards, Material Symbols icons, responsive grid).
 
-Visual reference: `./templates/OUTPUT_REFERENCE.html` shows a complete rendered example (Haier Smart Home).
+**REQUIRED: Load `templates/OUTPUT_REFERENCE.html`** as the visual reference — shows a complete rendered example (Haier Smart Home).
 
 ### Data Schema (what the agent produces as JSON)
 
