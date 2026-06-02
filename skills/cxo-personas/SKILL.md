@@ -10,6 +10,14 @@ user_locked: true
 
 # CXO Personas Library Skill
 
+---
+
+## Execution Discipline
+
+STOP. Read this entire skill file before executing.
+INDEX.md summaries are NOT sufficient — you must load the full persona file for each executive attendee.
+
+---
 
 ## 2. Core Rules
 
@@ -27,7 +35,7 @@ The INDEX provides summaries only. Always load the **full persona file** for eac
 ## 3. How to Use
 
 ### Step 1: Identify the Persona
-Use the **Title Mapping Guide** in [references/INDEX.md](references/INDEX.md) to match job titles to persona files.
+**REQUIRED: Load `references/INDEX.md` to match job titles to persona files via the Title Mapping Guide.**
 
 ### Step 2: Load the Persona
 Read the full persona file for each matched executive.
