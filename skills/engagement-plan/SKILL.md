@@ -97,7 +97,6 @@ For **executive stakeholders** (C-suite / VP), additionally load the matched **C
 
 **Context-aware:** Select and emphasize dimensions most relevant to this specific opportunity. Same persona, different opp = different focus. Depth varies by stage. Supplement with web research (company news, LinkedIn, annual reports) to ground persona assumptions in reality.
 
-
 ### Rule 4: Never Hallucinate
 Do not fabricate stakeholder information, relationship status, or trust levels. If information is unknown, mark as `[待确认]` and ask sales to provide it.
 
@@ -114,8 +113,6 @@ Then combine sales preference with agent analysis to recommend an engagement seq
 - **Dependencies** — e.g., "Need CTO's technical sign-off before CFO will discuss budget"
 
 If the agent's recommended sequence differs from sales preference, **explain the reasoning and let sales decide**. Never override sales judgment silently.
-
-
 
 ### Rule 6: Stage Review — Opp Progression as Single Source of Truth
 
@@ -146,6 +143,31 @@ EP does NOT determine whether an opportunity should advance to the next sales st
 - Opp Stage Exit Criteria = Opp Progression 负责验证（"这个商机能往下走吗？"）
 - 两者层级不同，不可混淆
 
+### Rule 7: Data Provenance Labeling
+
+  每条写入 EP 的信息必须携带来源标签，使销售能够判断可信度。
+
+  **三级标签体系：**
+
+  | 标签 | 含义 |
+  |------|------|
+  | `[销售确认]` | 销售直接提供或明确确认的信息 |
+  | `[网络搜索]` | 通过公开渠道获取的信息 |
+  | `[AI推断]` | Agent 基于上下文分析推断的信息（默认） |
+
+  **标注规则：**
+
+  *   ✅ 显式标注 `[销售确认]` 和 `[网络搜索]`；无标签 = `[AI推断]`（默认值）
+  *   ✅ 从上游 skill 传入的信息继承原始标签（如 account-context 标注为 `[网络搜索]`，写入 EP 时保留）
+  *   ✅ 对话中销售口头确认的信息，升级为 `[销售确认]`
+  *   ✅ PMR 回流的客户原话标 `[销售确认]`，agent 对客户原话的解读标 `[AI推断]`
+  *   ❌ 不得在信息流转过程中丢失或升级标签（`[AI推断]` 不可自动变为 `[销售确认]`）
+
+  **语言规则：** 标签随对话语言切换 — 中文对话用 `[销售确认]`/`[AI推断]`/`[网络搜索]`，英文对话用 `[Sales Confirmed]`/`[AI
+  Inferred]`/`[Web Search]`。
+
+  **下游影响：** Call Plan、Executive Briefing、PMR 从 EP 读取信息时，必须能看到来源标签并据此决定是否需要二次验证。
+  
 ---
 
 ## 3. EP Template
