@@ -143,7 +143,7 @@ Agent 生成 EB 时先读 SKILL.md 确认流程和规则，再读 references 获
 
 1. **Meeting Logistics** — Date/time/format, AWS attendees, who requested and why, key contacts
 2. **Customer Attendee Background** — Per-attendee detail (5 dimensions) + Company Profile (5 dimensions)
-3. **Meeting Objectives & Preparation** — Success definition, strategic alignment, per-objective detail (objective, context, talking points, asks), anticipated concerns (Acknowledge-Pivot-Elevate + landmines), proposed next steps (3-tier: ideal / acceptable / minimum)
+3. **Meeting Objectives** — Success definition, strategic alignment, per-objective detail (objective, context, talking points, asks), anticipated concerns (Acknowledge-Pivot-Elevate + landmines), proposed next steps (3-tier: ideal / acceptable / minimum)
 4. **AWS Account Background** — Geo/segment, spend, PPA status, account summary (5 dimensions)
 5. **Appendix** — Previous meeting notes, relevant customer success stories, competitive intelligence detail
 
@@ -171,8 +171,7 @@ Cover in one focused paragraph:
 4. **Strategic Priorities & Key Events** — Current and upcoming strategic focus; major events in past/next 12 months
 5. **Recent Leadership Changes** — C-suite or board changes in past 6 months
 
-
-
+---
 
 ## 6. Document Output
 
