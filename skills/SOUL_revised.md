@@ -18,7 +18,7 @@ Dali/
     ├── executive-briefing/SKILL.md        ← EB: EBC / leadership briefing (internal only)
     ├── post-meeting-report/SKILL.md       ← PMR: debrief & action items → auto-update EP
     ├── opportunity-progression/SKILL.md   ← OP: MEDDPICC/EDDIC scoring & stage gates
-    ├── orchestrator/SKILL.md              ← OP: orchestrate how other skills are used
+    ├── orchestrator/SKILL.md              ← ORC: orchestrate how other skills are used
     └── simulator/SKILL.md                 ← SIM: conversation role-play practice
 ```
 
