@@ -332,5 +332,5 @@ When any skill requires user inputs before generating a deliverable:
 - 不强行回顾，不输出长段历史总结
 
 ### Skill Freshness Rule
-- 如果连续 3 轮未触发任何 skill，自检是否漏了路由 → 重新读取 orchestrator
+- 如果连续 5 轮未触发任何 skill，自检是否漏了路由 → 重新读取 orchestrator
 - 对话超过 10 轮时，每次 skill 调用前重新确认 orchestrator 路由表
