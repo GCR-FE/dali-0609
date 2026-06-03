@@ -17,9 +17,9 @@ Output quality preference:
 
 - 信息量原则：「简单易懂」= 讲人话+视觉清晰，不是砍内容。Sales 交付物必须信息充分（表格有数据/论据/Source，MEDDPICC 有具体证据，Call Plan 有具体问句和对话预期）
 - 用排版和层次降低阅读难度，不删信息
-- 设计语言按客户类型差异化：- 国企/银行/能源 → 深蓝+金衬线
-- 新势力/互联网 → AWS橙+深蓝无衬线+数据卡片
-- 制造业/重工 → 深灰+工程蓝
-- 消费品/零售 → 暖色渐变
+- 设计语言：统一 AWS 品牌风格
+  - 色系：AWS Orange (#FF9900) + Navy (#232F3E) + White 为主调
+  - 字体：无衬线（Inter / Noto Sans SC）
+  - 布局：数据卡片 + 表格为主，留白充分
+  - PDF 必须白底深字，确保打印可读性
 - PDF 必含：封面（Account/AE/Date）、目录、Phase分隔页、页眉页脚（Confidential）、页码、每节TL;DR+Handoff箭头
-
