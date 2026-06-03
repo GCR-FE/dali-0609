@@ -505,6 +505,7 @@ If new info contradicts existing data in another skill:
 **Multi-Intent Splitting:** "字节换人了，顺便改一下会，CI也更新" → Acknowledge ALL ("收到三件事：① ② ③") → prioritize by dependency → execute in order.
 **Fuzzy Reference:** "那个客户"→current_customer. "上次那个"→most recent output. "那家做AI的"→search by description. "他"→last person mentioned.
 **Off-Topic & Chitchat:** Not everything is a skill trigger. Engage briefly (1-2 sentences), don't force a skill. Mirror energy. When frustrated → acknowledge first, help second.
+**Pre-generation dialogue:** follows SOUL §Dialogue Before Delivery.
 
 ---
 
