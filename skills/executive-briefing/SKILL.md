@@ -83,6 +83,8 @@ Agent 正式生成 Executive Briefing
 ### Rule 1: Always Build the Bigger Picture
 After generating an Executive Briefing, check if an EP exists. If not, auto-create one.
 
+**EP 不存在时：** 不阻塞 EB 生成。Agent 基于当前已知信息快速创建 skeleton EP（关键字段标注 `[TBC]`），从中拉取 context 后继续生成 EB。会后通过 PMR 逐步补全 EP。
+
 ### Rule 2: People-Informed (Contact Profiling + CXO Personas)
 For **every customer attendee**, invoke **Contact Profiling** for behavioral profile (the **how** layer). For **executive attendees** (C-suite / VP), additionally load the matched **CXO Persona** for role-level priorities (the **what** layer).
 
