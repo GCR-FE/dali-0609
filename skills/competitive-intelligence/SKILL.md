@@ -183,7 +183,7 @@ Pull ecosystem and organizational model content:
 
 ## Output Format
 
-Produce a single structured deliverable in this order. Sections 4–6 must inline-cite proof points from the consolidated table in Section 11 — the seller gets evidence woven into each section as they read, and the full table at the end serves as a lookup reference.
+Produce a single structured deliverable in this order. Sections 4–5 must inline-cite proof points from the consolidated table in Section 6 — the seller gets evidence woven into each section as they read, and the full table at the end serves as a lookup reference.
 
 ### 1. Compete Brief — Header
 
@@ -193,7 +193,7 @@ A single paragraph (4–6 sentences) that the AM/SA can internalize before the m
 
 > Against [competitor] in [workload], AWS wins when [the specific battleground the content says AWS wins on]. The competitor's strongest move is [their best counter], and they tend to beat AWS when [the known losing pattern]. For this customer — [industry, region, buying behavior] — the frame that fits is [positioning angle]. The one thing the seller must not do is [the known trap]. The one thing the seller must do is [the high-leverage move].
 
-Every clause must be traceable to a knowledge base artifact cited in Section 11.
+Every clause must be traceable to a knowledge base artifact cited in Section 6.
 
 ### 3. Recommended Compete Motion
 
@@ -209,7 +209,7 @@ State the motion, one sentence on why, and the content that supports the choice.
 
 ### 4. Objection-Handler Pack
 
-Top 3–5 objections, each in this exact structure. Inline-cite proof points from Section 11.
+Top 3–5 objections, each in this exact structure. Inline-cite proof points from Section 6.
 
 ```
 Objection [N]: "[Objection verbatim, as the competitor's field phrases it]"
@@ -220,7 +220,7 @@ Narrative Reframe:
   [If the objection is about a competitor concept, the reframe angle — 
    e.g., "middle platform" → "microservices innovation with lower risk and faster iteration"]
 Supporting Proof Point:
-  [Named customer outcome or benchmark, with metric — cite Section 11 reference #]
+  [Named customer outcome or benchmark, with metric — cite Section 6 reference #]
 Source: [`./references/` data URL]
 Last Reviewed: [Date]
 Watch-out: [What not to say when using this rebuttal]
@@ -242,7 +242,7 @@ Known Pricing Traps:
 
 Side-by-Side Comparison:
   [Apples-to-apples pricing for the contested workload, with specific instance types, 
-   regions, and discount levels. Show the math. Cite Section 11 proof points.]
+   regions, and discount levels. Show the math. Cite Section 6 proof points.]
 
 Counter-Tactics:
   1. [Tactic — e.g., sync discount info the customer doesn't have]
@@ -258,9 +258,9 @@ Commercial Programs Available:
 Source: [knowledge base URL]
 ```
 
-### 11. Consolidated Proof-Points Table
+### 6. Consolidated Proof-Points Table
 
-Every proof point cited in Sections 4–6 is collected here as a lookup reference. Sellers verify sources; reviewers audit traceability.
+Every proof point cited in Sections 4–5 is collected here as a lookup reference. Sellers verify sources; reviewers audit traceability.
 
 ```
 | # | Claim | Customer / Benchmark | Metric | Source Path | Last Reviewed | Freshness |
@@ -270,7 +270,7 @@ Every proof point cited in Sections 4–6 is collected here as a lookup referenc
 ```
 
 Rules:
-- Every inline citation in Sections 4–6 must have a corresponding row here
+- Every inline citation in Sections 4–5 must have a corresponding row here
 - Freshness tiers: Current (<6mo) / Recent (6–12mo) / Stale (12–18mo)
 - Stale entries must be flagged; Expired (>18mo) entries excluded entirely
 
