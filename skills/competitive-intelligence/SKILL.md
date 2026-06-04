@@ -50,7 +50,7 @@ Each competitor's official documentation source — the equivalent of the AWS Do
 
 **Honesty rule for vendor docs:** Only **Microsoft Learn** offers a clean, no-auth documentation-search MCP that is a true peer of the AWS Documentation MCP. For GCP / AliCloud / Tencent / Oracle, the official MCP servers are API- or ops-oriented and require credentials; when no MCP path is reachable, fall back to the vendor's **official documentation portal** (above) and label the dimension's confidence as **Thin** at best. When citing a competitor fact, mark it **vendor self-reported**, record the **retrieval date**, and pass it through the RAG guardrails (`references/rag-guardrails.md`, esp. Guardrail 6 pricing re-calc and Guardrail 7 benchmark methodology). If a vendor's official documentation cannot be reached, **state the gap in Coverage Honesty** — never substitute a curated CI page as if it were the vendor's own current docs.
 
-MCP wiring for these sources lives in `.kiro/settings/mcp.json` (Microsoft Learn enabled by default; the credential-gated servers are listed disabled with setup notes).
+MCP wiring for these sources lives in the Hermes MCP configuration (Microsoft Learn enabled by default; the credential-gated servers are listed disabled with setup notes).
 
 Ground **AWS-side** claims in `./references/` + the AWS Documentation MCP, and **competitor-side** claims in `./references/` + the competitor's official documentation source above. If anything is found through the open search on internet, state that explicitly.
 
