@@ -1,78 +1,28 @@
 #!/usr/bin/env python3
 """
-Executive Briefing HTML Renderer — fills the Jinja2 template with structured data and outputs rendered HTML.
+Executive Briefing HTML/PDF Renderer — fills the Jinja2 template with structured data.
 
 Usage:
     python render_eb.py input.json output.html
+    python render_eb.py input.json output.pdf
 
-Input: JSON file with the EB data structure (see DATA_SCHEMA below).
-Output: Rendered HTML file.
+Input: JSON file with the EB data structure (see sample_data.json).
+Output: Rendered HTML or PDF file (determined by extension).
 
-DATA SCHEMA (what the agent produces):
-{
-    "customer_name": "瑞安集团",
-    "meeting_title": "Executive Briefing Center",
-    "meeting_date": "2026-04-10",
-    "meeting_time": "10:00-11:30",
-    "meeting_format": "On-site (EBC)",
-    "opportunity_name": "Enterprise Digital Transformation",
-    "opp_stage": "Business Validation",
-    "who_requested_and_why": "...",
-    "aws_team": [
-        {"name": "...", "role": "...", "purpose": "..."}
-    ],
-    "customer_attendees": [
-        {
-            "name": "陈总",
-            "title": "CEO",
-            "stance": "Neutral",
-            "background_paragraph": "..."
-        }
-    ],
-    "company_profile": "...",
-    "objectives": [
-        {
-            "objective": "...",
-            "context": "...",
-            "talking_points": "...",
-            "asks": ["..."]
-        }
-    ],
-    "success_definition": "...",
-    "strategic_alignment": "...",
-    "anticipated_concerns": [
-        {
-            "concern": "...",
-            "acknowledge": "...",
-            "pivot": "...",
-            "elevate": "..."
-        }
-    ],
-    "landmines": ["..."],
-    "proposed_next_steps": {
-        "ideal": "...",
-        "acceptable": "...",
-        "minimum": "..."
-    },
-    "account_background": {
-        "geo": "...",
-        "segment": "...",
-        "current_spend": "...",
-        "expected_spend": "...",
-        "ppa_status": "...",
-        "account_summary": "..."
-    },
-    "appendix": {
-        "previous_meeting_notes": "...",
-        "customer_success_stories": "...",
-        "competitive_intelligence": "..."
-    },
-    "last_updated": "2026-05-14"
-}
+PDF generation:
+  Priority 1: headless Chromium (chrome/chromium/google-chrome)
+  Priority 2: weasyprint (pip install weasyprint)
+
+The template uses Tailwind CDN for utility classes with screens:{} to disable
+responsive breakpoints. Chrome and Firefox both render identically on desktop.
 """
 
 import json
+import os
+import shutil
+import subprocess
 import sys
+import tempfile
 from pathlib import Path
 
 try:
@@ -82,7 +32,7 @@ except ImportError:
     sys.exit(1)
 
 
-def render_eb(data: dict, template_dir: str = None) -> str:
+def render_html(data: dict, template_dir: str = None) -> str:
     """Render Executive Briefing data into HTML string."""
     if template_dir is None:
         template_dir = str(Path(__file__).parent)
@@ -95,9 +45,93 @@ def render_eb(data: dict, template_dir: str = None) -> str:
     return template.render(**data)
 
 
+def find_chrome() -> str | None:
+    """Find Chrome/Chromium binary."""
+    candidates = [
+        "google-chrome",
+        "google-chrome-stable",
+        "chromium",
+        "chromium-browser",
+        "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+        "/usr/bin/google-chrome",
+        "/usr/bin/chromium-browser",
+    ]
+    for candidate in candidates:
+        if shutil.which(candidate):
+            return candidate
+    # Check macOS path directly
+    mac_path = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
+    if os.path.exists(mac_path):
+        return mac_path
+    return None
+
+
+def html_to_pdf_chrome(html_path: str, pdf_path: str) -> bool:
+    """Convert HTML to PDF using headless Chrome."""
+    chrome = find_chrome()
+    if not chrome:
+        return False
+
+    cmd = [
+        chrome,
+        "--headless",
+        "--disable-gpu",
+        "--no-sandbox",
+        "--disable-software-rasterizer",
+        "--run-all-compositor-stages-before-draw",
+        "--force-color-profile=srgb",
+        "--window-size=1280,900",
+        f"--print-to-pdf={pdf_path}",
+        "--no-pdf-header-footer",
+        "--print-to-pdf-no-header",
+        f"file://{os.path.abspath(html_path)}"
+    ]
+
+    try:
+        result = subprocess.run(cmd, capture_output=True, text=True, timeout=30)
+        return os.path.exists(pdf_path)
+    except (subprocess.TimeoutExpired, FileNotFoundError):
+        return False
+
+
+def html_to_pdf_weasyprint(html_path: str, pdf_path: str) -> bool:
+    """Convert HTML to PDF using weasyprint."""
+    try:
+        from weasyprint import HTML
+        HTML(filename=html_path).write_pdf(pdf_path)
+        return True
+    except ImportError:
+        return False
+    except Exception as e:
+        print(f"weasyprint error: {e}", file=sys.stderr)
+        return False
+
+
+def render_pdf(html_content: str, pdf_path: str) -> bool:
+    """Render HTML content to PDF. Returns True on success."""
+    with tempfile.NamedTemporaryFile(mode='w', suffix='.html', delete=False, encoding='utf-8') as f:
+        f.write(html_content)
+        tmp_html = f.name
+
+    try:
+        if html_to_pdf_chrome(tmp_html, pdf_path):
+            return True
+
+        if html_to_pdf_weasyprint(tmp_html, pdf_path):
+            return True
+
+        print("ERROR: No PDF renderer available.", file=sys.stderr)
+        print("  Install one of:", file=sys.stderr)
+        print("  - Google Chrome / Chromium (recommended)", file=sys.stderr)
+        print("  - pip install weasyprint", file=sys.stderr)
+        return False
+    finally:
+        os.unlink(tmp_html)
+
+
 def main():
     if len(sys.argv) < 3:
-        print(f"Usage: {sys.argv[0]} input.json output.html", file=sys.stderr)
+        print(f"Usage: {sys.argv[0]} input.json output.html|pdf", file=sys.stderr)
         sys.exit(1)
 
     input_path = sys.argv[1]
@@ -106,12 +140,18 @@ def main():
     with open(input_path, 'r', encoding='utf-8') as f:
         data = json.load(f)
 
-    html = render_eb(data)
+    html = render_html(data)
 
-    with open(output_path, 'w', encoding='utf-8') as f:
-        f.write(html)
-
-    print(f"✅ Rendered: {output_path}")
+    if output_path.lower().endswith('.pdf'):
+        success = render_pdf(html, output_path)
+        if success:
+            print(f"✅ PDF rendered: {output_path}")
+        else:
+            sys.exit(1)
+    else:
+        with open(output_path, 'w', encoding='utf-8') as f:
+            f.write(html)
+        print(f"✅ HTML rendered: {output_path}")
 
 
 if __name__ == "__main__":
