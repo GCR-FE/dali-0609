@@ -13,8 +13,8 @@ PDF generation:
   Priority 1: headless Chromium (chrome/chromium/google-chrome)
   Priority 2: weasyprint (pip install weasyprint)
 
-Both Chrome and Firefox produce identical HTML rendering since all styles
-are pure CSS (no Tailwind CDN / no JS dependencies).
+The template uses Tailwind CDN for utility classes. Chrome and Firefox
+both render the HTML identically on desktop viewports.
 """
 
 import json

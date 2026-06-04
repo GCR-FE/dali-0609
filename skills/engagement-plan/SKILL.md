@@ -295,7 +295,7 @@ Every EP is rendered as a styled HTML file using `templates/engagement-plan.html
 2. Fills the template via `templates/render_ep.py`
 3. Outputs the rendered HTML file
 
-Visual style: Google Material Design 3 (Google Sans, MD3 color tokens, 28px rounded cards, Material Symbols icons, responsive grid).
+Visual style: Material Design 3 (Inter + Noto Sans SC fonts, MD3 color tokens, 16px rounded cards, emoji icons, desktop-optimized grid for PDF rendering).
 
 ### On-Demand: PDF / Word
 
