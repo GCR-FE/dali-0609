@@ -37,7 +37,7 @@ Curated `compete/` and `battlecards/` pages carry the **AWS positioning and talk
 | Tencent Cloud | Per-product MCP `cloud.tencent.com/developer/mcp` / docs `intl.cloud.tencent.com/document` | Per-product / portal | No unified docs MCP |
 | Oracle (OCI) | OCI/ADB MCP / docs `docs.oracle.com` | MCP needs OCI auth | DB/ops-oriented; portal fallback |
 
-**Only Microsoft Learn** is a no-auth docs-search MCP equivalent to the AWS Documentation MCP. For the others, fall back to the official docs portal and cap confidence at **Thin**. Mark every competitor fact **vendor self-reported** with a **retrieval date**, and run pricing/benchmark claims through `rag-guardrails.md`. MCP wiring lives in `.kiro/settings/mcp.json`.
+**Only Microsoft Learn** is a no-auth docs-search MCP equivalent to the AWS Documentation MCP. For the others, fall back to the official docs portal and cap confidence at **Thin**. Mark every competitor fact **vendor self-reported** with a **retrieval date**, and run pricing/benchmark claims through `rag-guardrails.md`. MCP wiring lives in the Hermes MCP configuration.
 
 ---
 
