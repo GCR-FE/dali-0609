@@ -51,6 +51,10 @@ Tag every Call Plan with the current AWS Sales Stage (sourced from EP / Opp Prog
 
 **EP → CP (post-sales-review):** When sales reviews the CP and makes changes (e.g., adjusting attendees, objectives, or agenda), the agent proactively checks whether corresponding EP fields need sync updates. See references/call-plan.md AGENT GUIDANCE for field mapping. Principle: if CP changes → EP follows, maintaining consistency.
 
+**EP 回写权限边界：**
+- 事实性变更（新增 attendee、更新会议日期/地点）→ 直接写入 EP，Change Log 标注来源为 CP
+- 判断性变更（调整 Win Strategy、修改 stakeholder 重要性、改变 engagement 顺序）→ 提示销售确认后再写入
+
 ### Rule 6: Data Provenance Labeling
 Every piece of information must carry a provenance label so sales knows the confidence level.
 
