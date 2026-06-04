@@ -258,6 +258,22 @@ Commercial Programs Available:
 Source: [knowledge base URL]
 ```
 
+### 11. Consolidated Proof-Points Table
+
+Every proof point cited in Sections 4–6 is collected here as a lookup reference. Sellers verify sources; reviewers audit traceability.
+
+```
+| # | Claim | Customer / Benchmark | Metric | Source Path | Last Reviewed | Freshness |
+|---|-------|---------------------|--------|-------------|---------------|-----------|
+| 1 | [Cited claim] | [Customer name or anonymized descriptor] | [Outcome metric] | [./references/... path] | [date] | Current / Recent / Stale |
+| 2 | ... | ... | ... | ... | ... | ... |
+```
+
+Rules:
+- Every inline citation in Sections 4–6 must have a corresponding row here
+- Freshness tiers: Current (<6mo) / Recent (6–12mo) / Stale (12–18mo)
+- Stale entries must be flagged; Expired (>18mo) entries excluded entirely
+
 ---
 
 ## Quality Guardrails
