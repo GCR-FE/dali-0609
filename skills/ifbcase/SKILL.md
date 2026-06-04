@@ -79,4 +79,4 @@ IFBcase/assets/auto/
 - Always confirm the industry with the user before reading files.
 - If the user does not specify an industry, present the table above and ask them to choose.
 - The `.md` files are the primary data source. The `.jpg` files provide supplementary visual context — read them when you need to ground in the picture.
-- To regenerate any file in this folder from the source `.pptx`, see the workspace skill at `.kiro/skills/pptx-to-ifbcase/`. It is also responsible for keeping naming consistent with this README.
+- To regenerate any file in this folder from the source `.pptx`, use the `pptx-to-ifbcase` workspace skill. It is also responsible for keeping naming consistent with this README.
