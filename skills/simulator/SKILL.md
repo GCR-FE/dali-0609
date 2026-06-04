@@ -528,6 +528,6 @@ User 看完可以**手动**:
   - Phase 3 反馈结构 11 段(开篇"写在前面"减压 + 价值三件事 / 三通道融进改进段)
   - 第 5 段升级:"这次对谈后他很可能会把你看作"+ 4 件证据强规则
   - Phase 3 时间表达规则(纯文本对话只用"轮"和"段",不用"分钟/秒")
-- **Spec**:`.kiro/specs/contact-profiling-v2/`(Simulator V2.0 单独 spec 待 V2.0 上线后开)
+- **Spec**: contact-profiling-v2 (Simulator V2.0 单独 spec 待 V2.0 上线后开)
 - **关键升级**:Input contract V2.0 Record / Translator 模块复用 / 扮演真实度提升
 - **未变化**:三阶段流程 / 双角色切换 / 难度三档 / Reflection 模板 / Fallback 规则
