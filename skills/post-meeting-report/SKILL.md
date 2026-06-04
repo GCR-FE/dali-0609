@@ -82,10 +82,10 @@ Every piece of information must carry a provenance label so sales knows the conf
 **REQUIRED: Load [references/post-meeting-report.md](references/post-meeting-report.md)** before generating. The template has 4 core sections + 1 handoff:
 
 1. **Outcome Assessment** — Auto-pulled objectives/criteria from related document + result (✅ Achieved / ⚠️ Partial / ❌ Not achieved) + stage progression result
-2. **Meeting Notes** — Customer sentiment per attendee + key findings with source and implication
+2. **Meeting Insights** — Customer sentiment per attendee + key findings with source and implication + information gap check
 3. **What Changed — EP Update** — Incremental changes by dimension (stakeholders, Win Strategy, competitive, risks, stage/timeline) + Agent Recommendation
-4. **Action Items** — Sorted by priority (High first), with owner, ETA, status
-5. **Customer Recap Email Draft** — Agent drafts directly (see §8)
+4. **Next Steps — Planned vs Actual** — Comparison table + Action Items sorted by priority (High first), with owner, ETA, status
+5. **Customer Recap Email** — Key points for sales review before sending (see §6)
 
 ---
 
