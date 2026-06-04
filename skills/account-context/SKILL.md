@@ -316,13 +316,13 @@ Default behavior: write the JSON to disk so downstream skills can consume it acr
 
 **Path:**
 ```
-~/.kiro/cache/account-context/data/{customer_slug}/account-context_{customer_slug}_{YYYY-MM-DDTHH-MM-SSZ}.json
-~/.kiro/cache/account-context/data/{customer_slug}/account-context_{customer_slug}_latest.json   # mirror of newest
+~/Sales/{Customer}/_account/account-context_{customer_slug}_{YYYY-MM-DDTHH-MM-SSZ}.json
+~/Sales/{Customer}/_account/account-context_{customer_slug}_latest.json   # mirror of newest
 ```
 
 - **Slug:** lowercase Latin chars, spaces → hyphens, Chinese characters preserved, strip path-unsafe characters (`/ \ : * ? " < > |`), truncate to 60 chars.
 - **Timestamp:** ISO 8601 in UTC with `:` replaced by `-` for filesystem safety (e.g., `2026-05-18T10-32-15Z`). Second-level resolution; multiple runs in the same day produce distinct files.
 - **Latest mirror:** `account-context_{customer_slug}_latest.json` is overwritten with each run; downstream skills should read this path when they need "the most recent context for this customer".
 - **Self-describing payload:** the JSON `meta` block carries `skill_name`, `customer_name`, `report_run_date`, `run_id` (UUID v4), `schema_version` so downstream consumers do not parse filenames for routing.
-- **Retention:** caller may keep all historical runs; this skill does not delete. Future Kiro maintenance may add automatic prune (e.g., keep most recent 10 + latest mirror per customer).
+- **Retention:** caller may keep all historical runs; this skill does not delete. Future maintenance may add automatic prune (e.g., keep most recent 10 + latest mirror per customer).
 - **Return value:** the absolute path of the written timestamped JSON, the absolute path of `latest.json`, and the JSON object itself.
