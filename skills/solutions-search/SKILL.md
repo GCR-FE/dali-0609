@@ -217,9 +217,9 @@ Everything produced during Procedure 1 Control, in full and unsummarized:
 
 ### Where to save
 
-Default path: `~/.hermes/output/solutions-search/`
+Default path: `~/Sales/{Customer}/`
 
-Platform-neutral (`~` resolves on macOS, Linux, Windows). Skill creates the directory if missing at runtime.
+Follows the workspace convention defined by the Orchestrator (Section 6). Skill creates the directory if missing at runtime.
 
 ### Filename convention
 
