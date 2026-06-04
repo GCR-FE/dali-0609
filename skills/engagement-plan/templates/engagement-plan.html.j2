@@ -158,8 +158,8 @@
         }
 
         .risk-high { background: var(--md-sys-color-error-container); }
-        .risk-medium { background: var(--md-sys-color-warning-container); }
-        .risk-low { background: var(--md-sys-color-surface-container); }
+        .risk-medium { background: var(--md-sys-color-surface-container); }
+        .risk-low { background: var(--md-sys-color-surface-container-low); }
 
         /* ═══════════════════════════════════════
            METRO JOURNEY STYLES
@@ -336,24 +336,26 @@
                 <span class="section-icon">📊</span>
                 Opportunity Snapshot
             </h2>
-            <div class="grid grid-cols-4 gap-4 mt-4">
-                <div class="md-card-filled text-center p-5">
-                    <p class="label-large">Account</p>
-                    <p class="title-medium mt-1" style="color: var(--md-sys-color-on-surface);">{{ customer_name }} · {{ industry }}</p>
-                </div>
-                <div class="md-card-filled text-center p-5">
-                    <p class="label-large">Deal Stage</p>
-                    <p class="title-medium mt-1" style="color: var(--md-sys-color-primary);">{{ current_stage }}</p>
-                </div>
-                <div class="md-card-filled text-center p-5">
-                    <p class="label-large">Target Launch Date</p>
-                    <p class="title-medium mt-1" style="color: var(--md-sys-color-on-surface);">{{ target_launch_date }}</p>
-                </div>
-                <div class="md-card-filled text-center p-5">
-                    <p class="label-large">Customer Type</p>
-                    <p class="title-medium mt-1" style="color: var(--md-sys-color-on-surface);">{{ customer_type }}</p>
-                </div>
-            </div>
+            <table class="w-full mt-4" style="border-collapse: collapse;">
+                <tbody>
+                    <tr style="border-bottom: 1px solid var(--md-sys-color-outline-variant);">
+                        <td class="label-large py-2 pr-4" style="width: 120px;">Account</td>
+                        <td class="title-medium py-2">{{ customer_name }} · {{ industry }}</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid var(--md-sys-color-outline-variant);">
+                        <td class="label-large py-2 pr-4">Deal Stage</td>
+                        <td class="title-medium py-2" style="color: var(--md-sys-color-primary);">{{ current_stage }}</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid var(--md-sys-color-outline-variant);">
+                        <td class="label-large py-2 pr-4">Target Launch</td>
+                        <td class="title-medium py-2">{{ target_launch_date }}</td>
+                    </tr>
+                    <tr>
+                        <td class="label-large py-2 pr-4">Customer Type</td>
+                        <td class="title-medium py-2">{{ customer_type }}</td>
+                    </tr>
+                </tbody>
+            </table>
         </section>
 
         <!-- Why Now -->
@@ -371,7 +373,7 @@
                 <span class="section-icon">🎯</span>
                 Deal Objective & Win Strategy
             </h2>
-            <div class="grid grid-cols-2 gap-6 mt-4">
+            <div class="space-y-4 mt-4">
                 <div>
                     <h3 class="title-medium mb-2" style="color: var(--md-sys-color-on-surface);">Deal Objective</h3>
                     <p class="body-medium leading-relaxed">{{ deal_objective }}</p>
@@ -433,7 +435,7 @@
                 <span class="section-icon">👥</span>
                 Key Stakeholders
             </h2>
-            <div class="grid grid-cols-3 gap-4 mt-4">
+            <div class="space-y-4 mt-4">
                 {% for person in stakeholders %}
                 <div class="md-card-filled p-5 flex flex-col gap-3" style="border-radius: 20px; break-inside: avoid; page-break-inside: avoid;">
                     <div class="flex items-center justify-between">
@@ -571,15 +573,11 @@
                 </h3>
                 <div class="space-y-3">
                     {% for risk in stakeholder_risks %}
-                    <div class="flex items-start gap-4 p-4 rounded-2xl risk-medium" style="break-inside: avoid; page-break-inside: avoid;">
-                        <div class="flex-shrink-0">
-                            <p class="title-medium">{{ risk.stakeholder }}</p>
-                        </div>
-                        <div class="flex-1">
-                            <p class="body-medium"><strong>Red Flag:</strong> {{ risk.red_flag }}</p>
-                            <p class="body-medium mt-1"><strong>Leverage:</strong> {{ risk.leverage_source }}</p>
-                            <p class="body-medium mt-1"><strong>Plan B:</strong> {{ risk.plan_b }}</p>
-                        </div>
+                    <div class="p-4 rounded-2xl risk-medium" style="break-inside: avoid; page-break-inside: avoid;">
+                        <p class="title-medium mb-2">{{ risk.stakeholder }}</p>
+                        <p class="body-medium"><strong>Red Flag:</strong> {{ risk.red_flag }}</p>
+                        <p class="body-medium mt-1"><strong>Leverage:</strong> {{ risk.leverage_source }}</p>
+                        <p class="body-medium mt-1"><strong>Plan B:</strong> {{ risk.plan_b }}</p>
                     </div>
                     {% endfor %}
                 </div>
@@ -595,14 +593,14 @@
                 </h3>
                 <div class="space-y-3">
                     {% for risk in milestone_risks %}
-                    <div class="flex items-start gap-4 p-4 rounded-2xl {% if risk.severity == 'high' %}risk-high{% elif risk.severity == 'medium' %}risk-medium{% else %}risk-low{% endif %}" style="break-inside: avoid; page-break-inside: avoid;">
-                        <span class="pill-badge" style="background: {% if risk.severity == 'high' %}#B3261E{% elif risk.severity == 'medium' %}#F57F17{% else %}var(--md-sys-color-outline){% endif %}; color: white;">{{ risk.severity|capitalize }}</span>
-                        <div>
+                    <div class="p-4 rounded-2xl {% if risk.severity == 'high' %}risk-high{% elif risk.severity == 'medium' %}risk-medium{% else %}risk-low{% endif %}" style="break-inside: avoid; page-break-inside: avoid;">
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="pill-badge shrink-0" style="background: {% if risk.severity == 'high' %}#B3261E{% elif risk.severity == 'medium' %}#F57F17{% else %}var(--md-sys-color-outline){% endif %}; color: white;">{{ risk.severity|capitalize }}</span>
                             <p class="title-medium" style="color: var(--md-sys-color-on-surface);">{{ risk.milestone }} — {{ risk.risk_item }}</p>
-                            <p class="body-medium mt-1"><strong>Trigger:</strong> {{ risk.trigger }}</p>
-                            <p class="body-medium mt-1"><strong>Impact:</strong> {{ risk.impact }}</p>
-                            <p class="body-medium mt-1"><strong>Plan B:</strong> {{ risk.plan_b }}</p>
                         </div>
+                        <p class="body-medium"><strong>Trigger:</strong> {{ risk.trigger }}</p>
+                        <p class="body-medium mt-1"><strong>Impact:</strong> {{ risk.impact }}</p>
+                        <p class="body-medium mt-1"><strong>Plan B:</strong> {{ risk.plan_b }}</p>
                     </div>
                     {% endfor %}
                 </div>
@@ -674,35 +672,36 @@
             </h2>
             <div class="space-y-4 mt-4">
                 {% for entry in execution_log %}
-                <div class="p-4 rounded-2xl" style="background: var(--md-sys-color-surface-container); break-inside: avoid; page-break-inside: avoid;">
-                    <div class="flex items-center justify-between mb-3">
-                        <p class="title-medium">Engagement #{{ entry.number }} — {{ entry.date }}</p>
-                        <p class="body-medium">{{ entry.attendees }}</p>
-                    </div>
-                    <div class="grid grid-cols-2 gap-4">
-                        <div>
-                            <p class="label-large">Planned</p>
-                            <p class="body-medium mt-1">{{ entry.planned }}</p>
-                        </div>
-                        <div>
-                            <p class="label-large">Actual</p>
-                            <p class="body-medium mt-1">{{ entry.actual }}</p>
-                        </div>
-                    </div>
-                    <div class="grid grid-cols-3 gap-4 mt-3">
-                        <div>
-                            <p class="label-large">People Updates</p>
-                            <p class="body-medium mt-1">{{ entry.people_updates }}</p>
-                        </div>
-                        <div>
-                            <p class="label-large">Key Learnings</p>
-                            <p class="body-medium mt-1">{{ entry.key_learnings }}</p>
-                        </div>
-                        <div>
-                            <p class="label-large">Plan Adjustment</p>
-                            <p class="body-medium mt-1">{{ entry.plan_adjustment }}</p>
-                        </div>
-                    </div>
+                <div class="p-4 rounded-2xl" style="break-inside: avoid; page-break-inside: avoid; border: 1px solid var(--md-sys-color-outline-variant);">
+                    <p class="title-medium mb-3">Engagement #{{ entry.number }} — {{ entry.date }}</p>
+                    <table class="w-full" style="border-collapse: collapse;">
+                        <tbody>
+                            <tr style="border-bottom: 1px solid var(--md-sys-color-outline-variant);">
+                                <td class="label-large py-2 pr-4" style="width: 110px;">Attendees</td>
+                                <td class="body-medium py-2">{{ entry.attendees }}</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid var(--md-sys-color-outline-variant);">
+                                <td class="label-large py-2 pr-4">Planned</td>
+                                <td class="body-medium py-2">{{ entry.planned }}</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid var(--md-sys-color-outline-variant);">
+                                <td class="label-large py-2 pr-4">Actual</td>
+                                <td class="body-medium py-2">{{ entry.actual }}</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid var(--md-sys-color-outline-variant);">
+                                <td class="label-large py-2 pr-4">People Updates</td>
+                                <td class="body-medium py-2">{{ entry.people_updates }}</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid var(--md-sys-color-outline-variant);">
+                                <td class="label-large py-2 pr-4">Key Learnings</td>
+                                <td class="body-medium py-2">{{ entry.key_learnings }}</td>
+                            </tr>
+                            <tr>
+                                <td class="label-large py-2 pr-4">Plan Adjustment</td>
+                                <td class="body-medium py-2">{{ entry.plan_adjustment }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
                 {% endfor %}
             </div>
