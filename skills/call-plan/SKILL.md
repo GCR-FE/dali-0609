@@ -268,7 +268,7 @@ Every Call Plan is rendered as a styled HTML file using the Jinja2 template at `
 2. Fills the template via `templates/render_cp.py`
 3. Outputs the rendered HTML file
 
-Visual style: Google Material Design 3 (Google Sans font, MD3 color tokens, 28px rounded cards, Material Symbols icons, responsive grid, pill badges for stance/category/tier).
+Visual style: Google Material Design 3 (Inter + Noto Sans SC fonts, MD3 color tokens, 12-16px rounded cards, emoji icons, Tailwind CSS utility classes, pill badges for stance/category/tier).
 
 ### On-Demand: PDF / Word
 
