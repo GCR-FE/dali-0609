@@ -37,18 +37,20 @@
         --md-sys-color-warning-container: #FFF9C4;
     }
 
+    html { font-size: 9px; }
     * { font-family: 'Inter', 'Noto Sans SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Microsoft YaHei', sans-serif; }
 
     body {
         background-color: var(--md-sys-color-surface);
         color: var(--md-sys-color-on-surface);
+        font-size: 9px;
     }
 
     .md-card {
         background: var(--md-sys-color-surface-container-lowest);
         border: 1px solid var(--md-sys-color-outline-variant);
-        border-radius: 20px;
-        padding: 18px;
+        border-radius: 16px;
+        padding: 14px;
         transition: box-shadow 0.2s ease;
     }
 
@@ -59,8 +61,8 @@
     .md-card-elevated {
         background: var(--md-sys-color-surface-container-low);
         border: none;
-        border-radius: 20px;
-        padding: 18px;
+        border-radius: 16px;
+        padding: 14px;
         box-shadow: 0 1px 3px 1px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.12);
         transition: box-shadow 0.2s ease;
     }
@@ -72,29 +74,29 @@
     .md-card-filled {
         background: var(--md-sys-color-surface-container-highest);
         border: none;
-        border-radius: 20px;
-        padding: 18px;
+        border-radius: 16px;
+        padding: 14px;
     }
 
     .md-fab {
         background: var(--md-sys-color-primary-container);
         color: var(--md-sys-color-on-primary-container);
         border-radius: 10px;
-        padding: 8px 14px;
+        padding: 6px 10px;
         font-weight: 500;
-        font-size: 13px;
+        font-size: 10px;
         box-shadow: 0 1px 3px 1px rgba(0,0,0,0.06);
     }
 
     .pill-badge {
         border-radius: 100px;
-        padding: 3px 12px;
-        font-size: 10px;
+        padding: 2px 8px;
+        font-size: 8.5px;
         font-weight: 500;
         letter-spacing: 0.5px;
         display: inline-flex;
         align-items: center;
-        gap: 4px;
+        gap: 3px;
         white-space: nowrap;
     }
 
@@ -104,41 +106,41 @@
     .pill-inspirational { background: var(--md-sys-color-secondary-container); color: var(--md-sys-color-secondary); }
 
     .section-title {
-        font-size: 16px;
+        font-size: 13px;
         font-weight: 500;
         color: var(--md-sys-color-on-surface);
         letter-spacing: 0;
-        margin-bottom: 16px;
+        margin-bottom: 12px;
     }
 
     .label-large {
-        font-size: 12px;
+        font-size: 10px;
         font-weight: 500;
         letter-spacing: 0.05px;
         color: var(--md-sys-color-on-surface-variant);
     }
 
     .title-medium {
-        font-size: 13px;
+        font-size: 10.5px;
         font-weight: 500;
         letter-spacing: 0.1px;
     }
 
     .body-medium {
-        font-size: 12px;
+        font-size: 10.5px;
         font-weight: 400;
         letter-spacing: 0.15px;
         color: var(--md-sys-color-on-surface-variant);
     }
 
     .headline-small {
-        font-size: 16px;
+        font-size: 13px;
         font-weight: 500;
         letter-spacing: 0;
     }
 
     .display-small {
-        font-size: 28px;
+        font-size: 20px;
         font-weight: 600;
         letter-spacing: -0.02em;
     }
@@ -146,9 +148,9 @@
     .match-tile {
         background: var(--md-sys-color-surface-container-lowest);
         border: 1px solid var(--md-sys-color-outline-variant);
-        border-radius: 14px;
-        padding: 14px;
-        border-left: 4px solid var(--md-sys-color-primary);
+        border-radius: 12px;
+        padding: 10px;
+        border-left: 3px solid var(--md-sys-color-primary);
         transition: box-shadow 0.2s ease;
     }
     .match-tile:hover {
@@ -169,37 +171,37 @@
     }
 
     .next-step-strip {
-        margin-top: 16px;
+        margin-top: 12px;
         background: var(--md-sys-color-primary-container);
-        border-radius: 16px;
-        padding: 14px 18px;
-        font-size: 13px;
+        border-radius: 12px;
+        padding: 10px 14px;
+        font-size: 10px;
         color: var(--md-sys-color-on-primary-container);
         display: flex;
         align-items: center;
-        gap: 10px;
+        gap: 8px;
     }
 
     .gap-warning {
         background: var(--md-sys-color-warning-container);
         color: var(--md-sys-color-on-surface);
-        border-radius: 16px;
-        padding: 14px 18px;
-        font-size: 13px;
+        border-radius: 12px;
+        padding: 10px 14px;
+        font-size: 10px;
         display: flex;
-        gap: 10px;
+        gap: 8px;
         align-items: flex-start;
     }
 
     .reason-note {
-        margin-top: 12px;
+        margin-top: 10px;
         background: var(--md-sys-color-surface-container);
-        border-radius: 16px;
-        padding: 12px 16px;
-        font-size: 12px;
+        border-radius: 12px;
+        padding: 10px 12px;
+        font-size: 9.5px;
         color: var(--md-sys-color-on-surface-variant);
         display: flex;
-        gap: 8px;
+        gap: 6px;
         align-items: flex-start;
     }
 
@@ -209,8 +211,8 @@
     }
 </style>
 </head>
-<body class="min-h-screen p-5">
-<div class="max-w-6xl mx-auto space-y-6">
+<body class="min-h-screen p-3">
+<div class="max-w-5xl mx-auto space-y-4">
 
     <!-- Header -->
     <header class="flex items-center justify-between mb-2">
@@ -233,12 +235,12 @@
         </h2>
         <div class="flex items-center gap-6 mt-4">
             <div class="flex items-center gap-2">
-                <span class="label-large" style="font-size: 13px;">战略倡议:</span>
-                <span class="title-medium" style="font-size: 15px;" style="color: var(--md-sys-color-on-surface);">{{ coverage_summary.initiatives_count }}</span>
+                <span class="label-large" style="font-size: 10px;">战略倡议:</span>
+                <span class="title-medium" style="font-size: 12px; color: var(--md-sys-color-on-surface);">{{ coverage_summary.initiatives_count }}</span>
             </div>
             <div class="flex items-center gap-2">
-                <span class="label-large" style="font-size: 13px;">匹配文档:</span>
-                <span class="title-medium" style="font-size: 15px;" style="color: var(--md-sys-color-primary);">{{ coverage_summary.references_count }}</span>
+                <span class="label-large" style="font-size: 10px;">匹配文档:</span>
+                <span class="title-medium" style="font-size: 12px; color: var(--md-sys-color-primary);">{{ coverage_summary.references_count }}</span>
             </div>
         </div>
     </section>
@@ -261,14 +263,14 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             {% for ref in initiative.references %}
             <div class="match-tile {{ ref.match_type if ref.match_type != 'direct' else '' }}">
-                <span class="pill-badge pill-{{ ref.match_type }} mb-2"><span class="material-symbols-outlined" style="font-size:14px;">{{ ref.icon }}</span>{{ ref.match_type_label }}</span>
-                <span class="pill-badge ml-1" style="background: var(--md-sys-color-surface-container); color: var(--md-sys-color-on-surface-variant); font-size:10px;">{{ ref.match_strength }}</span>
-                <span class="pill-badge ml-1" style="background: var(--md-sys-color-surface-container); color: var(--md-sys-color-on-surface-variant); font-size:10px;">{{ ref.freshness_tier }}</span>
+                <span class="pill-badge pill-{{ ref.match_type }} mb-2"><span class="material-symbols-outlined" style="font-size:11px;">{{ ref.icon }}</span>{{ ref.match_type_label }}</span>
+                <span class="pill-badge ml-1" style="background: var(--md-sys-color-surface-container); color: var(--md-sys-color-on-surface-variant); font-size:8.5px;">{{ ref.match_strength }}</span>
+                <span class="pill-badge ml-1" style="background: var(--md-sys-color-surface-container); color: var(--md-sys-color-on-surface-variant); font-size:8.5px;">{{ ref.freshness_tier }}</span>
                 <h4 class="mt-1"><a href="{{ ref.url }}" target="_blank">{{ ref.title }}</a></h4>
                 <p class="body-medium mt-1 text-xs">{{ ref.description }}</p>
                 <div class="flex gap-2 mt-2 flex-wrap">
                     {% for tag in ref.tags %}
-                    <span class="pill-badge" style="background: var(--md-sys-color-surface-container); color: var(--md-sys-color-on-surface-variant); font-size:10px;">{{ tag }}</span>
+                    <span class="pill-badge" style="background: var(--md-sys-color-surface-container); color: var(--md-sys-color-on-surface-variant); font-size:8.5px;">{{ tag }}</span>
                     {% endfor %}
                 </div>
             </div>
@@ -276,14 +278,14 @@
         </div>
 
         <div class="next-step-strip">
-            <span class="material-symbols-outlined" style="font-size:18px;">flag</span>
+            <span class="material-symbols-outlined" style="font-size:14px;">flag</span>
             <span class="font-bold text-xs uppercase tracking-wider mr-1">Next Step</span>
             {{ initiative.next_step }}
         </div>
 
         {% if initiative.coverage_gap and initiative.coverage_gap != "none" %}
         <div class="gap-warning">
-            <span class="material-symbols-outlined" style="color: var(--md-sys-color-warning); font-size:18px;">warning_amber</span>
+            <span class="material-symbols-outlined" style="color: var(--md-sys-color-warning); font-size:14px;">warning_amber</span>
             <div><strong>Coverage Gap</strong> {{ initiative.coverage_gap }}</div>
         </div>
         {% endif %}
