@@ -46,7 +46,7 @@ transaction:
       done: false
 
     - seq: 4
-      target_file: "~/.sales/客户A.yaml"
+      target_file: "~/Sales/.state/客户A.yaml"
       action: "set_fields"
       fields:
         skills.ep.last_updated: "2026-06-04"
