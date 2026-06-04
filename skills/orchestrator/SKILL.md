@@ -480,6 +480,10 @@ If new info contradicts existing data in another skill:
      "你说预算从 500万 降到 200万，这会影响策略方案的 solution scope。要我一起调整吗？"
 ```
 
+### 4.5 多文件写入事务协议
+
+当单次 skill 执行涉及 ≥2 个文件写入时，**必须**按 `references/transaction-protocol.md` 执行事务流程。此规则强制执行，不可跳过。启动时扫描 `~/Sales/.state/transactions/` 恢复未完成事务。
+
 ---
 
 ## 5. Resilience — Handling Messy Input
