@@ -5,8 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Post-Meeting Report – {{ customer_name }} | {{ meeting_title }}</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Symbols+Outlined" rel="stylesheet">
+    <script>
+        if (typeof tailwind !== 'undefined') {
+            tailwind.config = { theme: { screens: {} } };
+        }
+    </script>
+    <!-- Fonts: locally-installed Inter + Noto Sans SC, with cross-platform fallbacks -->
     <style>
         :root {
             --md-sys-color-primary: #6750A4;
@@ -37,54 +41,56 @@
             --md-sys-color-warning-container: #FFF9C4;
         }
 
-        * { font-family: 'Google Sans', 'Roboto', sans-serif; }
-
+        * { font-family: 'Inter', 'Noto Sans SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Microsoft YaHei', sans-serif; }
+        html { font-size: 9px; }
         body {
-            background-color: var(--md-sys-color-surface);
+            font-family: 'Inter', 'Noto Sans SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Microsoft YaHei', sans-serif;
+            font-size: 9px;
+            background: var(--md-sys-color-surface);
             color: var(--md-sys-color-on-surface);
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        @page {
+            size: A4;
+            margin: 10mm 8mm 10mm 8mm;
         }
 
         .md-card {
             background: var(--md-sys-color-surface-container-lowest);
             border: 1px solid var(--md-sys-color-outline-variant);
-            border-radius: 28px;
-            padding: 24px;
-            transition: box-shadow 0.2s ease;
-        }
-
-        .md-card:hover {
-            box-shadow: 0 2px 6px 2px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.12);
+            border-radius: 16px;
+            padding: 14px;
+            break-inside: avoid;
+            page-break-inside: avoid;
         }
 
         .md-card-elevated {
-            background: var(--md-sys-color-surface-container-low);
-            border: none;
-            border-radius: 28px;
-            padding: 24px;
+            background: var(--md-sys-color-surface-container-lowest);
+            border-radius: 16px;
+            padding: 14px;
             box-shadow: 0 1px 3px 1px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.12);
-            transition: box-shadow 0.2s ease;
-        }
-
-        .md-card-elevated:hover {
-            box-shadow: 0 4px 8px 3px rgba(0,0,0,0.10), 0 1px 3px rgba(0,0,0,0.12);
+            break-inside: avoid;
+            page-break-inside: avoid;
         }
 
         .md-card-filled {
             background: var(--md-sys-color-surface-container-highest);
             border: none;
-            border-radius: 28px;
-            padding: 24px;
+            border-radius: 12px;
+            padding: 12px;
         }
 
         .pill-badge {
             border-radius: 100px;
-            padding: 4px 16px;
-            font-size: 12px;
+            padding: 2px 10px;
+            font-size: 9px;
             font-weight: 500;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.02em;
             display: inline-flex;
             align-items: center;
-            gap: 4px;
+            gap: 3px;
             white-space: nowrap;
         }
 
@@ -108,53 +114,86 @@
         .pill-low { background: var(--md-sys-color-surface-container-highest); color: var(--md-sys-color-on-surface-variant); }
 
         .section-title {
-            font-size: 22px;
-            font-weight: 500;
+            font-size: 14px;
+            font-weight: 600;
             color: var(--md-sys-color-on-surface);
-            letter-spacing: 0;
-            margin-bottom: 16px;
+            letter-spacing: -0.01em;
+            margin-bottom: 10px;
         }
 
         .label-large {
-            font-size: 14px;
+            font-size: 10px;
             font-weight: 500;
-            letter-spacing: 0.1px;
+            letter-spacing: 0.02em;
             color: var(--md-sys-color-on-surface-variant);
         }
 
         .title-medium {
-            font-size: 16px;
+            font-size: 11px;
             font-weight: 500;
-            letter-spacing: 0.15px;
+            letter-spacing: 0;
         }
 
         .body-medium {
-            font-size: 14px;
+            font-size: 10.5px;
             font-weight: 400;
-            letter-spacing: 0.25px;
+            letter-spacing: 0.01em;
             color: var(--md-sys-color-on-surface-variant);
+            line-height: 1.5;
         }
 
         .headline-small {
-            font-size: 24px;
-            font-weight: 400;
-            letter-spacing: 0;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: -0.01em;
         }
 
         .display-small {
-            font-size: 36px;
-            font-weight: 400;
-            letter-spacing: 0;
+            font-size: 18px;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+        }
+
+        .section-icon {
+            font-size: 16px;
+            line-height: 1;
+        }
+
+        /* Table styles */
+        .pmr-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 10px;
+        }
+        .pmr-table th {
+            font-size: 9px;
+            font-weight: 500;
+            color: var(--md-sys-color-on-surface-variant);
+            padding: 6px 8px;
+            text-align: left;
+            border-bottom: 1px solid var(--md-sys-color-outline-variant);
+        }
+        .pmr-table td {
+            padding: 6px 8px;
+            color: var(--md-sys-color-on-surface-variant);
+            border-bottom: 1px solid var(--md-sys-color-outline-variant);
+            line-height: 1.4;
+            vertical-align: top;
+        }
+        .pmr-table tr:last-child td {
+            border-bottom: none;
         }
 
         @media print {
-            body { background: white; }
-            .md-card, .md-card-elevated, .md-card-filled { box-shadow: none; border: 1px solid #e0e0e0; }
+            .md-card, .md-card-elevated, .md-card-filled {
+                break-inside: avoid;
+                page-break-inside: avoid;
+            }
         }
     </style>
 </head>
-<body class="min-h-screen p-6 md:p-10">
-    <div class="max-w-6xl mx-auto space-y-6">
+<body class="min-h-screen p-4">
+    <div class="max-w-6xl mx-auto space-y-4">
 
         <!-- Header -->
         <header class="flex items-center justify-between mb-2">
@@ -165,9 +204,9 @@
                 <p class="body-medium mt-1">Related: {{ related_document }}</p>
             </div>
             <div class="text-right">
-                <div class="flex items-center gap-2" style="background: var(--md-sys-color-primary-container); color: var(--md-sys-color-on-primary-container); border-radius: 16px; padding: 16px 24px; font-weight: 500; box-shadow: 0 4px 8px 3px rgba(0,0,0,0.10);">
-                    <span class="material-symbols-outlined">event</span>
-                    <span class="text-lg font-medium">{{ meeting_date }}</span>
+                <div class="flex items-center gap-2" style="background: var(--md-sys-color-primary-container); color: var(--md-sys-color-on-primary-container); border-radius: 16px; padding: 10px 16px; font-weight: 500; box-shadow: 0 4px 8px 3px rgba(0,0,0,0.10);">
+                    <span class="section-icon">📅</span>
+                    <span class="title-medium">{{ meeting_date }}</span>
                 </div>
                 <p class="body-medium mt-2">Recorded by: {{ recorded_by }}</p>
             </div>
@@ -176,25 +215,25 @@
         <!-- Section 1: Outcome Assessment -->
         <section class="md-card-elevated">
             <h2 class="section-title flex items-center gap-2">
-                <span class="material-symbols-outlined" style="color: var(--md-sys-color-primary);">assessment</span>
+                <span class="section-icon">📊</span>
                 Outcome Assessment
             </h2>
-            <div class="overflow-x-auto mt-4">
-                <table class="w-full text-left">
+            <div class="mt-3">
+                <table class="pmr-table">
                     <thead>
-                        <tr class="border-b" style="border-color: var(--md-sys-color-outline-variant);">
-                            <th class="label-large py-3 px-2">#</th>
-                            <th class="label-large py-3 px-2">Target Meeting Outcome</th>
-                            <th class="label-large py-3 px-2">Result</th>
-                            <th class="label-large py-3 px-2">Evidence & Notes</th>
+                        <tr>
+                            <th>#</th>
+                            <th>Target Meeting Outcome</th>
+                            <th>Result</th>
+                            <th>Evidence & Notes</th>
                         </tr>
                     </thead>
                     <tbody>
                         {% for outcome in outcome_results %}
-                        <tr class="border-b" style="border-color: var(--md-sys-color-outline-variant);">
-                            <td class="body-medium py-3 px-2">{{ outcome.number }}</td>
-                            <td class="body-medium py-3 px-2">{{ outcome.target_outcome }}</td>
-                            <td class="py-3 px-2">
+                        <tr>
+                            <td>{{ outcome.number }}</td>
+                            <td>{{ outcome.target_outcome }}</td>
+                            <td>
                                 {% if outcome.result == "achieved" %}
                                 <span class="pill-badge pill-achieved">✅ Achieved</span>
                                 {% elif outcome.result == "partial" %}
@@ -203,7 +242,7 @@
                                 <span class="pill-badge pill-not-achieved">❌ Not Achieved</span>
                                 {% endif %}
                             </td>
-                            <td class="body-medium py-3 px-2">{{ outcome.evidence }}</td>
+                            <td>{{ outcome.evidence }}</td>
                         </tr>
                         {% endfor %}
                     </tbody>
@@ -211,15 +250,15 @@
             </div>
 
             {% if fallback_outcome_assessment %}
-            <div class="mt-4 p-3 rounded-xl" style="background: var(--md-sys-color-surface-container);">
+            <div class="mt-3 p-3 rounded-xl" style="background: var(--md-sys-color-surface-container);">
                 <p class="body-medium"><strong>Fallback Outcome:</strong> {{ fallback_outcome_assessment }}</p>
             </div>
             {% endif %}
 
             {% if stage_progression %}
-            <div class="mt-4 p-4 rounded-2xl" style="background: {% if stage_progression.achieved %}var(--md-sys-color-success-container){% else %}var(--md-sys-color-warning-container){% endif %};">
+            <div class="mt-3 p-3 rounded-xl" style="background: {% if stage_progression.achieved %}var(--md-sys-color-success-container){% else %}var(--md-sys-color-warning-container){% endif %};">
                 <p class="title-medium" style="color: {% if stage_progression.achieved %}var(--md-sys-color-success){% else %}var(--md-sys-color-warning){% endif %};">
-                    Stage Progression: {{ stage_progression.planned }}
+                    📈 Stage Progression: {{ stage_progression.planned }}
                     {% if stage_progression.achieved %} ✅{% else %} ⚠️ Actual: {{ stage_progression.actual }}{% endif %}
                 </p>
             </div>
@@ -229,92 +268,90 @@
         <!-- Section 2: Meeting Insights -->
         <section class="md-card">
             <h2 class="section-title flex items-center gap-2">
-                <span class="material-symbols-outlined" style="color: var(--md-sys-color-primary);">psychology</span>
+                <span class="section-icon">💡</span>
                 Meeting Insights
             </h2>
 
             <!-- Customer Sentiment -->
-            <div class="mt-4">
-                <p class="title-medium mb-3">Customer Sentiment Changes</p>
-                <div class="overflow-x-auto">
-                    <table class="w-full text-left">
-                        <thead>
-                            <tr class="border-b" style="border-color: var(--md-sys-color-outline-variant);">
-                                <th class="label-large py-3 px-2">Attendee</th>
-                                <th class="label-large py-3 px-2">Before</th>
-                                <th class="label-large py-3 px-2"></th>
-                                <th class="label-large py-3 px-2">After</th>
-                                <th class="label-large py-3 px-2">Evidence</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for s in sentiment_changes %}
-                            <tr class="border-b" style="border-color: var(--md-sys-color-outline-variant);">
-                                <td class="body-medium py-3 px-2 font-medium" style="color: var(--md-sys-color-on-surface);">{{ s.attendee }}</td>
-                                <td class="py-3 px-2"><span class="pill-badge pill-{{ s.stance_before|lower|replace(' ', '-')|replace('_', '-') }}">{{ s.stance_before }}</span></td>
-                                <td class="py-3 px-2 text-center"><span class="material-symbols-outlined" style="color: var(--md-sys-color-primary);">arrow_forward</span></td>
-                                <td class="py-3 px-2"><span class="pill-badge pill-{{ s.stance_after|lower|replace(' ', '-')|replace('_', '-') }}">{{ s.stance_after }}</span></td>
-                                <td class="body-medium py-3 px-2">{{ s.evidence }}</td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
+            {% if sentiment_changes %}
+            <div class="mt-3">
+                <p class="title-medium mb-2">Customer Sentiment Changes</p>
+                <table class="pmr-table">
+                    <thead>
+                        <tr>
+                            <th>Attendee</th>
+                            <th>Before</th>
+                            <th></th>
+                            <th>After</th>
+                            <th>Evidence</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for s in sentiment_changes %}
+                        <tr>
+                            <td style="color: var(--md-sys-color-on-surface); font-weight: 500;">{{ s.attendee }}</td>
+                            <td><span class="pill-badge pill-{{ s.stance_before|lower|replace(' ', '-')|replace('_', '-') }}">{{ s.stance_before }}</span></td>
+                            <td style="text-align: center;">→</td>
+                            <td><span class="pill-badge pill-{{ s.stance_after|lower|replace(' ', '-')|replace('_', '-') }}">{{ s.stance_after }}</span></td>
+                            <td>{{ s.evidence }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
             </div>
+            {% endif %}
 
             <!-- Key Findings -->
-            <div class="mt-6">
-                <p class="title-medium mb-3">Key Findings</p>
-                <div class="overflow-x-auto">
-                    <table class="w-full text-left">
-                        <thead>
-                            <tr class="border-b" style="border-color: var(--md-sys-color-outline-variant);">
-                                <th class="label-large py-3 px-2">Finding</th>
-                                <th class="label-large py-3 px-2">Source</th>
-                                <th class="label-large py-3 px-2">Implication</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for f in key_findings %}
-                            <tr class="border-b" style="border-color: var(--md-sys-color-outline-variant);">
-                                <td class="body-medium py-3 px-2 font-medium" style="color: var(--md-sys-color-on-surface);">{{ f.finding }}</td>
-                                <td class="body-medium py-3 px-2">{{ f.source }}</td>
-                                <td class="body-medium py-3 px-2">{{ f.implication }}</td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
+            {% if key_findings %}
+            <div class="mt-4">
+                <p class="title-medium mb-2">Key Findings</p>
+                <table class="pmr-table">
+                    <thead>
+                        <tr>
+                            <th>Finding</th>
+                            <th>Source</th>
+                            <th>Implication</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for f in key_findings %}
+                        <tr>
+                            <td style="color: var(--md-sys-color-on-surface); font-weight: 500;">{{ f.finding }}</td>
+                            <td>{{ f.source }}</td>
+                            <td>{{ f.implication }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
             </div>
+            {% endif %}
 
             <!-- Information Gap Check -->
             {% if info_gap_check %}
-            <div class="mt-6">
-                <p class="title-medium mb-3">Information Gap Check</p>
-                <div class="overflow-x-auto">
-                    <table class="w-full text-left">
-                        <thead>
-                            <tr class="border-b" style="border-color: var(--md-sys-color-outline-variant);">
-                                <th class="label-large py-3 px-2">Question (from Call Plan)</th>
-                                <th class="label-large py-3 px-2">Status</th>
-                                <th class="label-large py-3 px-2">Answer / Notes</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for q in info_gap_check %}
-                            <tr class="border-b" style="border-color: var(--md-sys-color-outline-variant);">
-                                <td class="body-medium py-3 px-2">{{ q.question }}</td>
-                                <td class="py-3 px-2">
-                                    <span class="pill-badge pill-{{ q.status }}">
-                                        {% if q.status == "answered" %}✅ Answered{% else %}❌ Unanswered{% endif %}
-                                    </span>
-                                </td>
-                                <td class="body-medium py-3 px-2">{{ q.answer_notes }}</td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
+            <div class="mt-4">
+                <p class="title-medium mb-2">Information Gap Check</p>
+                <table class="pmr-table">
+                    <thead>
+                        <tr>
+                            <th>Question (from Call Plan)</th>
+                            <th>Status</th>
+                            <th>Answer / Notes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for q in info_gap_check %}
+                        <tr>
+                            <td>{{ q.question }}</td>
+                            <td>
+                                <span class="pill-badge pill-{{ q.status }}">
+                                    {% if q.status == "answered" %}✅ Answered{% else %}❌ Unanswered{% endif %}
+                                </span>
+                            </td>
+                            <td>{{ q.answer_notes }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
             </div>
             {% endif %}
         </section>
@@ -322,43 +359,44 @@
         <!-- Section 3: What Changed — EP Update -->
         <section class="md-card-elevated">
             <h2 class="section-title flex items-center gap-2">
-                <span class="material-symbols-outlined" style="color: var(--md-sys-color-primary);">edit_document</span>
+                <span class="section-icon">📝</span>
                 What Changed — EP Update
             </h2>
-            <div class="overflow-x-auto mt-4">
-                <table class="w-full text-left">
+            {% if ep_updates %}
+            <div class="mt-3">
+                <table class="pmr-table">
                     <thead>
-                        <tr class="border-b" style="border-color: var(--md-sys-color-outline-variant);">
-                            <th class="label-large py-3 px-2">EP Section</th>
-                            <th class="label-large py-3 px-2">Change Type</th>
-                            <th class="label-large py-3 px-2">What to Write</th>
+                        <tr>
+                            <th>EP Section</th>
+                            <th>Change Type</th>
+                            <th>What to Write</th>
                         </tr>
                     </thead>
                     <tbody>
                         {% for update in ep_updates %}
-                        <tr class="border-b" style="border-color: var(--md-sys-color-outline-variant);">
-                            <td class="body-medium py-3 px-2 font-medium" style="color: var(--md-sys-color-on-surface);">{{ update.section }}</td>
-                            <td class="py-3 px-2"><span class="pill-badge pill-{{ update.change_type|lower }}">{{ update.change_type }}</span></td>
-                            <td class="body-medium py-3 px-2">{{ update.what_to_write }}</td>
+                        <tr>
+                            <td style="color: var(--md-sys-color-on-surface); font-weight: 500;">{{ update.section }}</td>
+                            <td><span class="pill-badge pill-{{ update.change_type|lower }}">{{ update.change_type }}</span></td>
+                            <td>{{ update.what_to_write }}</td>
                         </tr>
                         {% endfor %}
                     </tbody>
                 </table>
             </div>
+            {% endif %}
 
             {% if execution_log_update %}
-            <div class="mt-4 p-4 rounded-2xl" style="background: var(--md-sys-color-surface-container);">
-                <p class="label-large mb-2">Execution Log Update</p>
+            <div class="mt-3 p-3 rounded-xl" style="background: var(--md-sys-color-surface-container);">
+                <p class="label-large mb-1">Execution Log Update</p>
                 <p class="body-medium leading-relaxed">{{ execution_log_update }}</p>
             </div>
             {% endif %}
 
             <!-- Agent Recommendation -->
             {% if agent_recommendation %}
-            <div class="mt-4 p-5 rounded-2xl" style="background: var(--md-sys-color-primary-container); border-left: 4px solid var(--md-sys-color-primary);">
-                <p class="title-medium mb-2" style="color: var(--md-sys-color-on-primary-container);">
-                    <span class="material-symbols-outlined align-middle text-base">smart_toy</span>
-                    Agent Recommendation
+            <div class="mt-3 p-4 rounded-xl" style="background: var(--md-sys-color-primary-container); border-left: 4px solid var(--md-sys-color-primary);">
+                <p class="title-medium mb-1" style="color: var(--md-sys-color-on-primary-container);">
+                    🤖 Agent Recommendation
                 </p>
                 <p class="body-medium leading-relaxed" style="color: var(--md-sys-color-on-primary-container);">{{ agent_recommendation }}</p>
             </div>
@@ -368,63 +406,63 @@
         <!-- Section 4: Next Steps — Planned vs Actual -->
         <section class="md-card">
             <h2 class="section-title flex items-center gap-2">
-                <span class="material-symbols-outlined" style="color: var(--md-sys-color-primary);">compare_arrows</span>
+                <span class="section-icon">🔄</span>
                 Next Steps — Planned vs Actual
             </h2>
 
             <!-- Comparison -->
-            <div class="overflow-x-auto mt-4">
-                <table class="w-full text-left">
+            {% if planned_next_steps and actual_next_steps %}
+            <div class="mt-3">
+                <table class="pmr-table">
                     <thead>
-                        <tr class="border-b" style="border-color: var(--md-sys-color-outline-variant);">
-                            <th class="label-large py-3 px-2">#</th>
-                            <th class="label-large py-3 px-2">Planned (from CP)</th>
-                            <th class="label-large py-3 px-2">Actual Agreed</th>
-                            <th class="label-large py-3 px-2">Delta</th>
+                        <tr>
+                            <th>#</th>
+                            <th>Planned (from CP)</th>
+                            <th>Actual Agreed</th>
+                            <th>Delta</th>
                         </tr>
                     </thead>
                     <tbody>
                         {% set max_steps = [planned_next_steps|length, actual_next_steps|length] | max %}
                         {% for i in range(max_steps) %}
-                        <tr class="border-b" style="border-color: var(--md-sys-color-outline-variant);">
-                            <td class="body-medium py-3 px-2">{{ i + 1 }}</td>
-                            <td class="body-medium py-3 px-2">{% if i < planned_next_steps|length %}{{ planned_next_steps[i].step }} ({{ planned_next_steps[i].owner }}, {{ planned_next_steps[i].timeline }}){% else %}<em style="color: var(--md-sys-color-outline);">— No planned item —</em>{% endif %}</td>
-                            <td class="body-medium py-3 px-2">{% if i < actual_next_steps|length %}{{ actual_next_steps[i].step }} ({{ actual_next_steps[i].owner }}, {{ actual_next_steps[i].timeline }}){% else %}<em style="color: var(--md-sys-color-outline);">— Dropped —</em>{% endif %}</td>
-                            <td class="body-medium py-3 px-2">{% if i < actual_next_steps|length %}{{ actual_next_steps[i].delta }}{% elif i < planned_next_steps|length %}Not pursued{% endif %}</td>
+                        <tr>
+                            <td>{{ i + 1 }}</td>
+                            <td>{% if i < planned_next_steps|length %}{{ planned_next_steps[i].step }} ({{ planned_next_steps[i].owner }}, {{ planned_next_steps[i].timeline }}){% else %}<em style="color: var(--md-sys-color-outline);">— No planned item —</em>{% endif %}</td>
+                            <td>{% if i < actual_next_steps|length %}{{ actual_next_steps[i].step }} ({{ actual_next_steps[i].owner }}, {{ actual_next_steps[i].timeline }}){% else %}<em style="color: var(--md-sys-color-outline);">— Dropped —</em>{% endif %}</td>
+                            <td>{% if i < actual_next_steps|length %}{{ actual_next_steps[i].delta }}{% elif i < planned_next_steps|length %}Not pursued{% endif %}</td>
                         </tr>
                         {% endfor %}
                     </tbody>
                 </table>
             </div>
+            {% endif %}
 
             <!-- Action Items -->
             {% if action_items %}
-            <div class="mt-6">
-                <p class="title-medium mb-3">Action Items</p>
-                <div class="overflow-x-auto">
-                    <table class="w-full text-left">
-                        <thead>
-                            <tr class="border-b" style="border-color: var(--md-sys-color-outline-variant);">
-                                <th class="label-large py-3 px-2">Priority</th>
-                                <th class="label-large py-3 px-2">Action</th>
-                                <th class="label-large py-3 px-2">Owner</th>
-                                <th class="label-large py-3 px-2">ETA</th>
-                                <th class="label-large py-3 px-2">Status</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for item in action_items %}
-                            <tr class="border-b" style="border-color: var(--md-sys-color-outline-variant);">
-                                <td class="py-3 px-2"><span class="pill-badge pill-{{ item.priority|lower }}">{{ item.priority }}</span></td>
-                                <td class="body-medium py-3 px-2">{{ item.action }}</td>
-                                <td class="body-medium py-3 px-2">{{ item.owner }}</td>
-                                <td class="body-medium py-3 px-2">{{ item.eta }}</td>
-                                <td class="body-medium py-3 px-2">{{ item.status }}</td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
+            <div class="mt-4">
+                <p class="title-medium mb-2">Action Items</p>
+                <table class="pmr-table">
+                    <thead>
+                        <tr>
+                            <th>Priority</th>
+                            <th>Action</th>
+                            <th>Owner</th>
+                            <th>ETA</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in action_items %}
+                        <tr>
+                            <td><span class="pill-badge pill-{{ item.priority|lower }}">{{ item.priority }}</span></td>
+                            <td>{{ item.action }}</td>
+                            <td>{{ item.owner }}</td>
+                            <td>{{ item.eta }}</td>
+                            <td>{{ item.status }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
             </div>
             {% endif %}
         </section>
@@ -433,24 +471,26 @@
         {% if recap_email_points %}
         <section class="md-card-elevated" style="border-left: 4px solid var(--md-sys-color-tertiary);">
             <h2 class="section-title flex items-center gap-2">
-                <span class="material-symbols-outlined" style="color: var(--md-sys-color-tertiary);">mail</span>
+                <span class="section-icon">✉️</span>
                 Customer Recap Email — Key Points
             </h2>
-            <p class="body-medium mb-3">Draft for sales review before sending:</p>
-            <ul class="space-y-2 mt-4">
+            <p class="body-medium mb-2">Draft for sales review before sending:</p>
+            <div class="space-y-2 mt-3">
                 {% for point in recap_email_points %}
-                <li class="body-medium flex items-start gap-2">
-                    <span class="material-symbols-outlined text-base mt-0.5" style="color: var(--md-sys-color-tertiary);">check_circle</span>
-                    {{ point }}
-                </li>
+                <div class="flex items-start gap-2 p-2 rounded-lg" style="background: var(--md-sys-color-surface-container);">
+                    <span style="color: var(--md-sys-color-tertiary);">✓</span>
+                    <p class="body-medium">{{ point }}</p>
+                </div>
                 {% endfor %}
-            </ul>
+            </div>
         </section>
         {% endif %}
 
         <!-- Footer -->
         <footer class="text-center py-4">
-            <p class="body-medium">Last updated: {{ last_updated }}</p>
+            <p class="body-medium" style="color: var(--md-sys-color-on-surface-variant);">
+                Generated by AWS Sales Agent · Last updated: {{ last_updated }}
+            </p>
         </footer>
 
     </div>

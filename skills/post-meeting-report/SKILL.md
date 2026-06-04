@@ -194,7 +194,7 @@ Sales reviews and edits before sending same day. Customer-facing content only.
 2. Fills the template via `templates/render_pmr.py`
 3. Outputs the rendered HTML file
 
-Visual style: Google Material Design 3 (Google Sans, MD3 color tokens, 28px rounded cards, Material Symbols icons, responsive grid, pill badges for result/stance/priority/status).
+Visual style: Material Design 3 (Inter + Noto Sans SC locally-installed fonts, MD3 color tokens, 16px rounded cards, emoji icons, desktop-optimized fixed-width layout with Tailwind CDN, pill badges for result/stance/priority/status). PDF-optimized: @page margins, break-inside:avoid, compact 9px root font-size.
 
 ### On-Demand: PDF / Word
 
