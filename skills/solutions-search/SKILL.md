@@ -20,7 +20,9 @@ Every run of this skill executes three stages, in this fixed order:
 
 ## Procedure 1: Control - Core Objective (mandatory)
 
-Given the **Top 3 Strategic Initiatives** from the `business-insight` skill, search the local knowledge base (`./references/`) for **proven architectures and case studies from customers in the same or adjacent industry facing the same business context**, and return ranked, evidence-backed **Solutions 搜索结果**. You should also search AWS service information from aws_docs and aws_knowledge.
+Given the **Top 3 Strategic Initiatives** from the `business-insight` skill, search the local knowledge base (`./references/`) for **proven architectures and case studies from customers in the same or adjacent industry facing the same business context**, and return ranked, evidence-backed **Solutions 搜索结果**. Search AWS service information using:
+- `mcp_aws_docs_search_documentation` (search_phrase=关键词)
+- `mcp_aws_knowledge_aws___search_documentation` (search_phrase=关键词, topics=["reference_documentation"])
 
 ### Required Input
 
@@ -38,7 +40,7 @@ Read **Top 3 Strategic Initiatives** from `business-insight`. Each initiative co
 **REQUIRED: Load `references/search-keywords.json`** to compose structured search queries (7 dimensions: industry verticals, workload services, challenge patterns, scale/performance terms, compliance constraints, Well-Architected pillars, and composite search phrases).
 
 - `references/industries/` — per-industry pages (8 industries): Solution Maps, Asset Cards with KPI, customer references, AWS services
-- AWS documentation through aws_docs and aws_knowledge.
+- AWS documentation through `mcp_aws_docs_search_documentation` and `mcp_aws_knowledge_aws___search_documentation`.
 
 If the references folder nor the AWS documentation does not cover the requested industry, **state the coverage gap explicitly** and do not fabricate data.
 
@@ -89,7 +91,7 @@ Deprioritize results that do not fit the buying behavior, even if they are techn
 
 After retrieval, apply these hard constraints:
 
-1. **Only use content from `./references/`** , or AWS Documentation mcp tool— no external web search, no general knowledge augmentation, no creative inference beyond what the documents state
+1. **Only use content from `./references/`** , or AWS Documentation MCP tools (`mcp_aws_docs_search_documentation`, `mcp_aws_knowledge_aws___search_documentation`) — no external web search, no general knowledge augmentation, no creative inference beyond what the documents state
 2. **`internal_only: true` documents** — their content MUST NOT appear in any customer-facing material. Use them for internal strategy only; cite them in internal-only blocks if needed
 3. **No fabrication** — if the knowledge base does not contain a relevant reference, say so explicitly in the Coverage Gap. Do not invent, paraphrase beyond source, or substitute with public knowledge
 4. **No stale content** — apply freshness tiers (see RAG Search Quality Guardrails below) based on metadata dates in the loaded documents
