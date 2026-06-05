@@ -116,36 +116,53 @@ def main():
 
     if output_path.endswith('.pdf'):
         # Write temp HTML, then convert to PDF via headless Chrome
-        import subprocess, tempfile, shutil
+        import subprocess, shutil
         tmp_html = output_path.replace('.pdf', '_tmp.html')
         with open(tmp_html, 'w', encoding='utf-8') as f:
             f.write(html)
         
-        chrome = shutil.which("google-chrome") or shutil.which("chromium-browser") or shutil.which("chromium")
-        if not chrome:
-            print("ERROR: Chrome/Chromium not found", file=sys.stderr)
+        chrome = (shutil.which("google-chrome")
+                  or shutil.which("chromium-browser")
+                  or shutil.which("chromium")
+                  or shutil.which("chrome"))  # Windows 兼容
+    if chrome:
+            pdf_path = str(Path(output_path).resolve())
+            cmd = [
+                chrome,
+                "--headless",
+                "--disable-gpu",
+                "--no-sandbox",
+                "--disable-software-rasterizer",
+                "--run-all-compositor-stages-before-draw",
+                "--force-color-profile=srgb",
+                "--window-size=1280,900",
+                f"--print-to-pdf={pdf_path}",
+                "--no-pdf-header-footer",
+                f"file://{str(Path(tmp_html).resolve())}"
+            ]
+            result = subprocess.run(cmd, capture_output=True, text=True, timeout=30)
+            if result.returncode == 0:
+                Path(tmp_html).unlink(missing_ok=True)
+                print(f"✅ PDF rendered (Chrome): {output_path}")
+                return
+            else:
+                print(f"WARN: Chrome failed, trying weasyprint... ({result.stderr.strip()})", file=sys.stderr)
+
+        # Fallback: weasyprint
+        try:
+            from weasyprint import HTML as WeasyHTML
+            WeasyHTML(filename=str(Path(tmp_html).resolve())).write_pdf(output_path)
+            Path(tmp_html).unlink(missing_ok=True)
+            print(f"✅ PDF rendered (weasyprint): {output_path}")
+        except ImportError:
+            Path(tmp_html).unlink(missing_ok=True)
+            print("ERROR: Neither Chrome nor weasyprint available.", file=sys.stderr)
+            print("  Install one of: google-chrome | chromium | pip install weasyprint", file=sys.stderr)
             sys.exit(1)
-        
-        pdf_path = str(Path(output_path).resolve())
-        cmd = [
-            chrome,
-            "--headless",
-            "--disable-gpu",
-            "--no-sandbox",
-            "--disable-software-rasterizer",
-            "--run-all-compositor-stages-before-draw",
-            "--force-color-profile=srgb",
-            "--window-size=1280,900",
-            f"--print-to-pdf={pdf_path}",
-            "--no-pdf-header-footer",
-            f"file://{str(Path(tmp_html).resolve())}"
-        ]
-        result = subprocess.run(cmd, capture_output=True, text=True, timeout=30)
-        Path(tmp_html).unlink(missing_ok=True)
-        if result.returncode != 0:
-            print(f"ERROR: Chrome failed: {result.stderr}", file=sys.stderr)
+        except Exception as e:
+            Path(tmp_html).unlink(missing_ok=True)
+            print(f"ERROR: weasyprint failed: {e}", file=sys.stderr)
             sys.exit(1)
-        print(f"✅ PDF rendered: {output_path}")
     else:
         with open(output_path, 'w', encoding='utf-8') as f:
             f.write(html)
