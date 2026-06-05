@@ -21,7 +21,6 @@ Do NOT begin the Pre-Generation Dialogue until you understand all rules and the 
 
 ---
 
-
 ## 1. Generation Workflow — Pre-Generation Dialogue
 
 EB generation is **NOT** a one-shot output. EBC/高管拜访准备通常涉及多方协调，agent 和 sales 在生成前需要对话确认。
@@ -206,6 +205,22 @@ Sales requests these explicitly; agent does not auto-generate.
 Example: `EB_MinghuaHeavy_2026-06-10_EBC-VP-Visit.html`
 
 MilestoneBrief = EP Roadmap milestone 描述精简版（2-4个英文单词，kebab-case）。EB 和对应 PMR 使用相同的 `{Date}_{MilestoneBrief}` 后缀，方便配对。
+
+### HTML 生成方式（强制）
+
+**不允许从零手写 HTML 或跳过 render 脚本。** 必须按以下顺序操作：
+
+1. 将 Executive Briefing 内容整理为符合 `templates/sample_data.json` schema 的 JSON 对象
+2. 调用 `templates/render_eb.py` 填充 `templates/executive-briefing.html.j2` 模板
+3. 不得修改 J2 模板中的 CSS class、颜色变量、字体或布局结构
+4. 若 render 脚本执行失败，停止并报错，**不得 fallback 为手写 HTML**
+
+**Pre-render Checklist（全部 ✅ 才输出最终文件）：**
+- [ ] JSON 数据符合 `sample_data.json` 中定义的所有 key 和类型
+- [ ] 调用了 `render_eb.py`（不是手写 HTML）
+- [ ] 输出 HTML 中包含 "INTERNAL USE ONLY — AWS Confidential" banner
+- [ ] 输出 HTML 中不含任何硬编码颜色或自创 CSS class
+- [ ] 文件命名遵循 `EB_{Customer}_{Date}_{MilestoneBrief}.html` 规则
 
 ### Storage Architecture
 
