@@ -117,7 +117,10 @@
         .shadow-sm { box-shadow: 0 1px 2px 0 rgba(0,0,0,0.05); }
         .shadow { box-shadow: 0 1px 3px 0 rgba(0,0,0,0.1), 0 1px 2px -1px rgba(0,0,0,0.1); }
 
-        /* Table */
+        /* Extra utilities */
+        .shrink-0 { flex-shrink: 0; }
+
+        /* Table styles */
         table { border-collapse: collapse; }
         th, td { padding: 0.5rem 0.75rem; text-align: left; border-bottom: 1px solid var(--md-sys-color-outline-variant); }
         th { font-weight: 600; }
@@ -262,6 +265,9 @@
             width: 100%;
             border-collapse: collapse;
             font-size: 10px;
+            table-layout: fixed;
+            word-break: break-word;
+            overflow-wrap: break-word;
         }
         .eb-table th {
             font-size: 9px;
@@ -511,15 +517,15 @@
                 <p class="title-medium mb-2">📋 Proposed Next Steps</p>
                 <div class="space-y-2">
                     <div class="p-3 rounded-xl flex items-start gap-3" style="background: var(--md-sys-color-surface-container);">
-                        <span class="pill-badge shrink-0 mt-0.5" style="background: #C8E6C9; color: #1B5E20; min-width: 70px; justify-content: center;">Ideal</span>
+                        <span class="pill-badge shrink-0" style="background: #C8E6C9; color: #1B5E20; min-width: 70px; justify-content: center; margin-top: 2px;">Ideal</span>
                         <p class="body-medium flex-1">{{ proposed_next_steps.ideal }}</p>
                     </div>
                     <div class="p-3 rounded-xl flex items-start gap-3" style="background: var(--md-sys-color-surface-container);">
-                        <span class="pill-badge shrink-0 mt-0.5" style="background: #FFF9C4; color: #F57F17; min-width: 70px; justify-content: center;">Acceptable</span>
+                        <span class="pill-badge shrink-0" style="background: #FFF9C4; color: #F57F17; min-width: 70px; justify-content: center; margin-top: 2px;">Acceptable</span>
                         <p class="body-medium flex-1">{{ proposed_next_steps.acceptable }}</p>
                     </div>
                     <div class="p-3 rounded-xl flex items-start gap-3" style="background: var(--md-sys-color-surface-container);">
-                        <span class="pill-badge shrink-0 mt-0.5" style="background: var(--md-sys-color-surface-container-highest); color: var(--md-sys-color-on-surface-variant); min-width: 70px; justify-content: center;">Minimum</span>
+                        <span class="pill-badge shrink-0" style="background: var(--md-sys-color-surface-container-highest); color: var(--md-sys-color-on-surface-variant); min-width: 70px; justify-content: center; margin-top: 2px;">Minimum</span>
                         <p class="body-medium flex-1">{{ proposed_next_steps.minimum }}</p>
                     </div>
                 </div>

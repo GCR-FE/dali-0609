@@ -125,7 +125,7 @@ def main():
                   or shutil.which("chromium-browser")
                   or shutil.which("chromium")
                   or shutil.which("chrome"))  # Windows 兼容
-    if chrome:
+        if chrome:
             pdf_path = str(Path(output_path).resolve())
             cmd = [
                 chrome,
@@ -138,6 +138,7 @@ def main():
                 "--window-size=1280,900",
                 f"--print-to-pdf={pdf_path}",
                 "--no-pdf-header-footer",
+                "--print-to-pdf-no-header",
                 f"file://{str(Path(tmp_html).resolve())}"
             ]
             result = subprocess.run(cmd, capture_output=True, text=True, timeout=30)
