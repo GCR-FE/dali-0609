@@ -229,6 +229,11 @@
                 page-break-inside: avoid;
                 break-inside: avoid;
             }
+            /* Layer B Diagnostic cards carry long evidence + root_cause text and
+               often exceed remaining page space, causing premature page breaks.
+               Allow them to flow across pages while small Layer A summary cards
+               stay atomic via the rule above. */
+            .element-card-diagnostic { page-break-inside: auto !important; break-inside: auto !important; }
             table.exit-criteria tr { page-break-inside: avoid; break-inside: avoid; }
 
             /* Horizontal "metric strip" grids (3-4 colored cells in a row) are
@@ -241,12 +246,29 @@
                 break-inside: avoid;
             }
 
-            /* Container cards allow breaks so their inner elements can flow,
-               EXCEPT Phase 2 (with stepper) which is compact enough to stay on one page. */
-            .md-card, .md-card-elevated { page-break-inside: auto; }
-            .phase25-card { page-break-inside: avoid; break-inside: avoid; }
-            /* :has() as progressive enhancement for other stepper-like cards */
-            .md-card-elevated:has(.md-stepper-row) { page-break-inside: avoid; break-inside: avoid; }
+            /* Phase 2 verdict snapshot — fixed 2×2 in print. Tailwind's md:
+               breakpoint is viewport-based and does not fire in the print
+               (A4) viewport, so we pin 2 columns explicitly here instead of
+               relying on grid-cols responsive classes. Kept atomic so the 4
+               cells never split across a page boundary. */
+            .phase2-verdict-grid {
+                display: grid !important;
+                grid-template-columns: 1fr 1fr !important;
+                page-break-inside: avoid;
+                break-inside: avoid;
+            }
+
+            /* Container cards allow breaks so their inner elements can flow.
+               Phase 2 card (.phase25-card) is NOT forced atomic — its full content
+               (stepper + verdict grid + rationale + blocker + targets + gaps) often
+               exceeds remaining space on page 1, which previously caused page 1 to
+               render with ~80% whitespace. Stepper atomicity is preserved at the
+               .md-stepper-row level (defined above). */
+            .md-card, .md-card-elevated, .phase25-card { page-break-inside: auto; }
+            /* :has() as progressive enhancement: stepper-bearing cards stay atomic
+               only if the stepper itself is the dominant content. Phase 2's stepper
+               is one row among many sub-blocks, so this rule no longer fires for it. */
+            .md-card-elevated:has(.md-stepper-row) > .md-stepper-row { page-break-inside: avoid; break-inside: avoid; }
 
             /* Stepper nodes in print: slightly smaller and tighter label stack */
             .md-stepper-row { margin-top: 10px !important; margin-bottom: 10px !important; }
@@ -297,7 +319,7 @@
             Phase 2 · Deal Assessment
         </h2>
 
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mt-2">
+        <div class="grid grid-cols-2 gap-4 mt-2 phase2-verdict-grid">
             <div class="md-card-filled text-center p-5">
                 <p class="label-large">Verdict</p>
                 <p class="title-medium mt-2" style="color: var(--md-sys-color-warning);">🔴 建议回退到 Prospect 阶段</p>
@@ -860,26 +882,26 @@
 
         <p class="label-large mt-6 mb-3">Layer B · Diagnostic Cards</p>
         <div class="space-y-3">
-            <div class="element-card p0">
+            <div class="element-card element-card-diagnostic p0">
                 <p class="title-medium">E — Economic Buyer · 15%</p>
                 <p class="body-medium italic mt-2">Diagnostic Evidence: DC S2 标注'技术决策需 VP 背书'为 Yes，但 E 的 EB 接触类语句全部为 No —— DC 的 Yes 评分缺乏 EB 接触佐证，和 E 的实际进展对不上。</p>
                 <p class="body-medium mt-2" style="color: var(--md-sys-color-on-surface);">
                     <strong>Root Cause:</strong> Ava（座舱研发 VP）已经在 Slide 9 组织架构里识别出来，但 AE 的接触路径只停留在 Champion Alan 这一层。Alan 是 Ava 的直属下级，文化和组织惯性下 Alan 倾向于'先把东西做出来再报给 VP'，所以 EB 接触被自然延迟。当前 E 缺的不是信息盲区，是接触节奏没主动打开。
                 </p>
             </div>
-            <div class="element-card p1">
+            <div class="element-card element-card-diagnostic p1">
                 <p class="title-medium">DC — Decision Criteria · 50%</p>
                 <p class="body-medium mt-2" style="color: var(--md-sys-color-on-surface);">
                     <strong>Root Cause:</strong> 技术维度的准入标准已经和 Alan 对齐（多模态能力、车端延迟、Nova Sonic 可部署性），但商务维度（合规、定价、本地化服务）需要 VP 级才能确认。E 没接触，DC 的商务半张就缺，所以评分卡在 50% 附近。
                 </p>
             </div>
-            <div class="element-card p1">
+            <div class="element-card element-card-diagnostic p1">
                 <p class="title-medium">DP — Decision Process · 60%</p>
                 <p class="body-medium mt-2" style="color: var(--md-sys-color-on-surface);">
                     <strong>Root Cause:</strong> 技术选型流程清晰（Alan 主导），但预算审批路径和供应商准入 gate 还没显性化。Slide 12 显示 Alex（采购总监）对外资云的本地化和账期敏感 —— DP 在采购节点有未识别的阻力路径。
                 </p>
             </div>
-            <div class="element-card p0">
+            <div class="element-card element-card-diagnostic p0">
                 <p class="title-medium">P — Paper Process · 33%</p>
                 <p class="body-medium mt-2" style="color: var(--md-sys-color-on-surface);">
                     <strong>Root Cause:</strong> PPA / EDP 合同路径还没讨论。P 跟 E、DP 都挂钩，两个都没就绪，合同环节整体卡死。当前阶段不直接修复 P，先解决 E。

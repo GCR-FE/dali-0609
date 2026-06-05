@@ -1,6 +1,7 @@
 ---
 name: "ifbcase"
-description: "Use this skill when the user wants to read customer information about ifbcase. Trigger words 'ifbcase'. 
+description: >
+  Use this skill when the user wants to read customer information about ifbcase. Trigger words 'ifbcase'.
 user_locked: true
 ---
 
