@@ -162,7 +162,7 @@ Use one of the two templates below, template A or template B. These templates co
 Rules for filling:
 - **Every bracket must be filled** — if a bracket cannot be filled from the required upstream inputs, name the gap and stop; do not fabricate content
 -every data point written must have a (source).
-- **Keep it to 6-8 sentences** — anything longer loses the executive
+- **Keep it to 5–7 sentences** — anything longer loses the executive
 - use business terminology, instead of IT terminology, unless target person is CIO/CTO, but busienss terminology is must
 - explain the initiative, break it down so there's enough depth
 
@@ -207,9 +207,9 @@ Follows the workspace convention defined by the Orchestrator (Section 6). Skill 
 
 ### Filename convention
 
- `BTT_{Customer}_{CXOTitle}_{YYYY-MM-DD}.md`
+ `BTTROC_{Customer}_{CXOTitle}_{YYYY-MM-DD}.md`
 
-Customer name uses Pinyin for Chinese companies; CXO title in lowercase shorthand (e.g., `BTT_Haier_cto_2026-05-12.md`).
+Customer name uses Pinyin for Chinese companies; CXO title in lowercase shorthand (e.g., `BTTROC_Haier_cto_2026-05-12.md`).
 
 ### Order of operations
 
