@@ -314,6 +314,22 @@ Sales requests these explicitly; agent does not auto-generate.
 
 Example: `EP_MinghuaHeavy_AI-Quality-Inspection.html`
 
+### HTML 生成方式（强制）
+
+**不允许从零手写 HTML 或跳过 render 脚本。** 必须按以下顺序操作：
+
+1. 将 Engagement Plan 内容整理为符合 `templates/sample_data.json` schema 的 JSON 对象
+2. 调用 `templates/render_ep.py` 填充 `templates/engagement-plan.html.j2` 模板
+3. 不得修改 J2 模板中的 CSS class、颜色变量、字体或布局结构
+4. 若 render 脚本执行失败，停止并报错，**不得 fallback 为手写 HTML**
+
+**Pre-render Checklist（全部 ✅ 才输出最终文件）：**
+- [ ] JSON 数据符合 `sample_data.json` 中定义的所有 key 和类型
+- [ ] 调用了 `render_ep.py`（不是手写 HTML）
+- [ ] EP 作为 living document，每次更新仍必须通过 render 脚本重新生成
+- [ ] 输出 HTML 中不含任何硬编码颜色或自创 CSS class
+- [ ] 文件命名遵循 `EP_{Customer}_{Opportunity}.html` 规则
+
 ### Storage Architecture
 
 **首次配置：** Agent 首次与销售互动时，询问本地存储路径：
