@@ -95,7 +95,7 @@ When no EP exists or sales requests directly, collect minimum required inputs:
 | 1 | **Customer name** | Identify account, check for existing EP |
 | 2 | **Who are you meeting?** (names + titles) | Persona matching, stakeholder mapping |
 | 3 | **Meeting objective** | Shape document focus |
-| 4 | **Optional**Opportunity / customer need context** | What's the deal about? |
+| 4 | **Optional:** Opportunity / customer need context | What's the deal about? |
 
 Then:
 1. Confirm the **current sales stage** through interactive dialogue
