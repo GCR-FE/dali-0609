@@ -52,9 +52,11 @@ def find_chrome() -> str | None:
         "google-chrome-stable",
         "chromium",
         "chromium-browser",
+        "chrome",  # Windows — shutil.which 能找到 PATH 中的 chrome.exe
         "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
         "/usr/bin/google-chrome",
         "/usr/bin/chromium-browser",
+        r"C:\Program Files\Google\Chrome\Application\chrome.exe",  # Windows 默认安装路径
     ]
     for candidate in candidates:
         if shutil.which(candidate):
