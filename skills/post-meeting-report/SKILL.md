@@ -215,6 +215,22 @@ Example: `PMR_MinghuaHeavy_2026-05-15_Discovery-CTO.html`
 
 MilestoneBrief = Condensed EP Roadmap milestone description (2-4 English words, kebab-case). PMR and its corresponding CP/EB share the same `{Date}_{MilestoneBrief}` suffix for easy pairing (pre-meeting plan ↔ post-meeting report).
 
+### HTML 生成方式（强制）
+
+**不允许从零手写 HTML 或跳过 render 脚本。** 必须按以下顺序操作：
+
+1. 将 PMR 内容整理为符合 `templates/sample_data.json` schema 的 JSON 对象
+2. 调用 `templates/render_pmr.py` 填充 `templates/post-meeting-report.html.j2` 模板
+3. 不得修改 J2 模板中的 CSS class、颜色变量、字体或布局结构
+4. 若 render 脚本执行失败，停止并报错，**不得 fallback 为手写 HTML**
+
+**Pre-render Checklist（全部 ✅ 才输出最终文件）：**
+- [ ] JSON 数据符合 `sample_data.json` 中定义的所有 key 和类型
+- [ ] 调用了 `render_pmr.py`（不是手写 HTML）
+- [ ] Action Items 和 EP Update 部分有完整数据
+- [ ] 输出 HTML 中不含任何硬编码颜色或自创 CSS class
+- [ ] 文件命名遵循 `PMR_{Customer}_{Date}_{MilestoneBrief}.html` 规则
+
 ### Storage Architecture
 
 **First-time setup:** On first interaction with sales, ask for the local storage path.
