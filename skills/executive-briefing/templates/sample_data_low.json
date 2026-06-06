@@ -1,0 +1,73 @@
+{
+    "customer_name": "鑫达物流",
+    "meeting_title": "Executive Briefing — VP 首次客户拜访",
+    "meeting_date": "2026-04-22",
+    "meeting_time": "15:00-15:45",
+    "meeting_format": "Virtual (Chime)",
+    "opportunity_name": "Logistics Platform Modernization",
+    "opp_stage": "Qualified",
+    "who_requested_and_why": "AM Sarah 请求 AWS Director 王总加入，因为客户 CEO 临时决定出席下周的技术交流会，需要AWS方有对等高管参与以示重视。客户处于 Qualified 阶段，CEO 出席可能加速推进到 Technical Validation。",
+    "aws_team": [
+        {
+            "name": "王总",
+            "role": "AWS Director, GCR Commercial",
+            "purpose": "对等高管出席，表达 AWS 对合作的重视"
+        },
+        {
+            "name": "Sarah Chen",
+            "role": "Account Manager",
+            "purpose": "主持会议，后续 follow-up"
+        }
+    ],
+    "customer_attendees": [
+        {
+            "name": "张伟",
+            "title": "CEO",
+            "stance": "Neutral",
+            "background_paragraph": "张伟创办鑫达物流15年，从区域配送起步做到年营收¥12亿。务实型企业家，对技术持开放态度但要求快速见效。上月在行业峰会听了AWS的物流数字化演讲后主动联系AM。沟通偏好：直来直去，讨厌弯弯绕绕。"
+        }
+    ],
+    "company_profile": "鑫达物流是华东区域头部冷链物流企业，2025年营收约¥12亿，覆盖江浙沪皖2000+网点。核心痛点：旺季运力调度靠人工经验，效率瓶颈明显。目前IT系统较传统，云使用接近零。",
+    "objectives": [
+        {
+            "objective": "建立 CEO 对 AWS 的初步信任，获得深入技术评估的授权",
+            "context": "CEO 是主动找上门的（好信号），但对 AWS 了解有限。需要利用首次高管接触建立信任基础，让他愿意投入团队时间做技术评估。",
+            "talking_points": "「张总，很高兴您主动联系我们。您在峰会上关注的运力智能调度，正好是我们服务物流客户最多的场景之一。今天想先听听您的实际痛点，然后看看我们的经验能否帮上忙。」",
+            "asks": [
+                "请 CEO 授权技术团队配合两周内的需求调研和场景评估"
+            ]
+        }
+    ],
+    "success_definition": "CEO 确认愿意投入团队时间配合技术评估，明确下一步时间点和参与人。",
+    "strategic_alignment": "鑫达是 GCR 物流行业 SMB→Enterprise 增长型客户，如果拿下可作为冷链物流标杆案例。",
+    "anticipated_concerns": [
+        {
+            "concern": "我们公司小，AWS 会不会不重视我们？",
+            "acknowledge": "完全理解这个顾虑，我们确实服务很多大企业。",
+            "pivot": "但物流行业是我们的战略重点之一，我们专门有物流行业团队。鑫达的冷链场景对我们也有行业标杆价值。",
+            "elevate": "王总今天亲自参加就是表达我们的重视程度。"
+        }
+    ],
+    "landmines": [
+        "不要提及竞品价格对比——客户还没到选型阶段，过早提价格显得急功近利"
+    ],
+    "proposed_next_steps": {
+        "ideal": "CEO 当场拍板，下周安排技术团队与 AWS SA 做场景调研",
+        "acceptable": "CEO 同意让 IT Manager 对接，两周内安排首次技术交流",
+        "minimum": "CEO 表示有兴趣但要内部讨论，同意一周后电话 check-in"
+    },
+    "account_background": {
+        "geo": "Greater China - East",
+        "segment": "Commercial - Logistics",
+        "current_spend": "$0 (new logo)",
+        "expected_spend": "$500K (Year 1 target)",
+        "ppa_status": "N/A - new customer",
+        "account_summary": "鑫达物流是 net-new logo，当前无 AWS 使用。行业定位为华东冷链物流领导者，技术基础较弱但 CEO 有明确的数字化意愿。无已知竞争对手活动。机会规模虽不大（首年$500K），但冷链物流是高增长赛道，拿下后有3-5年增长潜力。"
+    },
+    "appendix": {
+        "previous_meeting_notes": "首次接触（无历史高管会议记录）。AM Sarah 与客户 IT Manager 陈志远有过一次30分钟电话了解需求，确认核心痛点为运力调度效率。",
+        "customer_success_stories": "顺丰科技：AI运力调度系统，配送效率提升18%，空驶率下降25%。京东物流：冷链全链路温控IoT平台，货损率从3%降至0.5%。",
+        "competitive_intelligence": "无已知竞争对手活动。客户目前IT系统为自建+本地ERP，云使用接近零。进入壁垒低但需要证明快速价值。"
+    },
+    "last_updated": "2026-04-18"
+}
