@@ -76,24 +76,12 @@ Customer name uses Pinyin for Chinese companies (e.g., `AA_Haier_2026-05-12.md`)
 
 Every Output produced by this skill ships as **an HTML file that auto-exports to PDF**. The HTML is the canonical rendering surface — no other renderer is used.
 
-### Step 0: HTML 生成方式（强制）
+### PDF Export
 
-**不允许从零手写 HTML。** 必须按以下顺序操作：
+```bash
+python3 skills/business-insight/assets/render_bi.py <output.html> <output.pdf>
+```
 
-1. 从 `OUTPUT_REFERENCE.html` 复制完整文件到新文件
-2. 替换 `<body>` 内容为本次分析数据
-3. 替换所有 `{{PLACEHOLDER}}`（COMPANY_NAME / COMPANY_NAME_CN / TICKER / DATE / FILING_BASELINE）
-4. 不得删除或修改任何 `@page` 规则、CSS class 定义
-
-**理由：** OUTPUT_REFERENCE.html 里的 CSS 是唯一正确来源。手写会漏掉关键 class（如 `.bmc-card` 的横版设置），导致格式错误。
-
-### Pre-render Checklist（生成完 HTML 后，逐项确认，全部 ✅ 才执行 write_pdf）
-
-- [ ] `@page bmc-page { size: A4 landscape; }` 存在于 `<style>` 中
-- [ ] BMC 的容器 div class 为 `card bmc-card`（不是只有 `card`）
-- [ ] 所有 `{{PLACEHOLDER}}` 已替换，文件中不含任何 `{{` 字符
-- [ ] `<sup class="cite">` 引用编号与底部 `<li id="src-N">` 一一对应，无孤立引用
-- [ ] PDF 用 `uv run python -c "from weasyprint import HTML; HTML(...).write_pdf(...)"` 生成（不用 `python3 -m weasyprint`）
 
 ## Quality Standards
 
