@@ -181,6 +181,16 @@ Pull ecosystem and organizational model content:
 **Read `references/rag-guardrails.md` before producing any compete brief.** It defines 8 mandatory guardrails (query decomposition, metadata filtering, cross-dimensional triangulation, freshness tiers, citation validation, pricing re-calculation, benchmark methodology verification, coverage honesty disclosure) and required confidence labels per dimension.
 
 
+## Output Rendering
+
+**REQUIRED: Load `templates/OUTPUT_REFERENCE.html` before generating any HTML output.**
+
+Every output ships as an HTML file that exports to PDF via headless Chrome:
+
+```bash
+python3 skills/competitive-intelligence/templates/render_ci.py <output.html> <output.pdf>
+```
+
 ## Output Format
 
 Produce a single structured deliverable in this order. Sections 4–5 must inline-cite proof points from the consolidated table in Section 6 — the seller gets evidence woven into each section as they read, and the full table at the end serves as a lookup reference.

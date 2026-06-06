@@ -3,10 +3,13 @@
 <head><meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Competitive Intelligence · Haier vs 华为云</title>
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
-<!-- Fonts: locally-installed Inter + Noto Sans SC -->
+<!-- Fonts: locally-installed Inter + Noto Sans SC + Noto Sans TC -->
 <style>
-  /* === Shared base (previously _shared.css) === */
+  @page {
+    size: A4;
+    margin: 14mm 12mm 20mm 12mm;
+  }
+  /* === Shared base === */
   :root {
     --ink: #0f172a;
     --ink-2: #334155;
@@ -32,20 +35,15 @@
     margin: 0; padding: 0;
     background: var(--page-bg);
     color: var(--ink);
-    font-family: "Inter", "Noto Sans SC", -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+    font-family: "Inter", "Noto Sans SC", "Noto Sans TC", -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
     font-size: 13px; line-height: 1.55;
     -webkit-font-smoothing: antialiased;
   }
   a { color: var(--accent); text-decoration: none; }
   a:hover { text-decoration: underline; }
   .material-icons-outlined {
-    font-family: 'Material Icons Outlined';
-    font-weight: normal; font-style: normal;
-    font-size: 20px; line-height: 1;
-    letter-spacing: normal; text-transform: none;
-    display: inline-block; white-space: nowrap; word-wrap: normal; direction: ltr;
-    -webkit-font-feature-settings: 'liga';
-    -webkit-font-smoothing: antialiased;
+    font-size: 16px; line-height: 1;
+    display: inline-block;
   }
   .export-bar {
     position: sticky; top: 0; z-index: 10;
@@ -64,7 +62,7 @@
     display: inline-flex; align-items: center; gap: 6px;
   }
   .export-bar button:hover { background: var(--accent-dark); }
-  .sheet { max-width: 900px; margin: 28px auto 56px; padding: 0 28px; }
+  .sheet { max-width: 820px; margin: 28px auto 56px; padding: 0 28px; }
   .head {
     display: flex; align-items: flex-start; justify-content: space-between;
     gap: 20px; padding: 8px 8px 20px;
@@ -129,11 +127,26 @@
   .reason-note .material-icons-outlined { font-size: 16px; color: var(--accent); flex: 0 0 auto; margin-top: 1px; }
   .foot { margin-top: 32px; padding: 16px 8px; border-top: 1px solid var(--line); font-size: 11px; color: var(--muted); }
   .foot .dl { display: block; margin-bottom: 4px; }
+  .page-footer {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    padding: 6px 12mm;
+    font-family: 'Inter', sans-serif;
+    font-size: 8pt;
+    color: #94a3b8;
+    display: flex;
+    justify-content: space-between;
+  }
+  @media screen { .page-footer { display: none; } }
   @media print {
     .export-bar { display: none; }
-    body { background: #fff; }
+    html, body { background: #fff; }
     .sheet { margin: 0; padding: 0 16px; }
-    .card { break-inside: avoid; }
+    .card h2 { page-break-after: avoid; }
+    .objection-row { page-break-inside: avoid; }
+    .kv-tile { page-break-inside: avoid; }
+    .reason-note { page-break-inside: avoid; }
+    .data-table tr { page-break-inside: avoid; }
   }
 
   /* === Skill-specific styles === */
@@ -203,7 +216,7 @@
 <div class="export-bar">
   <div class="brand">◆ COMPETITIVE INTELLIGENCE · 竞争情报 (Compete 分析结果)</div>
   <button onclick="window.print()">
-    <span class="material-icons-outlined" style="font-size:16px;">picture_as_pdf</span>
+    &#x1F4C4;
     Export PDF
   </button>
 </div>
@@ -217,14 +230,14 @@
       <div class="sub">Initiative 02 · 2026 AI Vision 全球架构 · 2026-05-12 · Source: Cloud Intelligence Highspot</div>
     </div>
     <div class="pill bad">
-      <span class="material-icons-outlined">sports_kabaddi</span>
+      &#x2694;&#xFE0F;
       Incumbent · 华为云
     </div>
   </div>
 
   <!-- Positioning -->
   <div class="card">
-    <h2><span class="material-icons-outlined">center_focus_strong</span>Positioning Frame · 定位框架</h2>
+    <h2>&#x1F3AF;Positioning Frame · 定位框架</h2>
     <div class="sub-card">
       <p style="margin:0; font-size:13.5px; line-height:1.7; color:var(--ink);">
         针对海尔的<strong>全球 AI 平台</strong>架构选型，AWS 的差异化是 <strong>北美 + 欧洲 Region 覆盖与合规深度、IoT + Supply Chain 原生组合、同业中国家电出海案例纵深</strong>。华为云在中国市场具备成本优势与政府关系，但在北美 / 欧洲数据驻留与合规能力不及 AWS — 这是打透 GE Appliances 北美需求的唯一叙事<a href="https://aws.amazon.com/about-aws/global-infrastructure/regions_az/" target="_blank">[AWS Geos]</a>。
@@ -234,7 +247,7 @@
 
   <!-- Battlecard metadata -->
   <div class="card">
-    <h2><span class="material-icons-outlined">description</span>Battlecard Metadata · 战场卡信息</h2>
+    <h2>&#x1F4CB;Battlecard Metadata · 战场卡信息</h2>
     <table style="width: 100%; border-collapse: collapse; margin-top: 6px;">
       <tbody><tr style="border-bottom: 1px solid var(--line-soft);">
         <td style="padding: 6px 12px 6px 0; font-size: 11px; color: var(--muted); font-weight: 500; width: 120px;">Last Reviewed</td>
@@ -253,7 +266,7 @@
 
   <!-- Proof points -->
   <div class="card">
-    <h2><span class="material-icons-outlined">verified</span>Proof Points · 证据</h2>
+    <h2>&#x2705;Proof Points · 证据</h2>
     <div class="kv-grid cols-2" style="margin-bottom: 12px;">
       <div class="kv-tile">
         <div class="lab">Published wins (Highspot)</div>
@@ -276,7 +289,7 @@
 
   <!-- Recommended motion -->
   <div class="card">
-    <h2><span class="material-icons-outlined">gps_fixed</span>Recommended Motion · 推荐打法</h2>
+    <h2>&#x1F3AF;Recommended Motion · 推荐打法</h2>
     <div class="sub-card">
       <div class="motion-ribbon">
         <div class="motion-opt"><span class="v">Displace</span>直取替换</div>
@@ -289,7 +302,7 @@
         华为云已在海尔国际业务架构中 — 直取替换风险高。建议 <strong>Coexist &amp; Erode</strong>：先锁定 GE Appliances 北美（华为云弱势区），再用北美案例影响青岛总部的全球 AI 平台决策，3 年内完成主架构迁移。
       </p>
       <div class="reason-note" style="margin-top: 10px;">
-        <span class="material-icons-outlined">psychology</span>
+        &#x1F4A1;
         <div><strong>推理</strong>Motion 选择基于：(a) 客户国际业务已运行在华为云 → 直取替换成本过高；(b) GE Appliances 北美合规需求是华为云弱势区 → 提供天然蚕食入口；(c) 3 年主架构窗口允许逐步迁移。</div>
       </div>
     </div>
@@ -297,7 +310,7 @@
 
   <!-- Objection handlers -->
   <div class="card">
-    <h2><span class="material-icons-outlined">forum</span>Objection Handlers · 异议处理</h2>
+    <h2>&#x1F4AC;Objection Handlers · 异议处理</h2>
 
     <div class="objection-row">
       <div class="obj">
@@ -357,7 +370,7 @@
 
   <!-- Honest competitor strengths -->
   <div class="card">
-    <h2><span class="material-icons-outlined">thumbs_up_down</span>Honest Competitor Strengths · 对手真正优势</h2>
+    <h2>&#x2696;&#xFE0F;Honest Competitor Strengths · 对手真正优势</h2>
     <div class="table-wrap">
       <table class="data-table">
         <thead><tr><th>华为云 Strength</th><th>AWS Counter</th><th>Source</th></tr></thead>
@@ -374,7 +387,7 @@
 
   <!-- Pricing combat -->
   <div class="card">
-    <h2><span class="material-icons-outlined">attach_money</span>Pricing Combat · 价格对抗</h2>
+    <h2>&#x1F4B0;Pricing Combat · 价格对抗</h2>
     <div class="pricing-split">
       <div class="side them">
         <div class="lab">华为云报价陷阱</div>
@@ -402,7 +415,7 @@
 
   <!-- Architecture & benchmark guidance -->
   <div class="card">
-    <h2><span class="material-icons-outlined">architecture</span>Architecture &amp; Benchmark Guidance · 架构与基准测试指引</h2>
+    <h2>&#x1F3D7;&#xFE0F;Architecture &amp; Benchmark Guidance · 架构与基准测试指引</h2>
     <div class="table-wrap">
       <table class="data-table">
         <thead><tr><th>Benchmark</th><th>Recommendation · 推荐配置</th><th>Expected Delta</th><th>Source</th></tr></thead>
@@ -419,7 +432,7 @@
 
   <!-- Watch-outs -->
   <div class="card">
-    <h2><span class="material-icons-outlined">report_problem</span>Watch-outs &amp; Traps · 风险陷阱</h2>
+    <h2>&#x26A0;&#xFE0F;Watch-outs &amp; Traps · 风险陷阱</h2>
     <ul class="num-list">
       <li><span class="ico">①</span><div><strong>不羞辱华为云</strong> — 正面否定中国技术会输掉房间。永远站在"分区"角度谈。</div></li>
       <li><span class="ico">②</span><div><strong>不提 Pangu 模型中文弱</strong> — 数据未必支撑，容易被反推；改谈"多模型灵活性"。</div></li>
@@ -430,7 +443,7 @@
 
   <!-- Seller takeaways -->
   <div class="card">
-    <h2><span class="material-icons-outlined">psychology_alt</span>Seller Takeaways · 会前记忆点</h2>
+    <h2>&#x1F9E0;Seller Takeaways · 会前记忆点</h2>
     <ul class="num-list">
       <li><span class="ico">①</span><div>"Best-of-region 不是多云" — 把 AWS 定位为北美 / 欧洲分区，不与华为云正面冲突。</div></li>
       <li><span class="ico">②</span><div>"List price ≠ 总体成本" — CFO 话题永远用 $ 合规损失 + 业务中断对比。</div></li>
@@ -442,9 +455,9 @@
 
   <!-- Coverage Honesty -->
   <div class="card">
-    <h2><span class="material-icons-outlined">fact_check</span>Coverage Honesty · 覆盖诚实性</h2>
+    <h2>&#x1F4DD;Coverage Honesty · 覆盖诚实性</h2>
     <div class="coverage-alert">
-      <span class="material-icons-outlined">warning_amber</span>
+      &#x26A0;&#xFE0F;
       <div>
         <strong>Highspot Coverage Gaps</strong>
         - 华为云 2026 CI Highspot 未更新（最新版本 2025-Q4）— 若客户引用 2026 新数据，请当场说明以防过时误导
@@ -467,4 +480,8 @@
 </script>
 
 
+<div class="page-footer">
+  <span>Dali · Competitive Intelligence · {{COMPANY_NAME}} · {{DATE}}</span>
+  <span>AWS Confidential</span>
+</div>
 </body></html>
