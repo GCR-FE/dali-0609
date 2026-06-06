@@ -74,6 +74,8 @@ Customer name uses Pinyin for Chinese companies (e.g., `AA_Haier_2026-05-12.md`)
 
 **REQUIRED: Load `assets/OUTPUT_REFERENCE.html` before generating any HTML output.**
 
+**REQUIRED: Load `assets/render_bi.py`** before converting HTML to PDF.
+
 Every Output produced by this skill ships as **an HTML file that exports to PDF via headless Chrome (`--no-pdf-header-footer`)**. The HTML is the canonical rendering surface — no other renderer is used.
 
 ### PDF Export

@@ -288,11 +288,13 @@ The generated HTML is converted to PDF exclusively via `render_mi.py` (headless 
 
 ### On-Demand: PDF
 
+**REQUIRED: Load `templates/render_mi.py`** before converting HTML to PDF.
+
 ```bash
 python3 skills/market-intelligence/templates/render_mi.py input.html output.pdf
 ```
 
-PDF is generated via headless Chrome (`--no-pdf-header-footer`). Sales requests explicitly; agent does not auto-generate.
+PDF is generated via headless Chrome (`--no-pdf-header-footer`). Sales requests explicitly; agent does not auto-generate. Do NOT use `window.print()` or browser Export PDF — the template includes its own fixed page footer.
 
 ### Edge Cases
 

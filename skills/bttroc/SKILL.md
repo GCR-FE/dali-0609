@@ -225,6 +225,8 @@ If any record save fails (permission denied, path not writable), stop. Do not re
 
 **REQUIRED: Load `templates/OUTPUT_REFERENCE.html` before generating any HTML output.**
 
+**REQUIRED: Load `templates/render_bttroc.py`** before converting HTML to PDF.
+
 Ships as **an HTML file that exports to PDF via headless Chrome (`--no-pdf-header-footer`)**:
 
 ```bash

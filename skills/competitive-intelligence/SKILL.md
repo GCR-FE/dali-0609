@@ -185,6 +185,8 @@ Pull ecosystem and organizational model content:
 
 **REQUIRED: Load `templates/OUTPUT_REFERENCE.html` before generating any HTML output.**
 
+**REQUIRED: Load `templates/render_ci.py`** before converting HTML to PDF.
+
 Every output ships as an HTML file that exports to PDF via headless Chrome (`--no-pdf-header-footer`):
 
 ```bash

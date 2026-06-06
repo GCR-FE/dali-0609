@@ -286,11 +286,13 @@ Example: `SS_Haier_2026-05-12.html`
 
 ### On-Demand: PDF
 
+**REQUIRED: Load `templates/render_ss.py`** before converting to PDF.
+
 ```bash
 python3 skills/solutions-search/templates/render_ss.py input.json output.html output.pdf
 ```
 
-PDF is generated via headless Chrome (`--no-pdf-header-footer`). Sales requests explicitly; agent does not auto-generate.
+PDF is generated via headless Chrome (`--no-pdf-header-footer`). Sales requests explicitly; agent does not auto-generate. Do NOT use `window.print()` or browser Export PDF — the template includes its own fixed page footer.
 
 ## Quality
 
