@@ -286,6 +286,14 @@ python3 scripts/inject.py \
 
 The generated HTML includes an "Export PDF" button and a `?print=1` auto-print trigger for headless browser PDF export.
 
+### On-Demand: PDF
+
+```bash
+python3 skills/market-intelligence/templates/render_mi.py input.html output.pdf
+```
+
+PDF is generated via headless Chrome (`--no-pdf-header-footer`). Sales requests explicitly; agent does not auto-generate.
+
 ### Edge Cases
 
 - **Search returns < 3 qualifying signals:** Stop. Do not pad with low-quality signals. Report to the user: "Only N signals found within the 3-month window. Cannot produce a valid Warning Card (minimum 3 required)."
