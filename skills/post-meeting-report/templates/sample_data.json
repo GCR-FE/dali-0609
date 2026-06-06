@@ -192,12 +192,9 @@
             "status": "Pending"
         }
     ],
-    "recap_email_points": [
-        "感谢刘总、赵工、马总的时间和深入讨论",
-        "确认 POC scope 已签字，3/25 正式 kickoff",
-        "赵工担任 POC Lead，AWS 侧 Mike Li 为技术对接人",
-        "Phase 1 详细预算方案将于 3/24 前提供给马总审阅",
-        "如有任何问题，随时联系 Sarah 或 Mike"
-    ],
+    "recap_email": {
+        "subject": "Follow-up: POC 验证方案评审会 — 明华重工 × AWS 2026-03-20",
+        "body": "刘总、赵工、马总，\n\n感谢三位今天抽出时间参加 POC 方案评审会，讨论非常高效。\n\n以下是今天的讨论要点和对齐事项：\n- POC scope 已确认，3/25 正式 kickoff\n- 赵工担任 POC Lead，AWS 侧 Mike Li 为技术对接人\n- 分阶段投资模式获认可，Phase 1 详细预算方案将于 3/24 前提供\n\n后续行动：\n- Mike Li 明天发送正式 POC 项目计划书 — Mike Li, 3/21\n- Phase 1 预算方案提供给马总审阅 — Sarah + Mike, 3/24\n- POC kickoff 会议 — 赵工 + Mike Li, 3/25\n\n我们会在 kickoff 前把所有准备工作就绪。如有任何问题，随时联系 Sarah 或 Mike。\n\n祝好，\nSarah Chen"
+    },
     "last_updated": "2026-05-14"
 }
