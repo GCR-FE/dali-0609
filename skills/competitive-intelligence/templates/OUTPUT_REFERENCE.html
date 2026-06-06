@@ -45,23 +45,6 @@
     font-size: 16px; line-height: 1;
     display: inline-block;
   }
-  .export-bar {
-    position: sticky; top: 0; z-index: 10;
-    background: #0f172a; color: #fff;
-    padding: 10px 24px;
-    display: flex; align-items: center; justify-content: space-between;
-  }
-  .export-bar .brand {
-    font-size: 11px; letter-spacing: 2px;
-    color: #93c5fd; font-weight: 700; text-transform: uppercase;
-  }
-  .export-bar button {
-    background: var(--accent); color: #fff; border: 0;
-    border-radius: 6px; padding: 7px 14px;
-    font-size: 12px; font-weight: 600; cursor: pointer;
-    display: inline-flex; align-items: center; gap: 6px;
-  }
-  .export-bar button:hover { background: var(--accent-dark); }
   .sheet { max-width: 820px; margin: 28px auto 56px; padding: 0 28px; }
   .head {
     display: flex; align-items: flex-start; justify-content: space-between;
@@ -139,7 +122,6 @@
   }
   @media screen { .page-footer { display: none; } }
   @media print {
-    .export-bar { display: none; }
     html, body { background: #fff; }
     .sheet { margin: 0; padding: 0 16px; }
     .card h2 { page-break-after: avoid; }
@@ -213,13 +195,6 @@
 </head>
 <body>
 
-<div class="export-bar">
-  <div class="brand">◆ COMPETITIVE INTELLIGENCE · 竞争情报 (Compete 分析结果)</div>
-  <button onclick="window.print()">
-    &#x1F4C4;
-    Export PDF
-  </button>
-</div>
 
 <div class="sheet">
 
@@ -472,12 +447,6 @@
 
 </div>
 
-<script>
-  const params = new URLSearchParams(window.location.search);
-  if (params.get('print') === '1') {
-    window.addEventListener('load', () => setTimeout(() => window.print(), 400));
-  }
-</script>
 
 
 <div class="page-footer">
