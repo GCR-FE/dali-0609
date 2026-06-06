@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-EP HTML/PDF Renderer — fills the Jinja2 template with structured data.
+EP Renderer — fills the Jinja2 template with structured data and outputs HTML or PDF.
 
 Usage:
     python render_ep.py input.json output.html
@@ -9,16 +9,12 @@ Usage:
 Input: JSON file with the EP data structure (see sample_data.json).
 Output: Rendered HTML or PDF file (determined by extension).
 
-PDF generation:
-  Priority 1: headless Chromium (chrome/chromium/google-chrome)
-  Priority 2: weasyprint (pip install weasyprint)
-
-The template uses Tailwind CDN for utility classes. Chrome and Firefox
-both render the HTML identically on desktop viewports.
+PDF generation uses headless Chrome/Chromium for stable output.
 """
 
 import json
 import os
+import platform
 import shutil
 import subprocess
 import sys
@@ -32,7 +28,7 @@ except ImportError:
     sys.exit(1)
 
 
-def render_html(data: dict, template_dir: str = None) -> str:
+def render_ep(data: dict, template_dir: str = None) -> str:
     """Render EP data into HTML string."""
     if template_dir is None:
         template_dir = str(Path(__file__).parent)
@@ -45,93 +41,77 @@ def render_html(data: dict, template_dir: str = None) -> str:
     return template.render(**data)
 
 
-def find_chrome() -> str | None:
-    """Find Chrome/Chromium binary."""
-    candidates = [
-        "google-chrome",
-        "google-chrome-stable",
-        "chromium",
-        "chromium-browser",
-        "chrome",  # Windows — shutil.which 能找到 PATH 中的 chrome.exe
-        "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
-        "/usr/bin/google-chrome",
-        "/usr/bin/chromium-browser",
-        r"C:\Program Files\Google\Chrome\Application\chrome.exe",  # Windows 默认安装路径
-    ]
+def find_chrome():
+    """Find Chrome/Chromium executable on the system."""
+    system = platform.system()
+
+    if system == "Darwin":
+        candidates = [
+            "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+            "/Applications/Chromium.app/Contents/MacOS/Chromium",
+            "/Applications/Google Chrome Canary.app/Contents/MacOS/Google Chrome Canary",
+        ]
+    elif system == "Linux":
+        candidates = [
+            "google-chrome",
+            "google-chrome-stable",
+            "chromium",
+            "chromium-browser",
+        ]
+    elif system == "Windows":
+        candidates = [
+            os.path.expandvars(r"%ProgramFiles%\Google\Chrome\Application\chrome.exe"),
+            os.path.expandvars(r"%ProgramFiles(x86)%\Google\Chrome\Application\chrome.exe"),
+            os.path.expandvars(r"%LocalAppData%\Google\Chrome\Application\chrome.exe"),
+        ]
+    else:
+        candidates = []
+
     for candidate in candidates:
-        if shutil.which(candidate):
+        if os.path.isfile(candidate):
             return candidate
-    # Check macOS path directly
-    mac_path = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
-    if os.path.exists(mac_path):
-        return mac_path
+        found = shutil.which(candidate)
+        if found:
+            return found
+
     return None
 
 
-def html_to_pdf_chrome(html_path: str, pdf_path: str) -> bool:
+def html_to_pdf(html_content: str, output_path: str) -> None:
     """Convert HTML to PDF using headless Chrome."""
     chrome = find_chrome()
     if not chrome:
-        return False
+        print("ERROR: Chrome/Chromium not found. Install Chrome or use .html output.", file=sys.stderr)
+        sys.exit(1)
 
-    cmd = [
-        chrome,
-        "--headless",
-        "--disable-gpu",
-        "--no-sandbox",
-        "--disable-software-rasterizer",
-        "--run-all-compositor-stages-before-draw",
-        "--force-color-profile=srgb",
-        "--window-size=1280,900",
-        f"--print-to-pdf={pdf_path}",
-        "--no-pdf-header-footer",
-        "--print-to-pdf-no-header",
-        f"file://{os.path.abspath(html_path)}"
-    ]
-
+    tmp_html = tempfile.NamedTemporaryFile(suffix=".html", delete=False, mode="w", encoding="utf-8")
     try:
+        tmp_html.write(html_content)
+        tmp_html.close()
+
+        cmd = [
+            chrome,
+            "--headless",
+            "--disable-gpu",
+            "--no-sandbox",
+            "--disable-software-rasterizer",
+            "--run-all-compositor-stages-before-draw",
+            "--virtual-time-budget=5000",
+            "--window-size=1280,900",
+            f"--print-to-pdf={output_path}",
+            "--print-to-pdf-no-header",
+            "--no-pdf-header-footer",
+            tmp_html.name,
+        ]
+
         result = subprocess.run(cmd, capture_output=True, text=True, timeout=30)
-        return os.path.exists(pdf_path)
-    except (subprocess.TimeoutExpired, FileNotFoundError):
-        return False
-
-
-def html_to_pdf_weasyprint(html_path: str, pdf_path: str) -> bool:
-    """Convert HTML to PDF using weasyprint."""
-    try:
-        from weasyprint import HTML
-        HTML(filename=html_path).write_pdf(pdf_path)
-        return True
-    except ImportError:
-        return False
-    except Exception as e:
-        print(f"weasyprint error: {e}", file=sys.stderr)
-        return False
-
-
-def render_pdf(html_content: str, pdf_path: str) -> bool:
-    """Render HTML content to PDF. Returns True on success."""
-    # Write HTML to temp file
-    with tempfile.NamedTemporaryFile(mode='w', suffix='.html', delete=False, encoding='utf-8') as f:
-        f.write(html_content)
-        tmp_html = f.name
-
-    try:
-        # Try Chrome first
-        if html_to_pdf_chrome(tmp_html, pdf_path):
-            return True
-
-        # Fallback to weasyprint
-        if html_to_pdf_weasyprint(tmp_html, pdf_path):
-            return True
-
-        print("ERROR: No PDF renderer available.", file=sys.stderr)
-        print("  Install one of:", file=sys.stderr)
-        print("  - Google Chrome / Chromium (recommended)", file=sys.stderr)
-        print("  - pip install weasyprint", file=sys.stderr)
-        return False
+        if result.returncode != 0:
+            stderr = result.stderr.strip()
+            if not os.path.exists(output_path):
+                print(f"ERROR: Chrome PDF generation failed.\n{stderr}", file=sys.stderr)
+                sys.exit(1)
     finally:
-        os.unlink(tmp_html)
+        os.unlink(tmp_html.name)
 
 
 def main():
@@ -141,22 +121,20 @@ def main():
 
     input_path = sys.argv[1]
     output_path = sys.argv[2]
+    ext = Path(output_path).suffix.lower()
 
     with open(input_path, 'r', encoding='utf-8') as f:
         data = json.load(f)
 
-    html = render_html(data)
+    html = render_ep(data)
 
-    if output_path.lower().endswith('.pdf'):
-        success = render_pdf(html, output_path)
-        if success:
-            print(f"✅ PDF rendered: {output_path}")
-        else:
-            sys.exit(1)
+    if ext == ".pdf":
+        html_to_pdf(html, output_path)
     else:
         with open(output_path, 'w', encoding='utf-8') as f:
             f.write(html)
-        print(f"✅ HTML rendered: {output_path}")
+
+    print(f"✅ Rendered: {output_path}")
 
 
 if __name__ == "__main__":
