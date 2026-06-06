@@ -74,13 +74,15 @@ Customer name uses Pinyin for Chinese companies (e.g., `AA_Haier_2026-05-12.md`)
 
 **REQUIRED: Load `assets/OUTPUT_REFERENCE.html` before generating any HTML output.**
 
-Every Output produced by this skill ships as **an HTML file that auto-exports to PDF**. The HTML is the canonical rendering surface — no other renderer is used.
+Every Output produced by this skill ships as **an HTML file that exports to PDF via headless Chrome (`--no-pdf-header-footer`)**. The HTML is the canonical rendering surface — no other renderer is used.
 
 ### PDF Export
 
 ```bash
 python3 skills/business-insight/assets/render_bi.py <output.html> <output.pdf>
 ```
+
+PDF is generated via headless Chrome with `--no-pdf-header-footer` flag. Do NOT use `window.print()` or browser Export PDF — the template includes its own fixed page footer.
 
 
 ## Quality Standards

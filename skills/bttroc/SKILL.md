@@ -225,11 +225,13 @@ If any record save fails (permission denied, path not writable), stop. Do not re
 
 **REQUIRED: Load `templates/OUTPUT_REFERENCE.html` before generating any HTML output.**
 
-Ships as **an HTML file that exports to PDF via headless Chrome**:
+Ships as **an HTML file that exports to PDF via headless Chrome (`--no-pdf-header-footer`)**:
 
 ```bash
 python3 skills/bttroc/templates/render_bttroc.py <output.html> <output.pdf>
 ```
+
+PDF is generated via headless Chrome with `--no-pdf-header-footer` flag. Do NOT use `window.print()` or browser Export PDF — the template includes its own fixed page footer.
 
 
 ### Output Content

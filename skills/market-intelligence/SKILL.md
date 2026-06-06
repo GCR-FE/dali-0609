@@ -265,7 +265,7 @@ Every Warning Card produced by this skill ships as **an HTML file that auto-expo
 
 1. **The HTML reference is the source of truth.** `templates/WARNING_CARD_REFERENCE.html` is the canonical design. Every run produces an HTML file that matches it structurally. Never hand-style a one-off deliverable.
 2. **Every layer renders reasoning.** No layer ships without a `推理` element. If a reasoning line is missing from the source markdown, the skill stops and asks.
-3. **Auto-export to PDF.** The generated HTML file carries an `Export PDF` button and an auto-print trigger (`?print=1` URL parameter) so a headless browser can convert it to PDF without manual intervention.
+3. **PDF via headless Chrome only.** PDF is generated exclusively via `render_mi.py` (headless Chrome with `--no-pdf-header-footer`). Do NOT use `window.print()` or browser Export PDF — the template includes its own fixed page footer.
 4. **This skill display ONE deliverable, in ONE format, against ONE template.** The template is `templates/WARNING_CARD_REFERENCE.html`. It defines the canonical layout, palette, typography, section order, and component shapes for every output of this skill — without exception.
 
 
@@ -284,7 +284,7 @@ python3 scripts/inject.py \
   --out MI_{Customer}_{YYYY-MM-DD}.html
 ```
 
-The generated HTML includes an "Export PDF" button and a `?print=1` auto-print trigger for headless browser PDF export.
+The generated HTML is converted to PDF exclusively via `render_mi.py` (headless Chrome, `--no-pdf-header-footer`).
 
 ### On-Demand: PDF
 
