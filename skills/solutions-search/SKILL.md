@@ -286,7 +286,11 @@ Example: `SS_Haier_2026-05-12.html`
 
 ### On-Demand: PDF
 
-- **PDF** — Generated from HTML via headless Chrome or weasyprint. Sales requests explicitly; agent does not auto-generate.
+```bash
+python3 skills/solutions-search/templates/render_ss.py input.json output.html output.pdf
+```
+
+PDF is generated via headless Chrome (`--no-pdf-header-footer`). Sales requests explicitly; agent does not auto-generate.
 
 ## Quality
 

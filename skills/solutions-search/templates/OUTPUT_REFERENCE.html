@@ -1,493 +1,495 @@
 <!DOCTYPE html>
-<html lang="zh-Hans"><head>
-<meta charset="UTF-8">
+<html lang="zh-Hans">
+<head><meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Solutions Search · Haier Smart Home</title>
-<script src="https://cdn.tailwindcss.com"></script>
-<!-- Fonts: locally-installed Inter + Noto Sans SC -->
-<link href="https://fonts.googleapis.com/icon?family=Material+Symbols+Outlined" rel="stylesheet">
 <style>
-    :root {
-        --md-sys-color-primary: #6750A4;
-        --md-sys-color-on-primary: #FFFFFF;
-        --md-sys-color-primary-container: #EADDFF;
-        --md-sys-color-on-primary-container: #21005D;
-        --md-sys-color-secondary: #625B71;
-        --md-sys-color-on-secondary: #FFFFFF;
-        --md-sys-color-secondary-container: #E8DEF8;
-        --md-sys-color-tertiary: #7D5260;
-        --md-sys-color-tertiary-container: #FFD8E4;
-        --md-sys-color-surface: #FFFBFE;
-        --md-sys-color-surface-variant: #E7E0EC;
-        --md-sys-color-on-surface: #1C1B1F;
-        --md-sys-color-on-surface-variant: #49454F;
-        --md-sys-color-outline: #79747E;
-        --md-sys-color-outline-variant: #CAC4D0;
-        --md-sys-color-surface-container-lowest: #FFFFFF;
-        --md-sys-color-surface-container-low: #F7F2FA;
-        --md-sys-color-surface-container: #F3EDF7;
-        --md-sys-color-surface-container-high: #ECE6F0;
-        --md-sys-color-surface-container-highest: #E6E0E9;
-        --md-sys-color-error: #B3261E;
-        --md-sys-color-error-container: #F9DEDC;
-        --md-sys-color-success: #386A20;
-        --md-sys-color-success-container: #C8E6C9;
-        --md-sys-color-warning: #F57F17;
-        --md-sys-color-warning-container: #FFF9C4;
-    }
+  @page {
+    size: A4;
+    margin: 14mm 12mm 20mm 12mm;
+  }
+  :root {
+    --ink: #0f172a;
+    --ink-2: #334155;
+    --muted: #64748b;
+    --muted-2: #cbd5e1;
+    --line: #e2e8f0;
+    --line-soft: #f1f5f9;
+    --paper: #ffffff;
+    --page-bg: #f8fafc;
+    --accent: #6750A4;
+    --accent-dark: #4a3880;
+    --accent-soft: #EADDFF;
+    --accent-softer: #f5f0ff;
+    --ok: #386A20;
+    --ok-soft: #C8E6C9;
+    --warn: #F57F17;
+    --warn-soft: #FFF9C4;
+    --bad: #B3261E;
+    --bad-soft: #F9DEDC;
+    --secondary: #625B71;
+    --secondary-soft: #E8DEF8;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0;
+    background: var(--page-bg);
+    color: var(--ink);
+    font-family: "Inter", "Noto Sans SC", "Noto Sans TC", -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+    font-size: 13px; line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .export-bar {
+    position: sticky; top: 0; z-index: 10;
+    background: #1C1B1F; color: #fff;
+    padding: 10px 24px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .export-bar .brand {
+    font-size: 11px; letter-spacing: 2px;
+    color: #EADDFF; font-weight: 700; text-transform: uppercase;
+  }
+  .export-bar button {
+    background: var(--accent); color: #fff; border: 0;
+    border-radius: 6px; padding: 7px 14px;
+    font-size: 12px; font-weight: 600; cursor: pointer;
+    display: inline-flex; align-items: center; gap: 6px;
+  }
+  .export-bar button:hover { background: var(--accent-dark); }
+  .sheet { max-width: 820px; margin: 28px auto 56px; padding: 0 28px; }
 
-    html { font-size: 9px; }
-    * { font-family: 'Inter', 'Noto Sans SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Microsoft YaHei', sans-serif; }
+  /* Header */
+  .head {
+    display: flex; align-items: flex-start; justify-content: space-between;
+    gap: 20px; padding: 8px 8px 20px;
+  }
+  .head .kicker {
+    font-size: 11px; font-weight: 700; letter-spacing: 2.4px;
+    text-transform: uppercase; color: var(--accent); margin-bottom: 6px;
+  }
+  .head h1 {
+    font-size: 22px; font-weight: 700; letter-spacing: -0.3px;
+    margin: 0 0 6px; color: var(--ink); line-height: 1.1;
+  }
+  .head .sub { font-size: 13px; color: var(--muted); }
+  .head .fab {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--accent-soft); color: var(--accent-dark);
+    padding: 10px 16px; border-radius: 12px;
+    font-size: 12px; font-weight: 600; white-space: nowrap;
+  }
 
-    body {
-        background-color: var(--md-sys-color-surface);
-        color: var(--md-sys-color-on-surface);
-        font-size: 9px;
-    }
+  /* Cards */
+  .card {
+    background: var(--paper); border-radius: 12px; border: 1px solid var(--line);
+    padding: 22px 24px; margin-bottom: 14px;
+  }
+  .card h2 {
+    display: flex; align-items: center; gap: 10px;
+    margin: 0 0 16px; font-size: 16px; font-weight: 600;
+    color: var(--ink); letter-spacing: -0.2px;
+  }
+  .card h2 .ico { font-size: 18px; }
 
-    .md-card {
-        background: var(--md-sys-color-surface-container-lowest);
-        border: 1px solid var(--md-sys-color-outline-variant);
-        border-radius: 16px;
-        padding: 14px;
-        transition: box-shadow 0.2s ease;
-    }
+  /* Coverage summary stats */
+  .stat-row {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
+  }
+  .stat-box {
+    background: var(--line-soft); border-radius: 10px;
+    padding: 14px 16px; text-align: center;
+  }
+  .stat-box .lab { font-size: 11px; color: var(--muted); font-weight: 500; margin-bottom: 4px; }
+  .stat-box .val { font-size: 15px; color: var(--ink); font-weight: 600; }
+  .stat-box .val.accent { color: var(--accent); }
+  .stat-box .val.ok { color: var(--ok); }
 
-    .md-card:hover {
-        box-shadow: 0 2px 6px 2px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.12);
-    }
+  /* Initiative header */
+  .init-header {
+    display: flex; align-items: center; gap: 12px;
+    padding-bottom: 12px; margin-bottom: 14px;
+    border-bottom: 1px solid var(--line-soft);
+  }
+  .init-num {
+    width: 28px; height: 28px; border-radius: 50%;
+    background: var(--accent); color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 700; flex-shrink: 0;
+  }
+  .init-header .title { font-size: 14px; font-weight: 600; color: var(--ink); }
+  .init-header .opp { font-size: 11px; color: var(--muted); margin-top: 2px; }
 
-    .md-card-elevated {
-        background: var(--md-sys-color-surface-container-low);
-        border: none;
-        border-radius: 16px;
-        padding: 14px;
-        box-shadow: 0 1px 3px 1px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.12);
-        transition: box-shadow 0.2s ease;
-    }
+  /* Match tiles grid */
+  .tiles-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+    margin-bottom: 14px;
+  }
+  .match-tile {
+    background: var(--paper); border: 1px solid var(--line);
+    border-radius: 10px; padding: 12px 14px;
+    border-left: 4px solid var(--accent);
+  }
+  .match-tile.pattern { border-left-color: var(--ok); }
+  .match-tile.displacement { border-left-color: var(--warn); }
+  .match-tile.inspirational { border-left-color: var(--secondary); }
+  .match-tile .pill-row { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 6px; }
+  .pill {
+    display: inline-flex; align-items: center; gap: 4px;
+    border-radius: 100px; padding: 2px 10px;
+    font-size: 10px; font-weight: 600; white-space: nowrap;
+  }
+  .pill-direct { background: var(--accent-soft); color: var(--accent-dark); }
+  .pill-pattern { background: var(--ok-soft); color: var(--ok); }
+  .pill-displacement { background: var(--warn-soft); color: var(--warn); }
+  .pill-inspirational { background: var(--secondary-soft); color: var(--secondary); }
+  .pill-meta { background: var(--line-soft); color: var(--muted); }
+  .match-tile h4 { margin: 0 0 4px; font-size: 12.5px; font-weight: 600; color: var(--ink); }
+  .match-tile h4 a { color: var(--ink); text-decoration: none; }
+  .match-tile h4 a:hover { color: var(--accent); text-decoration: underline; }
+  .match-tile .desc { font-size: 11px; color: var(--ink-2); line-height: 1.5; }
+  .match-tile .tags { display: flex; gap: 4px; flex-wrap: wrap; margin-top: 6px; }
+  .match-tile .tags span {
+    font-size: 9px; background: var(--line-soft); color: var(--muted);
+    padding: 2px 8px; border-radius: 100px;
+  }
 
-    .md-card-elevated:hover {
-        box-shadow: 0 4px 8px 3px rgba(0,0,0,0.10), 0 1px 3px rgba(0,0,0,0.12);
-    }
+  /* Next step strip */
+  .next-step {
+    background: var(--accent-soft); border-radius: 10px;
+    padding: 10px 14px; font-size: 12px; color: var(--accent-dark);
+    display: flex; align-items: center; gap: 8px;
+  }
+  .next-step .label {
+    font-size: 9px; font-weight: 700; letter-spacing: 1px;
+    text-transform: uppercase;
+  }
 
-    .md-card-filled {
-        background: var(--md-sys-color-surface-container-highest);
-        border: none;
-        border-radius: 16px;
-        padding: 14px;
-    }
+  /* Coverage gap warning */
+  .gap-warn {
+    background: var(--warn-soft); border-radius: 10px;
+    padding: 10px 14px; font-size: 11.5px; color: var(--ink-2);
+    display: flex; gap: 8px; align-items: flex-start; margin-top: 10px;
+  }
+  .gap-warn .ico { font-size: 14px; flex-shrink: 0; }
 
-    .md-fab {
-        background: var(--md-sys-color-primary-container);
-        color: var(--md-sys-color-on-primary-container);
-        border-radius: 10px;
-        padding: 6px 10px;
-        font-weight: 500;
-        font-size: 10px;
-        box-shadow: 0 1px 3px 1px rgba(0,0,0,0.06);
-    }
+  /* Reason note */
+  .reason-note {
+    background: var(--line-soft); border-radius: 8px;
+    padding: 10px 14px; font-size: 11px; color: var(--ink-2);
+    display: flex; gap: 8px; align-items: flex-start; margin-top: 10px;
+    line-height: 1.55;
+  }
+  .reason-note .ico { font-size: 14px; color: var(--accent); flex-shrink: 0; margin-top: 1px; }
 
-    .pill-badge {
-        border-radius: 100px;
-        padding: 2px 8px;
-        font-size: 8.5px;
-        font-weight: 500;
-        letter-spacing: 0.5px;
-        display: inline-flex;
-        align-items: center;
-        gap: 3px;
-        white-space: nowrap;
-    }
+  /* Footer */
+  .foot { margin-top: 32px; padding: 16px 8px; border-top: 1px solid var(--line); font-size: 11px; color: var(--muted); text-align: center; }
 
-    .pill-direct { background: var(--md-sys-color-primary-container); color: var(--md-sys-color-on-primary-container); }
-    .pill-pattern { background: var(--md-sys-color-success-container); color: var(--md-sys-color-success); }
-    .pill-displacement { background: var(--md-sys-color-warning-container); color: var(--md-sys-color-warning); }
-    .pill-inspirational { background: var(--md-sys-color-secondary-container); color: var(--md-sys-color-secondary); }
-
-    .section-title {
-        font-size: 13px;
-        font-weight: 500;
-        color: var(--md-sys-color-on-surface);
-        letter-spacing: 0;
-        margin-bottom: 16px;
-    }
-
-    .label-large {
-        font-size: 10px;
-        font-weight: 500;
-        letter-spacing: 0.05px;
-        color: var(--md-sys-color-on-surface-variant);
-    }
-
-    .title-medium {
-        font-size: 10.5px;
-        font-weight: 500;
-        letter-spacing: 0.1px;
-    }
-
-    .body-medium {
-        font-size: 10.5px;
-        font-weight: 400;
-        letter-spacing: 0.15px;
-        color: var(--md-sys-color-on-surface-variant);
-    }
-
-    .headline-small {
-        font-size: 13px;
-        font-weight: 500;
-        letter-spacing: 0;
-    }
-
-    .display-small {
-        font-size: 20px;
-        font-weight: 600;
-        letter-spacing: -0.02em;
-    }
-
-    .match-tile {
-        background: var(--md-sys-color-surface-container-lowest);
-        border: 1px solid var(--md-sys-color-outline-variant);
-        border-radius: 12px;
-        padding: 10px;
-        border-left: 3px solid var(--md-sys-color-primary);
-        transition: box-shadow 0.2s ease;
-    }
-    .match-tile:hover {
-        box-shadow: 0 2px 6px 2px rgba(0,0,0,0.08);
-    }
-    .match-tile.pattern { border-left-color: var(--md-sys-color-success); }
-    .match-tile.displacement { border-left-color: var(--md-sys-color-warning); }
-    .match-tile.inspirational { border-left-color: var(--md-sys-color-secondary); }
-
-    .match-tile h4 a {
-        color: var(--md-sys-color-on-surface);
-        text-decoration: none;
-        font-weight: 500;
-    }
-    .match-tile h4 a:hover {
-        color: var(--md-sys-color-primary);
-        text-decoration: underline;
-    }
-
-    .next-step-strip {
-        margin-top: 16px;
-        background: var(--md-sys-color-primary-container);
-        border-radius: 16px;
-        padding: 14px 18px;
-        font-size: 10px;
-        color: var(--md-sys-color-on-primary-container);
-        display: flex;
-        align-items: center;
-        gap: 10px;
-    }
-
-    .gap-warning {
-        background: var(--md-sys-color-warning-container);
-        color: var(--md-sys-color-on-surface);
-        border-radius: 16px;
-        padding: 14px 18px;
-        font-size: 10px;
-        display: flex;
-        gap: 10px;
-        align-items: flex-start;
-    }
-
-    .reason-note {
-        margin-top: 12px;
-        background: var(--md-sys-color-surface-container);
-        border-radius: 16px;
-        padding: 12px 16px;
-        font-size: 9.5px;
-        color: var(--md-sys-color-on-surface-variant);
-        display: flex;
-        gap: 8px;
-        align-items: flex-start;
-    }
-
-    @media print {
-        body { background: white; }
-        .md-card, .md-card-elevated, .md-card-filled { box-shadow: none; border: 1px solid #e0e0e0; }
-    }
+  /* Page footer (print) */
+  .page-footer {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    padding: 6px 12mm;
+    font-family: 'Inter', sans-serif;
+    font-size: 8pt;
+    color: #94a3b8;
+    display: flex;
+    justify-content: space-between;
+  }
+  @media screen { .page-footer { display: none; } }
+  @media print {
+    .export-bar { display: none; }
+    html, body { background: #fff; }
+    .sheet { margin: 0; padding: 0 16px; }
+    .card h2 { page-break-after: avoid; }
+    .match-tile { page-break-inside: avoid; }
+    .next-step { page-break-inside: avoid; }
+    .reason-note { page-break-inside: avoid; }
+    .init-header { page-break-after: avoid; }
+  }
 </style>
 </head>
-<body class="min-h-screen p-3">
-<div class="max-w-5xl mx-auto space-y-4">
+<body>
 
-    <!-- Header -->
-    <header class="flex items-center justify-between mb-2">
-        <div>
-            <p class="label-large uppercase tracking-wider" style="color: var(--md-sys-color-primary);">Solutions Search · Solutions 搜索结果</p>
-            <h1 class="display-small mt-1">海尔智家 Haier Smart Home</h1>
-            <p class="body-medium mt-1">消费电子 · 2026-05-12 · 上游：business-insight（3 个战略倡议）· Source: ./references/</p>
-        </div>
-        <div class="md-fab flex items-center gap-2">
-            <span class="material-symbols-outlined">search</span>
-            <span class="text-lg font-medium">4-step match</span>
-        </div>
-    </header>
+<div class="export-bar">
+  <div class="brand">&#x25C6; SOLUTIONS SEARCH · Solutions &#x641C;&#x7D22;&#x7ED3;&#x679C;</div>
+  <button onclick="window.print()">&#x1F4C4; Export PDF</button>
+</div>
 
-    <!-- Coverage Summary -->
-    <section class="md-card-elevated">
-        <h2 class="section-title flex items-center gap-2">
-            <span class="material-symbols-outlined" style="color: var(--md-sys-color-primary);">grading</span>
-            Search Coverage · 检索覆盖
-        </h2>
-        <div class="flex items-center gap-6 mt-4">
-            <div class="flex items-center gap-2">
-                <span class="label-large" style="font-size: 10px;">战略倡议:</span>
-                <span class="title-medium" style="font-size: 12px; color: var(--md-sys-color-on-surface);">3</span>
-            </div>
-            <div class="flex items-center gap-2">
-                <span class="label-large" style="font-size: 10px;">匹配文档:</span>
-                <span class="title-medium" style="font-size: 12px; color: var(--md-sys-color-primary);">14</span>
-            </div>
-            <div class="flex items-center gap-2">
-                <span class="label-large" style="font-size: 10px;">WA Lenses:</span>
-                <span class="title-medium" style="font-size: 12px; color: var(--md-sys-color-success);">3</span>
-            </div>
-        </div>
-    </section>
+<div class="sheet">
 
-    <!-- Initiative 1 -->
-    <section class="md-card">
-        <h2 class="section-title flex items-center gap-2">
-            <span class="material-symbols-outlined" style="color: var(--md-sys-color-primary);">flag</span>
-            Initiative 01 · 北美供应链 IT 重塑入口
-        </h2>
-        <div class="flex items-center gap-3 mb-4 pb-3" style="border-bottom: 1px solid var(--md-sys-color-outline-variant);">
-            <div class="w-8 h-8 rounded-full flex items-center justify-center text-white font-bold text-sm" style="background: var(--md-sys-color-primary);">1</div>
-            <div>
-                <p class="title-medium">Tariff-aware forecasting + 供应链 IT 重塑</p>
-                <p class="body-medium text-xs mt-0.5">潜在机会：4-year platform contract · $8–15M Y1 · $25–40M 3Y [估算]</p>
-            </div>
-        </div>
+  <div class="head">
+    <div>
+      <div class="kicker">Solutions Search · Solutions 搜索结果</div>
+      <h1>海尔智家 Haier Smart Home</h1>
+      <div class="sub">消费电子 · 2026-05-12 · 上游：business-insight（3 个战略倡议）· Source: ./references/</div>
+    </div>
+    <div class="fab">&#x1F50D; 4-step match</div>
+  </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div class="match-tile">
-                <span class="pill-badge pill-direct mb-2"><span class="material-symbols-outlined" style="font-size:11px;">rocket_launch</span>Direct Match</span>
-                <h4 class="mt-1"><a href="https://docs.aws.amazon.com/aws-supply-chain/" target="_blank">AWS Supply Chain Developer Guide</a></h4>
-                <p class="body-medium mt-1 text-xs">Demand planning, supply planning, and tariff impact modeling with end-to-end visibility across supplier tiers.</p>
-                <div class="flex gap-2 mt-2 flex-wrap">
-                    <span class="pill-badge" style="background: var(--md-sys-color-surface-container); color: var(--md-sys-color-on-surface-variant); font-size:8.5px;">docs.aws.amazon.com</span>
-                    <span class="pill-badge" style="background: var(--md-sys-color-surface-container); color: var(--md-sys-color-on-surface-variant); font-size:8.5px;">Direct match</span>
-                </div>
-            </div>
-            <div class="match-tile">
-                <span class="pill-badge pill-direct mb-2"><span class="material-symbols-outlined" style="font-size:11px;">rocket_launch</span>Direct Match</span>
-                <h4 class="mt-1"><a href="https://docs.aws.amazon.com/forecast/latest/dg/what-is-forecast.html" target="_blank">Amazon Forecast Developer Guide</a></h4>
-                <p class="body-medium mt-1 text-xs">ML-based demand forecasting with tariff scenario inputs; historical data ingestion + scenario modeling.</p>
-                <div class="flex gap-2 mt-2 flex-wrap">
-                    <span class="pill-badge" style="background: var(--md-sys-color-surface-container); color: var(--md-sys-color-on-surface-variant); font-size:8.5px;">docs.aws.amazon.com</span>
-                    <span class="pill-badge" style="background: var(--md-sys-color-surface-container); color: var(--md-sys-color-on-surface-variant); font-size:8.5px;">Direct match</span>
-                </div>
-            </div>
-            <div class="match-tile pattern">
-                <span class="pill-badge pill-pattern mb-2"><span class="material-symbols-outlined" style="font-size:11px;">architecture</span>Pattern Match</span>
-                <h4 class="mt-1"><a href="https://docs.aws.amazon.com/prescriptive-guidance/latest/patterns/welcome.html" target="_blank">Prescriptive Guidance · Patterns</a></h4>
-                <p class="body-medium mt-1 text-xs">Demand Forecasting Reference Architecture — Forecast + SageMaker + QuickSight for CPG / Mfg.</p>
-                <div class="flex gap-2 mt-2 flex-wrap">
-                    <span class="pill-badge" style="background: var(--md-sys-color-surface-container); color: var(--md-sys-color-on-surface-variant); font-size:8.5px;">Prescriptive Guidance</span>
-                    <span class="pill-badge" style="background: var(--md-sys-color-surface-container); color: var(--md-sys-color-on-surface-variant); font-size:8.5px;">CPG / Mfg</span>
-                </div>
-            </div>
-            <div class="match-tile displacement">
-                <span class="pill-badge pill-displacement mb-2"><span class="material-symbols-outlined" style="font-size:11px;">swap_horiz</span>Displacement</span>
-                <h4 class="mt-1"><a href="https://docs.aws.amazon.com/prescriptive-guidance/latest/strategy-migration/welcome.html" target="_blank">Migration Strategy Guidance</a></h4>
-                <p class="body-medium mt-1 text-xs">From on-prem (SAP APO / IBP) forecasting to AWS Supply Chain with parallel-run + 6R framework.</p>
-                <div class="flex gap-2 mt-2 flex-wrap">
-                    <span class="pill-badge" style="background: var(--md-sys-color-surface-container); color: var(--md-sys-color-on-surface-variant); font-size:8.5px;">6R Framework</span>
-                    <span class="pill-badge" style="background: var(--md-sys-color-surface-container); color: var(--md-sys-color-on-surface-variant); font-size:8.5px;">Replatform</span>
-                </div>
-            </div>
-            <div class="match-tile inspirational">
-                <span class="pill-badge pill-inspirational mb-2"><span class="material-symbols-outlined" style="font-size:11px;">check_circle</span>Inspirational</span>
-                <h4 class="mt-1"><a href="https://docs.aws.amazon.com/wellarchitected/latest/analytics-lens/analytics-lens.html" target="_blank">Data Analytics Lens</a></h4>
-                <p class="body-medium mt-1 text-xs">Best practices for forecasting pipelines, data freshness SLO, and cost optimization at scale.</p>
-                <div class="flex gap-2 mt-2 flex-wrap">
-                    <span class="pill-badge" style="background: var(--md-sys-color-surface-container); color: var(--md-sys-color-on-surface-variant); font-size:8.5px;">6 Pillars</span>
-                    <span class="pill-badge" style="background: var(--md-sys-color-surface-container); color: var(--md-sys-color-on-surface-variant); font-size:8.5px;">Analytics Lens</span>
-                </div>
-            </div>
-            <div class="match-tile inspirational">
-                <span class="pill-badge pill-inspirational mb-2"><span class="material-symbols-outlined" style="font-size:11px;">check_circle</span>Inspirational</span>
-                <h4 class="mt-1"><a href="https://docs.aws.amazon.com/wellarchitected/latest/manufacturing-engineering-lens/manufacturing-engineering-lens.html" target="_blank">Manufacturing &amp; Industrial Lens</a></h4>
-                <p class="body-medium mt-1 text-xs">Reference patterns for supply chain visibility, IoT ingest, and multi-site integration.</p>
-                <div class="flex gap-2 mt-2 flex-wrap">
-                    <span class="pill-badge" style="background: var(--md-sys-color-surface-container); color: var(--md-sys-color-on-surface-variant); font-size:8.5px;">Mfg Lens</span>
-                </div>
-            </div>
-        </div>
+  <!-- Coverage Summary -->
+  <div class="card">
+    <h2><span class="ico">&#x1F4CA;</span>Search Coverage · 检索覆盖</h2>
+    <div class="stat-row">
+      <div class="stat-box">
+        <div class="lab">战略倡议</div>
+        <div class="val">3 · Initiatives</div>
+      </div>
+      <div class="stat-box">
+        <div class="lab">匹配文档</div>
+        <div class="val accent">14 · References</div>
+      </div>
+      <div class="stat-box">
+        <div class="lab">Well-Architected Lenses</div>
+        <div class="val ok">3 Lenses</div>
+      </div>
+    </div>
+  </div>
 
-        <div class="next-step-strip">
-            <span class="material-symbols-outlined" style="font-size:14px;">flag</span>
-            <span class="font-bold text-xs uppercase tracking-wider mr-1">Next Step</span>
-            申请 CPG/Mfg Industry EBA Workshop — 以 tariff forecasting 为主题，邀 GE Appliances 北美 CTO + 供应链数字化 VP 同席。
-        </div>
+  <!-- Initiative 1 -->
+  <div class="card">
+    <h2><span class="ico">&#x1F6A9;</span>Initiative 01 · 北美供应链 IT 重塑入口</h2>
+    <div class="init-header">
+      <div class="init-num">1</div>
+      <div>
+        <div class="title">Tariff-aware forecasting + 供应链 IT 重塑</div>
+        <div class="opp">潜在机会：4-year platform contract · $8–15M Y1 · $25–40M 3Y [估算]</div>
+      </div>
+    </div>
 
-        <div class="reason-note">
-            <span class="material-symbols-outlined" style="font-size:12px; color: var(--md-sys-color-primary);">psychology</span>
-            <div><strong>推理</strong> 4 步检索均返回直接命中；Direct Match 优先级最高（AWS Supply Chain + Forecast），Pattern Match + Inspirational 为 SA 提供可交付架构 &amp; WAR。Displacement 匹配因客户当前 forecasting 在 SAP 可能性高。</div>
+    <div class="tiles-grid">
+      <div class="match-tile">
+        <div class="pill-row">
+          <span class="pill pill-direct">&#x1F680; Direct Match</span>
+          <span class="pill pill-meta">Strong</span>
+          <span class="pill pill-meta">Current</span>
         </div>
-    </section>
-
-    <!-- Initiative 2 -->
-    <section class="md-card">
-        <h2 class="section-title flex items-center gap-2">
-            <span class="material-symbols-outlined" style="color: var(--md-sys-color-primary);">flag</span>
-            Initiative 02 · 2026 AI Vision 全球架构占位
-        </h2>
-        <div class="flex items-center gap-3 mb-4 pb-3" style="border-bottom: 1px solid var(--md-sys-color-outline-variant);">
-            <div class="w-8 h-8 rounded-full flex items-center justify-center text-white font-bold text-sm" style="background: var(--md-sys-color-primary);">2</div>
-            <div>
-                <p class="title-medium">Bedrock Agents + Q Business 对标 MevoX</p>
-                <p class="body-medium text-xs mt-0.5">潜在机会：Multi-region AI platform · $6–10M Y1 [估算]</p>
-            </div>
+        <h4><a href="https://docs.aws.amazon.com/aws-supply-chain/" target="_blank">AWS Supply Chain Developer Guide</a></h4>
+        <p class="desc">Demand planning, supply planning, and tariff impact modeling with end-to-end visibility across supplier tiers.</p>
+        <div class="tags"><span>docs.aws.amazon.com</span><span>Direct match</span></div>
+      </div>
+      <div class="match-tile">
+        <div class="pill-row">
+          <span class="pill pill-direct">&#x1F680; Direct Match</span>
+          <span class="pill pill-meta">Strong</span>
+          <span class="pill pill-meta">Current</span>
         </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div class="match-tile">
-                <span class="pill-badge pill-direct mb-2"><span class="material-symbols-outlined" style="font-size:11px;">rocket_launch</span>Direct Match</span>
-                <h4 class="mt-1"><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/agents.html" target="_blank">Amazon Bedrock Agents Developer Guide</a></h4>
-                <p class="body-medium mt-1 text-xs">Build and deploy agents that orchestrate LLMs with enterprise data, tools, and multi-step reasoning.</p>
-                <div class="flex gap-2 mt-2 flex-wrap">
-                    <span class="pill-badge" style="background: var(--md-sys-color-surface-container); color: var(--md-sys-color-on-surface-variant); font-size:8.5px;">Bedrock</span>
-                    <span class="pill-badge" style="background: var(--md-sys-color-surface-container); color: var(--md-sys-color-on-surface-variant); font-size:8.5px;">Agents + KB</span>
-                </div>
-            </div>
-            <div class="match-tile">
-                <span class="pill-badge pill-direct mb-2"><span class="material-symbols-outlined" style="font-size:11px;">rocket_launch</span>Direct Match</span>
-                <h4 class="mt-1"><a href="https://docs.aws.amazon.com/amazonq/latest/business-use-dg/what-is.html" target="_blank">Amazon Q Business Developer Guide</a></h4>
-                <p class="body-medium mt-1 text-xs">Enterprise AI assistant with 40+ connectors, identity-aware, multi-brand ready.</p>
-                <div class="flex gap-2 mt-2 flex-wrap">
-                    <span class="pill-badge" style="background: var(--md-sys-color-surface-container); color: var(--md-sys-color-on-surface-variant); font-size:8.5px;">Q Business</span>
-                    <span class="pill-badge" style="background: var(--md-sys-color-surface-container); color: var(--md-sys-color-on-surface-variant); font-size:8.5px;">Connectors</span>
-                </div>
-            </div>
-            <div class="match-tile pattern">
-                <span class="pill-badge pill-pattern mb-2"><span class="material-symbols-outlined" style="font-size:11px;">architecture</span>Pattern Match</span>
-                <h4 class="mt-1"><a href="https://docs.aws.amazon.com/prescriptive-guidance/latest/retrieval-augmented-generation-options/welcome.html" target="_blank">RAG Pattern on AWS</a></h4>
-                <p class="body-medium mt-1 text-xs">OpenSearch + Bedrock KB reference architecture; multi-tenant + multi-brand data isolation.</p>
-                <div class="flex gap-2 mt-2 flex-wrap">
-                    <span class="pill-badge" style="background: var(--md-sys-color-surface-container); color: var(--md-sys-color-on-surface-variant); font-size:8.5px;">Prescriptive Guidance</span>
-                    <span class="pill-badge" style="background: var(--md-sys-color-surface-container); color: var(--md-sys-color-on-surface-variant); font-size:8.5px;">RAG</span>
-                </div>
-            </div>
-            <div class="match-tile inspirational">
-                <span class="pill-badge pill-inspirational mb-2"><span class="material-symbols-outlined" style="font-size:11px;">check_circle</span>Inspirational</span>
-                <h4 class="mt-1"><a href="https://docs.aws.amazon.com/wellarchitected/latest/generative-ai-lens/generative-ai-lens.html" target="_blank">Generative AI Lens</a></h4>
-                <p class="body-medium mt-1 text-xs">Best practices for agent evaluation, cost guardrails, model selection, enterprise deployment.</p>
-                <div class="flex gap-2 mt-2 flex-wrap">
-                    <span class="pill-badge" style="background: var(--md-sys-color-surface-container); color: var(--md-sys-color-on-surface-variant); font-size:8.5px;">GenAI Lens</span>
-                    <span class="pill-badge" style="background: var(--md-sys-color-surface-container); color: var(--md-sys-color-on-surface-variant); font-size:8.5px;">BP 1-12</span>
-                </div>
-            </div>
+        <h4><a href="https://docs.aws.amazon.com/forecast/latest/dg/what-is-forecast.html" target="_blank">Amazon Forecast Developer Guide</a></h4>
+        <p class="desc">ML-based demand forecasting with tariff scenario inputs; historical data ingestion + scenario modeling.</p>
+        <div class="tags"><span>docs.aws.amazon.com</span><span>Direct match</span></div>
+      </div>
+      <div class="match-tile pattern">
+        <div class="pill-row">
+          <span class="pill pill-pattern">&#x1F3D7;&#xFE0F; Pattern Match</span>
+          <span class="pill pill-meta">Moderate</span>
+          <span class="pill pill-meta">Current</span>
         </div>
-
-        <div class="next-step-strip">
-            <span class="material-symbols-outlined" style="font-size:14px;">flag</span>
-            <span class="font-bold text-xs uppercase tracking-wider mr-1">Next Step</span>
-            向海尔 AI 平台负责人提供 Bedrock Agents + Q Business 架构评估 Deck，聚焦"跨品牌 UX 对标 MevoX"。
+        <h4><a href="https://docs.aws.amazon.com/prescriptive-guidance/latest/patterns/welcome.html" target="_blank">Prescriptive Guidance · Patterns</a></h4>
+        <p class="desc">Demand Forecasting Reference Architecture — Forecast + SageMaker + QuickSight for CPG / Mfg.</p>
+        <div class="tags"><span>Prescriptive Guidance</span><span>CPG / Mfg</span></div>
+      </div>
+      <div class="match-tile displacement">
+        <div class="pill-row">
+          <span class="pill pill-displacement">&#x1F504; Displacement</span>
+          <span class="pill pill-meta">Moderate</span>
+          <span class="pill pill-meta">Current</span>
         </div>
-
-        <div class="reason-note">
-            <span class="material-symbols-outlined" style="font-size:12px; color: var(--md-sys-color-primary);">psychology</span>
-            <div><strong>推理</strong> 战略倡议 02 对标 MevoX → 直接服务优先是 Bedrock Agents + Q Business 组合；GenAI Lens 是风险规避型买家（CFO / 海尔全球 CIO）最强的信任锚点。</div>
+        <h4><a href="https://docs.aws.amazon.com/prescriptive-guidance/latest/strategy-migration/welcome.html" target="_blank">Migration Strategy Guidance</a></h4>
+        <p class="desc">From on-prem (SAP APO / IBP) forecasting to AWS Supply Chain with parallel-run + 6R framework.</p>
+        <div class="tags"><span>6R Framework</span><span>Replatform</span></div>
+      </div>
+      <div class="match-tile inspirational">
+        <div class="pill-row">
+          <span class="pill pill-inspirational">&#x2705; Inspirational</span>
+          <span class="pill pill-meta">Moderate</span>
+          <span class="pill pill-meta">Current</span>
         </div>
-    </section>
-
-    <!-- Initiative 3 -->
-    <section class="md-card">
-        <h2 class="section-title flex items-center gap-2">
-            <span class="material-symbols-outlined" style="color: var(--md-sys-color-primary);">flag</span>
-            Initiative 03 · 欧洲合规 + Frankfurt D 股叙事
-        </h2>
-        <div class="flex items-center gap-3 mb-4 pb-3" style="border-bottom: 1px solid var(--md-sys-color-outline-variant);">
-            <div class="w-8 h-8 rounded-full flex items-center justify-center text-white font-bold text-sm" style="background: var(--md-sys-color-primary);">3</div>
-            <div>
-                <p class="title-medium">EU Region 合规深度 + Azure 数据驻留叙事对抗</p>
-                <p class="body-medium text-xs mt-0.5">潜在机会：EU data residency platform · $4–7M Y1 [估算]</p>
-            </div>
+        <h4><a href="https://docs.aws.amazon.com/wellarchitected/latest/analytics-lens/analytics-lens.html" target="_blank">Data Analytics Lens</a></h4>
+        <p class="desc">Best practices for forecasting pipelines, data freshness SLO, and cost optimization at scale.</p>
+        <div class="tags"><span>6 Pillars</span><span>Analytics Lens</span></div>
+      </div>
+      <div class="match-tile inspirational">
+        <div class="pill-row">
+          <span class="pill pill-inspirational">&#x2705; Inspirational</span>
+          <span class="pill pill-meta">Moderate</span>
+          <span class="pill pill-meta">Current</span>
         </div>
+        <h4><a href="https://docs.aws.amazon.com/wellarchitected/latest/manufacturing-engineering-lens/manufacturing-engineering-lens.html" target="_blank">Manufacturing &amp; Industrial Lens</a></h4>
+        <p class="desc">Reference patterns for supply chain visibility, IoT ingest, and multi-site integration.</p>
+        <div class="tags"><span>Mfg Lens</span></div>
+      </div>
+    </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div class="match-tile">
-                <span class="pill-badge pill-direct mb-2"><span class="material-symbols-outlined" style="font-size:11px;">rocket_launch</span>Direct Match</span>
-                <h4 class="mt-1"><a href="https://docs.aws.amazon.com/whitepapers/latest/aws-risk-and-compliance/welcome.html" target="_blank">AWS Risk &amp; Compliance Whitepaper</a></h4>
-                <p class="body-medium mt-1 text-xs">GDPR / ISO 27001 / SOC 2 coverage + EU-specific controls (Frankfurt Region).</p>
-                <div class="flex gap-2 mt-2 flex-wrap">
-                    <span class="pill-badge" style="background: var(--md-sys-color-surface-container); color: var(--md-sys-color-on-surface-variant); font-size:8.5px;">docs.aws.amazon.com</span>
-                    <span class="pill-badge" style="background: var(--md-sys-color-surface-container); color: var(--md-sys-color-on-surface-variant); font-size:8.5px;">Compliance</span>
-                </div>
-            </div>
-            <div class="match-tile">
-                <span class="pill-badge pill-direct mb-2"><span class="material-symbols-outlined" style="font-size:11px;">rocket_launch</span>Direct Match</span>
-                <h4 class="mt-1"><a href="https://docs.aws.amazon.com/whitepapers/latest/navigating-gdpr-compliance/welcome.html" target="_blank">Navigating GDPR Compliance</a></h4>
-                <p class="body-medium mt-1 text-xs">Data residency + cross-border transfer controls using SCC / BCR patterns.</p>
-                <div class="flex gap-2 mt-2 flex-wrap">
-                    <span class="pill-badge" style="background: var(--md-sys-color-surface-container); color: var(--md-sys-color-on-surface-variant); font-size:8.5px;">GDPR</span>
-                </div>
-            </div>
-            <div class="match-tile pattern">
-                <span class="pill-badge pill-pattern mb-2"><span class="material-symbols-outlined" style="font-size:11px;">architecture</span>Pattern Match</span>
-                <h4 class="mt-1"><a href="https://docs.aws.amazon.com/prescriptive-guidance/latest/patterns/implement-dr-strategy-for-a-multi-region-application.html" target="_blank">Multi-region Pattern (EU + US)</a></h4>
-                <p class="body-medium mt-1 text-xs">Data residency + DR strategy with EU-primary architecture and fall-over.</p>
-                <div class="flex gap-2 mt-2 flex-wrap">
-                    <span class="pill-badge" style="background: var(--md-sys-color-surface-container); color: var(--md-sys-color-on-surface-variant); font-size:8.5px;">Prescriptive Guidance</span>
-                    <span class="pill-badge" style="background: var(--md-sys-color-surface-container); color: var(--md-sys-color-on-surface-variant); font-size:8.5px;">Multi-region</span>
-                </div>
-            </div>
-            <div class="match-tile inspirational">
-                <span class="pill-badge pill-inspirational mb-2"><span class="material-symbols-outlined" style="font-size:11px;">check_circle</span>Inspirational</span>
-                <h4 class="mt-1"><a href="https://docs.aws.amazon.com/wellarchitected/latest/framework/security-pillar.html" target="_blank">Security Pillar (WAF)</a></h4>
-                <p class="body-medium mt-1 text-xs">Identity, detection, infrastructure protection, data protection, incident response.</p>
-                <div class="flex gap-2 mt-2 flex-wrap">
-                    <span class="pill-badge" style="background: var(--md-sys-color-surface-container); color: var(--md-sys-color-on-surface-variant); font-size:8.5px;">6 Pillars</span>
-                    <span class="pill-badge" style="background: var(--md-sys-color-surface-container); color: var(--md-sys-color-on-surface-variant); font-size:8.5px;">Security</span>
-                </div>
-            </div>
+    <div class="next-step">
+      <span class="label">&#x1F6A9; Next Step</span>
+      申请 CPG/Mfg Industry EBA Workshop — 以 tariff forecasting 为主题，邀 GE Appliances 北美 CTO + 供应链数字化 VP 同席。
+    </div>
+
+    <div class="reason-note">
+      <span class="ico">&#x1F4A1;</span>
+      <div><strong>推理</strong> 4 步检索均返回直接命中；Direct Match 优先级最高（AWS Supply Chain + Forecast），Pattern Match + Inspirational 为 SA 提供可交付架构 &amp; WAR。Displacement 匹配因客户当前 forecasting 在 SAP 可能性高。</div>
+    </div>
+  </div>
+
+  <!-- Initiative 2 -->
+  <div class="card">
+    <h2><span class="ico">&#x1F6A9;</span>Initiative 02 · 2026 AI Vision 全球架构占位</h2>
+    <div class="init-header">
+      <div class="init-num">2</div>
+      <div>
+        <div class="title">Bedrock Agents + Q Business 对标 MevoX</div>
+        <div class="opp">潜在机会：Multi-region AI platform · $6–10M Y1 [估算]</div>
+      </div>
+    </div>
+
+    <div class="tiles-grid">
+      <div class="match-tile">
+        <div class="pill-row">
+          <span class="pill pill-direct">&#x1F680; Direct Match</span>
+          <span class="pill pill-meta">Strong</span>
+          <span class="pill pill-meta">Current</span>
         </div>
-
-        <div class="next-step-strip">
-            <span class="material-symbols-outlined" style="font-size:14px;">flag</span>
-            <span class="font-bold text-xs uppercase tracking-wider mr-1">Next Step</span>
-            向海尔欧洲总部提供 Frankfurt Region 合规白皮书 + SCVR (Security Compliance Visibility Review) 邀请。
+        <h4><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/agents.html" target="_blank">Amazon Bedrock Agents Developer Guide</a></h4>
+        <p class="desc">Build and deploy agents that orchestrate LLMs with enterprise data, tools, and multi-step reasoning.</p>
+        <div class="tags"><span>Bedrock</span><span>Agents + KB</span></div>
+      </div>
+      <div class="match-tile">
+        <div class="pill-row">
+          <span class="pill pill-direct">&#x1F680; Direct Match</span>
+          <span class="pill pill-meta">Strong</span>
+          <span class="pill pill-meta">Current</span>
         </div>
-
-        <div class="reason-note">
-            <span class="material-symbols-outlined" style="font-size:12px; color: var(--md-sys-color-primary);">psychology</span>
-            <div><strong>推理</strong> Initiative 03 的核心是"合规深度" — AWS Documentation 的 GDPR / SCC / EU Region 白皮书是 Azure 叙事的直接反制材料；EU 投资者审计要求提升（Frankfurt D 股）强化此叙事的紧迫性。</div>
+        <h4><a href="https://docs.aws.amazon.com/amazonq/latest/business-use-dg/what-is.html" target="_blank">Amazon Q Business Developer Guide</a></h4>
+        <p class="desc">Enterprise AI assistant with 40+ connectors, identity-aware, multi-brand ready.</p>
+        <div class="tags"><span>Q Business</span><span>Connectors</span></div>
+      </div>
+      <div class="match-tile pattern">
+        <div class="pill-row">
+          <span class="pill pill-pattern">&#x1F3D7;&#xFE0F; Pattern Match</span>
+          <span class="pill pill-meta">Strong</span>
+          <span class="pill pill-meta">Current</span>
         </div>
-    </section>
-
-    <!-- Coverage Gap -->
-    <section class="md-card">
-        <h2 class="section-title flex items-center gap-2">
-            <span class="material-symbols-outlined" style="color: var(--md-sys-color-warning);">report_problem</span>
-            Coverage Gap · 覆盖缺口
-        </h2>
-        <div class="gap-warning">
-            <span class="material-symbols-outlined" style="color: var(--md-sys-color-warning); font-size:20px;">warning_amber</span>
-            <div>
-                <strong>本次检索中未命中内容：</strong><br>
-                - "Consumer appliance IoT" 垂直 prescriptive pattern 在 ./references/ 中缺失（需通过 Industry team 补强）<br>
-                - Haier 具体相关 customer case study 未在本地知识库中发现（应通过 AWS Industry team 单独检索）
-            </div>
+        <h4><a href="https://docs.aws.amazon.com/prescriptive-guidance/latest/retrieval-augmented-generation-options/welcome.html" target="_blank">RAG Pattern on AWS</a></h4>
+        <p class="desc">OpenSearch + Bedrock KB reference architecture; multi-tenant + multi-brand data isolation.</p>
+        <div class="tags"><span>Prescriptive Guidance</span><span>RAG</span></div>
+      </div>
+      <div class="match-tile inspirational">
+        <div class="pill-row">
+          <span class="pill pill-inspirational">&#x2705; Inspirational</span>
+          <span class="pill pill-meta">Moderate</span>
+          <span class="pill pill-meta">Current</span>
         </div>
-    </section>
+        <h4><a href="https://docs.aws.amazon.com/wellarchitected/latest/generative-ai-lens/generative-ai-lens.html" target="_blank">Generative AI Lens</a></h4>
+        <p class="desc">Best practices for agent evaluation, cost guardrails, model selection, enterprise deployment.</p>
+        <div class="tags"><span>GenAI Lens</span><span>BP 1-12</span></div>
+      </div>
+    </div>
 
-    <!-- Footer -->
-    <footer class="text-center py-4">
-        <p class="text-xs mt-1" style="color: var(--md-sys-color-outline);">Generated by Dali · Solutions Search · 2026-05-12</p>
-    </footer>
+    <div class="next-step">
+      <span class="label">&#x1F6A9; Next Step</span>
+      向海尔 AI 平台负责人提供 Bedrock Agents + Q Business 架构评估 Deck，聚焦"跨品牌 UX 对标 MevoX"。
+    </div>
+
+    <div class="reason-note">
+      <span class="ico">&#x1F4A1;</span>
+      <div><strong>推理</strong> 战略倡议 02 对标 MevoX → 直接服务优先是 Bedrock Agents + Q Business 组合；GenAI Lens 是风险规避型买家（CFO / 海尔全球 CIO）最强的信任锚点。</div>
+    </div>
+  </div>
+
+  <!-- Initiative 3 -->
+  <div class="card">
+    <h2><span class="ico">&#x1F6A9;</span>Initiative 03 · 欧洲合规 + Frankfurt D 股叙事</h2>
+    <div class="init-header">
+      <div class="init-num">3</div>
+      <div>
+        <div class="title">EU Region 合规深度 + Azure 数据驻留叙事对抗</div>
+        <div class="opp">潜在机会：EU data residency platform · $4–7M Y1 [估算]</div>
+      </div>
+    </div>
+
+    <div class="tiles-grid">
+      <div class="match-tile">
+        <div class="pill-row">
+          <span class="pill pill-direct">&#x1F680; Direct Match</span>
+          <span class="pill pill-meta">Strong</span>
+          <span class="pill pill-meta">Current</span>
+        </div>
+        <h4><a href="https://docs.aws.amazon.com/whitepapers/latest/aws-risk-and-compliance/welcome.html" target="_blank">AWS Risk &amp; Compliance Whitepaper</a></h4>
+        <p class="desc">GDPR / ISO 27001 / SOC 2 coverage + EU-specific controls (Frankfurt Region).</p>
+        <div class="tags"><span>docs.aws.amazon.com</span><span>Compliance</span></div>
+      </div>
+      <div class="match-tile">
+        <div class="pill-row">
+          <span class="pill pill-direct">&#x1F680; Direct Match</span>
+          <span class="pill pill-meta">Strong</span>
+          <span class="pill pill-meta">Current</span>
+        </div>
+        <h4><a href="https://docs.aws.amazon.com/whitepapers/latest/navigating-gdpr-compliance/welcome.html" target="_blank">Navigating GDPR Compliance</a></h4>
+        <p class="desc">Data residency + cross-border transfer controls using SCC / BCR patterns.</p>
+        <div class="tags"><span>GDPR</span></div>
+      </div>
+      <div class="match-tile pattern">
+        <div class="pill-row">
+          <span class="pill pill-pattern">&#x1F3D7;&#xFE0F; Pattern Match</span>
+          <span class="pill pill-meta">Moderate</span>
+          <span class="pill pill-meta">Current</span>
+        </div>
+        <h4><a href="https://docs.aws.amazon.com/prescriptive-guidance/latest/patterns/implement-dr-strategy-for-a-multi-region-application.html" target="_blank">Multi-region Pattern (EU + US)</a></h4>
+        <p class="desc">Data residency + DR strategy with EU-primary architecture and fall-over.</p>
+        <div class="tags"><span>Prescriptive Guidance</span><span>Multi-region</span></div>
+      </div>
+      <div class="match-tile inspirational">
+        <div class="pill-row">
+          <span class="pill pill-inspirational">&#x2705; Inspirational</span>
+          <span class="pill pill-meta">Moderate</span>
+          <span class="pill pill-meta">Current</span>
+        </div>
+        <h4><a href="https://docs.aws.amazon.com/wellarchitected/latest/framework/security-pillar.html" target="_blank">Security Pillar (WAF)</a></h4>
+        <p class="desc">Identity, detection, infrastructure protection, data protection, incident response.</p>
+        <div class="tags"><span>6 Pillars</span><span>Security</span></div>
+      </div>
+    </div>
+
+    <div class="next-step">
+      <span class="label">&#x1F6A9; Next Step</span>
+      向海尔欧洲总部提供 Frankfurt Region 合规白皮书 + SCVR (Security Compliance Visibility Review) 邀请。
+    </div>
+
+    <div class="reason-note">
+      <span class="ico">&#x1F4A1;</span>
+      <div><strong>推理</strong> Initiative 03 的核心是"合规深度" — AWS Documentation 的 GDPR / SCC / EU Region 白皮书是 Azure 叙事的直接反制材料；EU 投资者审计要求提升（Frankfurt D 股）强化此叙事的紧迫性。</div>
+    </div>
+  </div>
+
+  <!-- Coverage Gap -->
+  <div class="card">
+    <h2><span class="ico">&#x26A0;&#xFE0F;</span>Coverage Gap · 覆盖缺口</h2>
+    <div class="gap-warn">
+      <span class="ico">&#x26A0;&#xFE0F;</span>
+      <div>
+        <strong>本次检索中未命中内容：</strong><br>
+        - "Consumer appliance IoT" 垂直 prescriptive pattern 在 ./references/ 中缺失（需通过 Industry team 补强）<br>
+        - Haier 具体相关 customer case study 未在本地知识库中发现（应通过 AWS Industry team 单独检索）
+      </div>
+    </div>
+  </div>
+
+  <div class="foot">
+    Generated by Dali · Solutions Search · 2026-05-12
+  </div>
 
 </div>
 
 <script>
-    const params = new URLSearchParams(window.location.search);
-    if (params.get('print') === '1') {
-        window.addEventListener('load', () => setTimeout(() => window.print(), 400));
-    }
+  const params = new URLSearchParams(window.location.search);
+  if (params.get('print') === '1') {
+    window.addEventListener('load', () => setTimeout(() => window.print(), 400));
+  }
 </script>
 
-
+<div class="page-footer">
+  <span>Dali · Solutions Search · {{COMPANY_NAME}} · {{DATE}}</span>
+  <span>AWS Confidential</span>
+</div>
 </body></html>
