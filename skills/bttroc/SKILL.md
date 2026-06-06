@@ -51,7 +51,7 @@ Procedure 3. **View** — render the HTML/PDF deliverable from the saved record,
 Required Input：
 1. **TOWS-driven Top 3 Strategic Initiatives** — the recommended moves
 2. Solutions 搜索结果 (from `solutions-search`)， if content not found in context, run it in the background before proceeding.
-3. competitive intelligence 搜索结果 (from 'competitive-intelligence') if content not found in context, run it in the background before proceeding.
+3. competitive intelligence 搜索结果 (from 'compteitive-intelligence') if content not found in context, run it in the background before proceeding.
 4. contact profile
    - name: Contact Profile (V2.0)
    - repo: GCR-FE/contact-profiling
@@ -162,7 +162,7 @@ Use one of the two templates below, template A or template B. These templates co
 Rules for filling:
 - **Every bracket must be filled** — if a bracket cannot be filled from the required upstream inputs, name the gap and stop; do not fabricate content
 -every data point written must have a (source).
-- **Keep it to 5–7 sentences** — anything longer loses the executive
+- **Keep it to 6-8 sentences** — anything longer loses the executive
 - use business terminology, instead of IT terminology, unless target person is CIO/CTO, but busienss terminology is must
 - explain the initiative, break it down so there's enough depth
 
@@ -207,9 +207,9 @@ Follows the workspace convention defined by the Orchestrator (Section 6). Skill 
 
 ### Filename convention
 
- `BTTROC_{Customer}_{CXOTitle}_{YYYY-MM-DD}.md`
+ `BTT_{Customer}_{CXOTitle}_{YYYY-MM-DD}.md`
 
-Customer name uses Pinyin for Chinese companies; CXO title in lowercase shorthand (e.g., `BTTROC_Haier_cto_2026-05-12.md`).
+Customer name uses Pinyin for Chinese companies; CXO title in lowercase shorthand (e.g., `BTT_Haier_cto_2026-05-12.md`).
 
 ### Order of operations
 
@@ -223,7 +223,13 @@ If any record save fails (permission denied, path not writable), stop. Do not re
 
 ## Procedure 3: View — DETERMINISTIC HTML → PDF
 
-Ships as **an HTML file that auto-exports to PDF**. The HTML is the canonical rendering surface — no other renderer is used. Visual style: Google Material Design 3 (Google Sans, MD3 color tokens, 28px rounded cards, Material Symbols icons, responsive grid).
+**REQUIRED: Load `templates/OUTPUT_REFERENCE.html` before generating any HTML output.**
+
+Ships as **an HTML file that exports to PDF via headless Chrome**:
+
+```bash
+python3 skills/bttroc/templates/render_bttroc.py <output.html> <output.pdf>
+```
 
 
 ### Output Content

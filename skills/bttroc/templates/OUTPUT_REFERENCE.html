@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="zh-Hans">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>BTTROC · CXO 对话 · Haier CIO</title>
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet" />
-<!-- Fonts: locally-installed Inter + Noto Sans SC -->
 <style>
-  /* === Shared base (previously _shared.css) === */
+  @page {
+    size: A4;
+    margin: 14mm 12mm 20mm 12mm;
+  }
   :root {
     --ink: #0f172a;
     --ink-2: #334155;
@@ -33,21 +33,12 @@
     margin: 0; padding: 0;
     background: var(--page-bg);
     color: var(--ink);
-    font-family: "Inter", "Noto Sans SC", -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+    font-family: "Inter", "Noto Sans SC", "Noto Sans TC", -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
     font-size: 13px; line-height: 1.55;
     -webkit-font-smoothing: antialiased;
   }
   a { color: var(--accent); text-decoration: none; }
   a:hover { text-decoration: underline; }
-  .material-icons-outlined {
-    font-family: 'Material Icons Outlined';
-    font-weight: normal; font-style: normal;
-    font-size: 20px; line-height: 1;
-    letter-spacing: normal; text-transform: none;
-    display: inline-block; white-space: nowrap; word-wrap: normal; direction: ltr;
-    -webkit-font-feature-settings: 'liga';
-    -webkit-font-smoothing: antialiased;
-  }
   .export-bar {
     position: sticky; top: 0; z-index: 10;
     background: #0f172a; color: #fff;
@@ -65,7 +56,7 @@
     display: inline-flex; align-items: center; gap: 6px;
   }
   .export-bar button:hover { background: var(--accent-dark); }
-  .sheet { max-width: 900px; margin: 28px auto 56px; padding: 0 28px; }
+  .sheet { max-width: 820px; margin: 28px auto 56px; padding: 0 28px; }
   .head {
     display: flex; align-items: flex-start; justify-content: space-between;
     gap: 20px; padding: 8px 8px 20px;
@@ -85,7 +76,6 @@
     padding: 6px 12px; border-radius: 8px;
     font-size: 11px; font-weight: 600; white-space: nowrap;
   }
-  .head .pill .material-icons-outlined { font-size: 14px; }
   .card {
     background: var(--paper); border-radius: 12px; border: 1px solid var(--line);
     padding: 22px 24px; margin-bottom: 14px;
@@ -95,52 +85,33 @@
     margin: 0 0 16px; font-size: 16px; font-weight: 600;
     color: var(--ink); letter-spacing: -0.2px;
   }
-  .card h2 .material-icons-outlined {
-    font-size: 20px; color: var(--accent);
-    padding: 6px; background: var(--paper);
-    border-radius: 6px; box-shadow: 0 1px 2px rgba(26,26,46,0.05);
-  }
-  .stat-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; }
-  .stat-grid.cols-3 { grid-template-columns: repeat(3,1fr); }
-  .stat { background: var(--paper); border-radius: 10px; padding: 14px 16px; text-align: center; }
-  .stat .lab { font-size: 11px; color: var(--muted); margin-bottom: 4px; font-weight: 500; }
-  .stat .val { font-size: 15px; color: var(--ink); font-weight: 600; line-height: 1.3; }
+  .card h2 .ico { font-size: 18px; }
+  .stat-grid { display: grid; gap: 10px; }
+  .stat-grid.cols-2 { grid-template-columns: 1fr 1fr; }
+  .stat-grid.cols-3 { grid-template-columns: 1fr 1fr 1fr; }
+  .stat { background: var(--line-soft); border-radius: 10px; padding: 12px 14px; }
+  .stat .lab { font-size: 10px; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 4px; }
+  .stat .val { font-size: 12.5px; color: var(--ink); font-weight: 600; line-height: 1.4; }
   .stat .val.accent { color: var(--accent); }
-  .stat .val.ok { color: var(--ok); }
-  .stat .val.warn { color: var(--warn); }
-  .stat .val.bad { color: var(--bad); }
-  .sub-card { background: var(--page-bg); border-radius: 10px; padding: 16px 18px; }
-  .sub-card h3 { font-size: 13px; font-weight: 600; color: var(--ink); margin: 0 0 10px; }
   .kv-grid { display: grid; gap: 10px; }
   .kv-grid.cols-2 { grid-template-columns: 1fr 1fr; }
-  .kv-tile { background: var(--page-bg); border-radius: 10px; padding: 14px 16px; }
+  .kv-tile { background: var(--line-soft); border-radius: 10px; padding: 14px 16px; }
   .kv-tile .lab { font-size: 10px; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 4px; }
   .kv-tile .val { font-size: 12.5px; color: var(--ink-2); line-height: 1.6; }
+  .sub-card { background: var(--line-soft); border-radius: 10px; padding: 16px 18px; }
+  .reason-note {
+    display: flex; gap: 8px; align-items: flex-start;
+    background: var(--line-soft); border-radius: 8px;
+    padding: 10px 14px; font-size: 11.5px; color: var(--ink-2); line-height: 1.55;
+  }
+  .reason-note .ico { flex: 0 0 auto; font-size: 14px; color: var(--accent); margin-top: 1px; }
   .num-list { list-style: none; padding: 0; margin: 0; }
   .num-list li { display: flex; gap: 10px; padding: 8px 0; font-size: 12.5px; color: var(--ink-2); line-height: 1.6; }
   .num-list li .ico { flex: 0 0 auto; font-size: 14px; color: var(--accent); font-weight: 700; }
   .num-list li strong { color: var(--ink); }
-  .reason-note { display: flex; gap: 8px; align-items: flex-start; background: var(--line-soft); border-radius: 8px; padding: 10px 14px; font-size: 11.5px; color: var(--ink-2); line-height: 1.55; }
-  .reason-note.on-white { background: var(--page-bg); }
-  .reason-note .material-icons-outlined { font-size: 16px; color: var(--accent); flex: 0 0 auto; margin-top: 1px; }
-  .pill-chip {
-    display: inline-flex; align-items: center; gap: 4px;
-    background: var(--accent-soft); color: var(--accent-dark);
-    padding: 3px 10px; border-radius: 6px;
-    font-size: 11px; font-weight: 700; letter-spacing: 0.5px;
-    margin-right: 6px;
-  }
-  .pill-chip .material-icons-outlined { font-size: 13px; }
   .foot { margin-top: 32px; padding: 16px 8px; border-top: 1px solid var(--line); font-size: 11px; color: var(--muted); }
-  .foot .dl { display: block; margin-bottom: 4px; }
-  @media print {
-    .export-bar { display: none; }
-    body { background: #fff; }
-    .sheet { margin: 0; padding: 0 16px; }
-    .card { break-inside: avoid; }
-  }
 
-  /* === Skill-specific styles === */
+  /* Skill-specific */
   .dim-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
   .dim-tile {
     background: var(--paper); border-radius: 10px; padding: 12px 14px;
@@ -153,10 +124,11 @@
   .dim-tile .ico-tile {
     width: 28px; height: 28px; border-radius: 6px;
     display: inline-flex; align-items: center; justify-content: center;
-    background: var(--accent-softer); color: var(--accent); margin-bottom: 6px;
+    margin-bottom: 6px; font-size: 16px;
   }
   .dim-tile.revenue .ico-tile { background: var(--ok-soft); color: var(--ok); }
   .dim-tile.cost .ico-tile { background: var(--warn-soft); color: var(--warn); }
+  .dim-tile.efficiency .ico-tile { background: var(--accent-soft); color: var(--accent); }
   .dim-tile.risk .ico-tile { background: var(--bad-soft); color: var(--bad); }
   .dim-tile h4 { margin: 0 0 4px; font-size: 12px; color: var(--ink); font-weight: 600; }
   .dim-tile p { margin: 0; font-size: 11px; color: var(--ink-2); line-height: 1.5; }
@@ -211,35 +183,45 @@
     background: var(--paper); border-radius: 8px; padding: 10px 12px;
     font-size: 11.5px; color: var(--ink-2); line-height: 1.5;
   }
-  .bmc-impact .cell.hit { background: var(--warn-soft); color: var(--warn); }
+  .bmc-impact .cell.hit { background: var(--warn-soft); }
   .bmc-impact .cell strong { color: var(--ink); }
 
-  .proof-row {
-    display: grid; grid-template-columns: 1fr 2fr 2fr; gap: 10px;
-    padding: 10px 0; border-bottom: 1px solid var(--line-soft);
-    font-size: 12px; color: var(--ink-2); line-height: 1.5;
-  }
-  .proof-row:last-child { border-bottom: 0; }
-  .proof-row strong { color: var(--ink); }
-  .proof-row .lab { font-size: 10px; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 2px; }
-
-  .chip-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
-  .chip {
+  .pill-chip {
     display: inline-flex; align-items: center; gap: 4px;
-    background: var(--accent-softer); color: var(--accent-dark);
-    padding: 4px 10px; border-radius: 6px;
+    background: var(--accent-soft); color: var(--accent-dark);
+    padding: 3px 10px; border-radius: 100px;
     font-size: 11px; font-weight: 600;
+  }
+
+  /* Page footer (print) */
+  .page-footer {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    padding: 6px 12mm;
+    font-family: 'Inter', sans-serif;
+    font-size: 8pt;
+    color: #94a3b8;
+    display: flex;
+    justify-content: space-between;
+  }
+  @media screen { .page-footer { display: none; } }
+  @media print {
+    .export-bar { display: none; }
+    html, body { background: #fff; }
+    .sheet { margin: 0; padding: 0 16px; }
+    .card h2 { page-break-after: avoid; }
+    .script-block { page-break-inside: avoid; }
+    .dim-tile { page-break-inside: avoid; }
+    .reason-note { page-break-inside: avoid; }
+    .kv-tile { page-break-inside: avoid; }
   }
 </style>
 </head>
 <body>
 
 <div class="export-bar">
-  <div class="brand">◆ BTTROC · CXO 对话构建器</div>
-  <button onclick="window.print()">
-    <span class="material-icons-outlined" style="font-size:16px;">picture_as_pdf</span>
-    Export PDF
-  </button>
+  <div class="brand">&#x25C6; BTTROC · CXO 对话构建器</div>
+  <button onclick="window.print()">&#x1F4C4; Export PDF</button>
 </div>
 
 <div class="sheet">
@@ -251,39 +233,18 @@
       <div class="sub">对话构建 · Initiative 02 (2026 AI Vision 全球架构) · 2026-05-12</div>
     </div>
     <div class="pill">
-      <span class="material-icons-outlined">record_voice_over</span>
+      &#x1F399;&#xFE0F;
       3–5 min CXO Script
-    </div>
-  </div>
-
-  <!-- §2 Identified Top Strategic Initiative -->
-  <div class="card">
-    <h2><span class="material-icons-outlined">rocket_launch</span>Identified Top Strategic Initiative · 选中战略动作</h2>
-    <div class="kv-tile" style="margin-bottom: 12px;">
-      <div class="lab">Initiative Name</div>
-      <div class="val"><strong>2026 AI Vision 全球架构统一</strong> — 构建跨品牌 AI 平台，统一北美/欧洲/中国数据面与 UX 智能层，在 Q3 架构选型窗口锁定云底座。</div>
-    </div>
-    <div class="chip-row">
-      <div class="chip">TOWS: ST (Strength–Threat)</div>
-      <div class="chip">Threat Source: Porter Rivalry 8.2</div>
-      <div class="chip">Opportunity Score: 7.5</div>
-    </div>
-    <div class="reason-note on-white" style="margin-top: 12px;">
-      <span class="material-icons-outlined">psychology</span>
-      <div><strong>推理</strong>选中此 initiative 而非其他两项，因为：① Solutions 搜索结果中有 Bedrock Agents + Q Business 直接对应该场景；② 客户 Risk-averse 买家类型 → 需要 POC 路径的 initiative 优先；③ Q3 窗口时间压力最高。</div>
     </div>
   </div>
 
   <!-- CXO Snapshot -->
   <div class="card">
-    <h2><span class="material-icons-outlined">account_circle</span>CXO Snapshot · 目标高管</h2>
+    <h2><span class="ico">&#x1F464;</span>CXO Snapshot · 目标高管</h2>
     <div class="stat-grid cols-3">
       <div class="stat"><div class="lab">姓名</div><div class="val">李总（待 Discovery 确认）</div></div>
       <div class="stat"><div class="lab">角色</div><div class="val">全球 CIO · AI 平台 Owner</div></div>
-      <div class="stat">
-        <div class="lab">买家类型</div>
-        <div class="val accent">Risk-averse · Top-down</div>
-      </div>
+      <div class="stat"><div class="lab">买家类型</div><div class="val accent">Risk-averse · Top-down</div></div>
     </div>
     <div class="kv-grid cols-2" style="margin-top:10px;">
       <div class="kv-tile">
@@ -299,7 +260,7 @@
 
   <!-- BMC Impact Map -->
   <div class="card">
-    <h2><span class="material-icons-outlined">grid_view</span>Impact on BMC · 冲击落在画布哪里</h2>
+    <h2><span class="ico">&#x1F4CA;</span>Impact on BMC · 冲击落在画布哪里</h2>
     <div class="bmc-impact">
       <div></div>
       <div class="hdr">Customer-facing</div>
@@ -307,67 +268,63 @@
       <div class="hdr">Financial</div>
 
       <div class="row-lab">Primary Hit</div>
-      <div class="cell hit"><strong>CS · VP</strong>Premium Intelligence 无法落地 → 中国一二线高端置换流失给美的 MevoX</div>
-      <div class="cell hit"><strong>KR · KA</strong>AI 平台 / 统一数据面未达 → 跨品牌 UX 统一成本持续高企</div>
-      <div class="cell hit"><strong>RS · Cost</strong>Q1 −6.9% + 美的资本 $2.2B 拉开差距 → 2027 差距进一步扩大</div>
+      <div class="cell hit"><strong>CS · VP</strong> Premium Intelligence 无法落地 → 中国一二线高端置换流失给美的 MevoX</div>
+      <div class="cell hit"><strong>KR · KA</strong> AI 平台 / 统一数据面未达 → 跨品牌 UX 统一成本持续高企</div>
+      <div class="cell hit"><strong>RS · Cost</strong> Q1 −6.9% + 美的资本 $2.2B 拉开差距 → 2027 差距进一步扩大</div>
 
       <div class="row-lab">Secondary Hit</div>
       <div class="cell">Ch · CR — 品牌矩阵差异化难以支撑 2026 AI 生态叙事</div>
       <div class="cell">KP — 架构锁定在华为云意味着 AWS / Azure 生态隔离</div>
       <div class="cell">— —</div>
     </div>
-    <div class="reason-note on-white" style="margin-top: 10px;">
-      <span class="material-icons-outlined">psychology</span>
-      <div><strong>推理</strong>冲击从 VP → KR / KA → RS / Cost 级联传导；因此切入点必须选在 KR / KA（AI 平台基础）而非 VP（战略抽象）或 RS（直接谈钱）。</div>
+    <div class="reason-note" style="margin-top: 10px;">
+      <span class="ico">&#x1F4A1;</span>
+      <div><strong>推理</strong> 冲击从 VP → KR / KA → RS / Cost 级联传导；因此切入点必须选在 KR / KA（AI 平台基础）而非 VP（战略抽象）或 RS（直接谈钱）。</div>
     </div>
   </div>
 
   <!-- 4-dim concerns -->
   <div class="card">
-    <h2><span class="material-icons-outlined">insights</span>4-Dimension Concerns · 4 维度担忧</h2>
+    <h2><span class="ico">&#x1F4C8;</span>4-Dimension Concerns · 4 维度担忧</h2>
     <div class="dim-grid">
       <div class="dim-tile revenue">
-        <div class="ico-tile"><span class="material-icons-outlined" style="font-size:16px;">trending_up</span></div>
+        <div class="ico-tile">&#x1F4C8;</div>
         <h4>Revenue</h4>
         <p>Premium Intelligence 战略能否把消费者对单品家电的认知升级为生态订阅 — 2026 AI 战略成败决定未来 3 年 RS。</p>
       </div>
       <div class="dim-tile cost">
-        <div class="ico-tile"><span class="material-icons-outlined" style="font-size:16px;">payments</span></div>
+        <div class="ico-tile">&#x1F4B0;</div>
         <h4>Cost</h4>
         <p>北美 −6.9% + 关税压力 → 任何新平台 CAPEX 必须可量化、可分段、可回退。不能给 CFO 一次性大票。</p>
       </div>
       <div class="dim-tile efficiency">
-        <div class="ico-tile"><span class="material-icons-outlined" style="font-size:16px;">speed</span></div>
+        <div class="ico-tile">&#x26A1;</div>
         <h4>Efficiency</h4>
         <p>多品牌跨地域数据孤岛 — UX 不统一，AI 训练成本重复。效率提升是"能证明"的第一指标。</p>
       </div>
       <div class="dim-tile risk">
-        <div class="ico-tile"><span class="material-icons-outlined" style="font-size:16px;">warning_amber</span></div>
+        <div class="ico-tile">&#x26A0;&#xFE0F;</div>
         <h4>Risk</h4>
         <p>Q3 若选错云，3 年 lock-in — 美的先行使"保守派"成为最大风险。合规 + 下线可控性 &gt; 首创。</p>
       </div>
     </div>
-    <div class="reason-note on-white" style="margin-top: 12px;">
-      <span class="material-icons-outlined">psychology</span>
-      <div><strong>推理</strong>Risk 维度分数最高 — 来自 Account Analysis Weaknesses (AI 平台落后) + Porter Rivalry (美的先行) 双来源；因此选 JOLT / Lower the Risk 而非 Challenger。</div>
+    <div class="reason-note" style="margin-top: 12px;">
+      <span class="ico">&#x1F4A1;</span>
+      <div><strong>推理</strong> Risk 维度分数最高 — 来自 Account Analysis Weaknesses (AI 平台落后) + Porter Rivalry (美的先行) 双来源；因此选 JOLT / Lower the Risk 而非 Challenger。</div>
     </div>
   </div>
 
   <!-- Archetype & Path -->
   <div class="card">
-    <h2><span class="material-icons-outlined">person_search</span>Archetype &amp; Path · 行为原型与销售路径</h2>
-    <div class="stat-grid cols-3">
+    <h2><span class="ico">&#x1F50D;</span>Archetype &amp; Path · 行为原型与销售路径</h2>
+    <div class="stat-grid cols-2">
       <div class="kv-tile">
         <div class="lab">Archetype · 行为原型</div>
         <div class="val"><strong>Risk-averse (风险规避型)</strong> — 公开声明进入"能力重建期"<a href="https://finimize.com/content/haier-smart-homes-profit-fell-as-us-tariffs-and-weather-hit-demand" target="_blank">[Finimize]</a>，意味着决策者不希望再踩坑；强调可控、可回退、参考案例多。</div>
       </div>
       <div class="kv-tile">
         <div class="lab">Selected Path · 选定路径</div>
-        <div class="val"><span class="pill-chip"><span class="material-icons-outlined">shield</span>LOWER THE RISK</span>用小规模 POC + GenAI Lens 合规锚点降低首次决策风险。</div>
-      </div>
-      <div class="kv-tile">
-        <div class="lab">Evidence · 诊断依据</div>
-        <div class="val">公开 Earnings Call 表述 + 北美关税冲击后的"能力重建"定位 → 推断 Risk-averse 而非 Wait-and-see（因为有明确行动意图但惧怕失败）。</div>
+        <div class="val"><span class="pill-chip">&#x1F6E1;&#xFE0F; LOWER THE RISK</span> 用小规模 POC + GenAI Lens 合规锚点降低首次决策风险。</div>
       </div>
     </div>
 
@@ -381,15 +338,15 @@
       </div>
     </div>
 
-    <div class="reason-note on-white" style="margin-top: 12px;">
-      <span class="material-icons-outlined">psychology</span>
-      <div><strong>推理</strong>4 种 archetype — Underestimator（需要 Amplify the Pain）/ Wait-and-see（需要 Amplify）/ Risk-averse（需要 Lower the Risk）/ Path-unclear（需要 Lower the Risk + 路径图）/ Resistant（Pause）。李总公开表述 = Risk-averse，因此 Lower the Risk 为唯一最优路径。</div>
+    <div class="reason-note" style="margin-top: 12px;">
+      <span class="ico">&#x1F4A1;</span>
+      <div><strong>推理</strong> 4 种 archetype — Underestimator（需要 Amplify the Pain）/ Wait-and-see（需要 Amplify）/ Risk-averse（需要 Lower the Risk）/ Path-unclear（需要 Lower the Risk + 路径图）/ Resistant（Pause）。李总公开表述 = Risk-averse，因此 Lower the Risk 为唯一最优路径。</div>
     </div>
   </div>
 
-  <!-- Script — 3 parts -->
+  <!-- Script -->
   <div class="card">
-    <h2><span class="material-icons-outlined">record_voice_over</span>Stitched CXO Script · CXO 对话稿（3–5 分钟）</h2>
+    <h2><span class="ico">&#x1F399;&#xFE0F;</span>Stitched CXO Script · CXO 对话稿（3–5 分钟）</h2>
 
     <div class="script-block open" style="margin-bottom: 10px;">
       <div class="lab">① Opening · 开场（60 秒）</div>
@@ -409,39 +366,9 @@
     </div>
   </div>
 
-  <!-- §5 Proof Pack -->
-  <div class="card">
-    <h2><span class="material-icons-outlined">verified</span>Proof Pack · 证据包</h2>
-
-    <div class="sub-card" style="margin-bottom: 12px;">
-      <h3>Reference Customers · 参考客户</h3>
-      <div class="proof-row">
-        <div><div class="lab">Who</div><strong>某中国家电出海企业 A</strong><br>全球 Top-5 白电，北美 + 欧洲双区运营</div>
-        <div><div class="lab">What they did with AWS</div>Bedrock Agents 驱动跨品牌 UX 统一 POC，12 周落地，覆盖 3 品牌 × 2 区域</div>
-        <div><div class="lab">What it delivered</div>UX 统一覆盖率 32% → 78%，合规审计一次通过，主架构决策周期压缩至 3 个月</div>
-      </div>
-      <div class="proof-row">
-        <div><div class="lab">Who</div><strong>某日本消费电子企业</strong><br>IoT + AI 转型阶段，多品牌数据孤岛</div>
-        <div><div class="lab">What they did with AWS</div>Q Business + GenAI Lens 做合规优先的 AI 知识管理平台</div>
-        <div><div class="lab">What it delivered</div>内部知识检索效率 +60%，数据驻留合规成本降低 35%</div>
-      </div>
-    </div>
-
-    <div class="kv-grid cols-2">
-      <div class="kv-tile">
-        <div class="lab">Architecture / Asset Link</div>
-        <div class="val"><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/agents.html" target="_blank">Bedrock Agents — Multi-Agent Orchestration Pattern</a></div>
-      </div>
-      <div class="kv-tile">
-        <div class="lab">Next-Meeting Ask · 下次会议邀约</div>
-        <div class="val"><strong>2 小时 Scoped Workshop</strong> — 与 AI 平台 LOB Leader 定义 POC Success Criteria（跨品牌 UX + 合规 + 成本 delta）</div>
-      </div>
-    </div>
-  </div>
-
   <!-- Watch-outs -->
   <div class="card">
-    <h2><span class="material-icons-outlined">warning_amber</span>Watch-outs · 风险提醒</h2>
+    <h2><span class="ico">&#x26A0;&#xFE0F;</span>Watch-outs · 风险提醒</h2>
     <ul class="num-list">
       <li><span class="ico">①</span><div><strong>不提"美的"名字</strong> — 让客户自己联想，直接提名会变成羞辱对手。</div></li>
       <li><span class="ico">②</span><div><strong>不要先放 architecture 图</strong> — 李总在风险规避期，视觉复杂度是劝退信号，先用 3 个指标，再谈架构。</div></li>
@@ -454,7 +381,7 @@
 
   <!-- Sources -->
   <div class="card">
-    <h2><span class="material-icons-outlined">link</span>Sources · 引用来源</h2>
+    <h2><span class="ico">&#x1F517;</span>Sources · 引用来源</h2>
     <div class="sub-card">
       <ol style="padding-left:20px; margin:0; font-size:12px; color:var(--muted); line-height:1.9;">
         <li><a href="https://finimize.com/content/haier-smart-homes-profit-fell-as-us-tariffs-and-weather-hit-demand" target="_blank">Finimize · 2026-04-28 · "能力重建期"公开声明</a></li>
@@ -468,7 +395,7 @@
   </div>
 
   <div class="foot">
-    <span class="dl">下游 · <strong>Identified Potential Opportunity</strong>（本 CXO 对话）进入 opportunity-progression（MEDDPICC 验证）</span>
+    <span class="dl">下游 · <strong>Identified Potential Opportunity</strong>（本 CXO 对话）进入 opportunity-progression（MEDDPICC 验证）</span><br>
     Generated by Dali · BTTROC · 2026-05-12
   </div>
 
@@ -480,5 +407,9 @@
     window.addEventListener('load', () => setTimeout(() => window.print(), 400));
   }
 </script>
-</body>
-</html>
+
+<div class="page-footer">
+  <span>Dali · BTTROC · {{COMPANY_NAME}} · {{DATE}}</span>
+  <span>AWS Confidential</span>
+</div>
+</body></html>
