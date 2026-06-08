@@ -160,7 +160,7 @@ Dali/
 | # | Skill | Abbrev | Layer | What it does |
 |---|---|---|---|---|
 | 1 | account-context | AC | Foundation | 客户结构化数据（组织架构、IT 环境、采购行为）— 仅供其他技能调用 |
-| 2 | business-insight | BI | Analysis | McKinsey 式全链路分析：PESTLE → Porter → BMC → SWOT/TOWS → Top 战略举措 |
+| 2 | business-insight | BI | Analysis | McKinsey 式全链路分析：BI: BMC → Porter → PESTLE → SWOT/TOWS → Top 战略举措 |
 | 3 | market-intelligence | MI | Analysis | 外部环境监控 → 每周预警卡（行业动态、竞品动作、政策变化） |
 | 4 | competitive-intelligence | CI | Analysis | 竞争定位、替代/共存策略、battlecard |
 | 5 | solutions-search | SS | Analysis | AWS 参考架构 & 客户案例匹配（基于 BI 产出的战略举措） |
