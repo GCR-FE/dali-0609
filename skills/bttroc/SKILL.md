@@ -51,7 +51,7 @@ Procedure 3. **View** — render the HTML/PDF deliverable from the saved record,
 Required Input：
 1. **TOWS-driven Top 3 Strategic Initiatives** — the recommended moves
 2. Solutions 搜索结果 (from `solutions-search`)， if content not found in context, run it in the background before proceeding.
-3. competitive intelligence 搜索结果 (from 'compteitive-intelligence') if content not found in context, run it in the background before proceeding.
+3. competitive intelligence 搜索结果 (from `competitive-intelligence`) if content not found in context, run it in the background before proceeding.
 4. contact profile
    - name: Contact Profile (V2.0)
    - repo: GCR-FE/contact-profiling
