@@ -67,9 +67,9 @@ Rules:
 - You **must** reason through all six steps before producing the output — skipping steps produces a weak, ungrounded script.
 - If the archetype in Step 4 is **Resistant**, the output format changes — see the "Resistant Archetype Exception" under Output Format.
 
-#### Step 2.1 — For each Top Strategic Initiatives.
+#### Step 2.1 — For each Top Strategic Initiatives or user's input on oppportunities.
 
-From the **Top Strategic Initiatives**, pick the **single most important Strategic Initiative** for this run. Criteria in order:
+From the **Top Strategic Initiatives**, pick the **single most important Strategic Initiative** for this run. Or user's input on oppportunities. Criteria in order:
 
 1. Has a **clear AWS answer** in the **Solutions 搜索结果** (otherwise the conversation has no close — BTTROC requires that the chosen initiative has at least one Solutions 搜索结果 reference)
 2. Aligns with the customer's **buying behavior** — e.g., if the customer is risk-averse, pick an initiative where the Solutions 搜索结果 reference is a POC / Immersion Day pathway
