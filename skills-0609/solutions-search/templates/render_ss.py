@@ -1,69 +1,13 @@
 #!/usr/bin/env python3
-"""
-Solutions Search HTML Renderer — fills the Jinja2 template with structured data and outputs rendered HTML.
+"""Solutions Search renderer — JSON → HTML (Jinja2) → PDF (headless Chrome).
 
 Usage:
-    python render_ss.py input.json output.html
-
-Input: JSON file with the Solutions Search data structure (see DATA_SCHEMA below).
-Output: Rendered HTML file (MD3 styled, self-contained).
-
-DATA SCHEMA (what the agent produces):
-{
-    "customer_name": "海尔智家 Haier Smart Home",
-    "industry": "消费电子",
-    "date": "2026-05-12",
-    "upstream_source": "business-insight（3 个战略倡议）",
-    "coverage_summary": {
-        "initiatives_count": 3,        // Number of Strategic Initiatives searched
-        "references_count": 9             // Total references across all initiatives
-    },
-    "initiatives": [
-        {
-            "number": 1,                                     // Initiative sequence (1-3)
-            "title": "北美供应链 IT 重塑入口",               // Initiative title from business-insight
-            "subtitle": "Tariff-aware forecasting + ...",    // AWS capability / approach
-            "potential_opportunity": "$8–15M Y1 ...",        // Deal shape estimate
-            "queries_executed": [                            // All search queries for this initiative
-                "consumer electronics supply chain AWS ...",
-                "manufacturing supply chain pattern ...",
-                "Oracle ERP migration AWS ...",
-                "supply chain CxO executive briefing ..."
-            ],
-            "references": [
-                {
-                    "title": "AWS Supply Chain Dev Guide",   // Reference document title
-                    "url": "https://...",                    // Source URL
-                    "match_type": "direct",                  // One of: direct, pattern, displacement, inspirational
-                    "match_type_label": "Direct Match",    // Display label for pill badge
-                    "match_strength": "Strong",              // Strong / Moderate / Thin
-                    "freshness_tier": "Current",             // Current / Recent / Stale
-                    "citation_validated": "Yes",             // Yes / Partial / No
-                    "icon": "rocket_launch",                 // Material Symbols icon name
-                    "description": "...",                    // 1-2 sentence summary
-                    "tags": ["tag1", "tag2"]                 // Source + match metadata tags
-                }
-            ],
-            "next_step": "申请 Workshop ...",                // Single actionable next step for AM/SA
-            "coverage_gap": "none"                           // Per-initiative coverage gap disclosure
-        }
-    ]
-}
-
-MATCH_TYPE VALUES:
-- "direct"        → pill-direct (purple)  — same industry + same capability
-- "pattern"       → pill-pattern (green)  — adjacent industry, same architectural pattern
-- "displacement"  → pill-displacement (amber) — displacement / migration playbook
-- "inspirational" → pill-inspirational (grey) — novel approach from unrelated domain
-
-ICON VALUES (Material Symbols Outlined):
-- "rocket_launch" — Direct Match
-- "architecture"  — Pattern Match
-- "swap_horiz"    — Displacement
-- "check_circle"  — Inspirational
+    python3 render_ss.py input.json output.html
+    python3 render_ss.py input.json output.html output.pdf
 """
 
 import json
+import subprocess
 import sys
 from pathlib import Path
 
@@ -74,36 +18,56 @@ except ImportError:
     sys.exit(1)
 
 
-def render_ss(data: dict, template_dir: str = None) -> str:
-    """Render Solutions Search data into HTML string."""
+def render_html(data: dict, template_dir: str = None) -> str:
     if template_dir is None:
         template_dir = str(Path(__file__).parent)
-
-    env = Environment(
-        loader=FileSystemLoader(template_dir),
-        autoescape=True
-    )
+    env = Environment(loader=FileSystemLoader(template_dir), autoescape=True)
     template = env.get_template("solutions-search.html.j2")
     return template.render(**data)
 
 
+def render_pdf(html_path: Path, pdf_path: Path) -> Path:
+    chrome = next(
+        (p for p in [
+            "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+            "/usr/bin/google-chrome",
+            "/usr/bin/chromium-browser",
+        ] if Path(p).exists()),
+        None,
+    )
+    if not chrome:
+        sys.exit("Chrome not found — install Google Chrome for PDF export.")
+    subprocess.run(
+        [chrome, "--headless", "--disable-gpu", "--no-pdf-header-footer",
+         f"--print-to-pdf={pdf_path}", str(html_path.resolve())],
+        check=True, capture_output=True,
+    )
+    return pdf_path
+
+
 def main():
     if len(sys.argv) < 3:
-        print(f"Usage: {sys.argv[0]} input.json output.html", file=sys.stderr)
+        print(f"Usage: {sys.argv[0]} input.json output.html [output.pdf]", file=sys.stderr)
         sys.exit(1)
 
-    input_path = sys.argv[1]
-    output_path = sys.argv[2]
+    input_path = Path(sys.argv[1])
+    output_html = Path(sys.argv[2])
+
+    if not input_path.exists():
+        sys.exit(f"File not found: {input_path}")
 
     with open(input_path, 'r', encoding='utf-8') as f:
         data = json.load(f)
 
-    html = render_ss(data)
-
-    with open(output_path, 'w', encoding='utf-8') as f:
+    html = render_html(data)
+    with open(output_html, 'w', encoding='utf-8') as f:
         f.write(html)
+    print(f"HTML: {output_html}")
 
-    print(f"✅ Rendered: {output_path}")
+    if len(sys.argv) >= 4:
+        pdf_path = Path(sys.argv[3])
+        render_pdf(output_html, pdf_path)
+        print(f"PDF: {pdf_path}")
 
 
 if __name__ == "__main__":

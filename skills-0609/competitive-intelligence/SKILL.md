@@ -181,6 +181,20 @@ Pull ecosystem and organizational model content:
 **Read `references/rag-guardrails.md` before producing any compete brief.** It defines 8 mandatory guardrails (query decomposition, metadata filtering, cross-dimensional triangulation, freshness tiers, citation validation, pricing re-calculation, benchmark methodology verification, coverage honesty disclosure) and required confidence labels per dimension.
 
 
+## Output Rendering
+
+**REQUIRED: Load `templates/OUTPUT_REFERENCE.html` before generating any HTML output.**
+
+**REQUIRED: Load `templates/render_ci.py`** before converting HTML to PDF.
+
+Every output ships as an HTML file that exports to PDF via headless Chrome (`--no-pdf-header-footer`):
+
+```bash
+python3 skills/competitive-intelligence/templates/render_ci.py <output.html> <output.pdf>
+```
+
+PDF is generated via headless Chrome with `--no-pdf-header-footer` flag. Do NOT use `window.print()` or browser Export PDF — the template includes its own fixed page footer.
+
 ## Output Format
 
 Produce a single structured deliverable in this order. Sections 4–5 must inline-cite proof points from the consolidated table in Section 6 — the seller gets evidence woven into each section as they read, and the full table at the end serves as a lookup reference.

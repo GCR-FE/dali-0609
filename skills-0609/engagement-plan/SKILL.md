@@ -203,7 +203,7 @@ EP does NOT determine whether an opportunity should advance to the next sales st
 
   **标注规则：**
 
-  *   ✅ 显式标注 `[销售确认]` 和 `[网络搜索]`；无标签 = `[AI推断]`（默认值）
+  *   ✅ 三个标签均需显式标注：`[销售确认]`、`[网络搜索]`、`[AI推断]`
   *   ✅ 从上游 skill 传入的信息继承原始标签（如 account-context 标注为 `[网络搜索]`，写入 EP 时保留）
   *   ✅ 对话中销售口头确认的信息，升级为 `[销售确认]`
   *   ✅ PMR 回流的客户原话标 `[销售确认]`，agent 对客户原话的解读标 `[AI推断]`
@@ -286,7 +286,7 @@ EP does NOT determine whether an opportunity should advance to the next sales st
 
 ## 5. Document Output
 
-### Default: HTML (Material Design 3)
+### Default: HTML
 
 **REQUIRED: Load `templates/sample_data.json` before generating output — this defines the expected JSON structure.**
 
@@ -295,11 +295,11 @@ Every EP is rendered as a styled HTML file using `templates/engagement-plan.html
 2. Fills the template via `templates/render_ep.py`
 3. Outputs the rendered HTML file
 
-Visual style: Material Design 3 (Inter + Noto Sans SC fonts, MD3 color tokens, 16px rounded cards, emoji icons, desktop-optimized grid for PDF rendering).
+Visual style: Compact document layout (Inter + Noto Sans SC, minimal borders, tight spacing, no external JS dependencies). All CSS inlined — renders identically in browser and PDF.
 
 ### On-Demand: PDF / Word
 
-- **PDF** — Generated from HTML via headless Chrome or weasyprint
+- **PDF** — Generated from HTML via `render_ep.py output.pdf` (headless Chrome)
 - **Word (.docx)** — Generated via python-docx (clean business format)
 
 Sales requests these explicitly; agent does not auto-generate.
@@ -313,22 +313,6 @@ Sales requests these explicitly; agent does not auto-generate.
 | Word | `EP_{Customer}_{Opportunity}.docx` |
 
 Example: `EP_MinghuaHeavy_AI-Quality-Inspection.html`
-
-### HTML 生成方式（强制）
-
-**不允许从零手写 HTML 或跳过 render 脚本。** 必须按以下顺序操作：
-
-1. 将 Engagement Plan 内容整理为符合 `templates/sample_data.json` schema 的 JSON 对象
-2. 调用 `templates/render_ep.py` 填充 `templates/engagement-plan.html.j2` 模板
-3. 不得修改 J2 模板中的 CSS class、颜色变量、字体或布局结构
-4. 若 render 脚本执行失败，停止并报错，**不得 fallback 为手写 HTML**
-
-**Pre-render Checklist（全部 ✅ 才输出最终文件）：**
-- [ ] JSON 数据符合 `sample_data.json` 中定义的所有 key 和类型
-- [ ] 调用了 `render_ep.py`（不是手写 HTML）
-- [ ] EP 作为 living document，每次更新仍必须通过 render 脚本重新生成
-- [ ] 输出 HTML 中不含任何硬编码颜色或自创 CSS class
-- [ ] 文件命名遵循 `EP_{Customer}_{Opportunity}.html` 规则
 
 ### Storage Architecture
 

@@ -65,7 +65,7 @@ Every piece of information must carry a provenance label so sales knows the conf
 | `[网络搜索]` | Publicly available information obtained via web search | Check timeliness |
 
 **Labeling granularity:** Each independently verifiable assertion.
-**Display rules:** Only explicitly label `[销售确认]` and `[网络搜索]`; no label = `[AI推断]` (default).
+**Display rules:** 三个标签均需显式标注：`[销售确认]`、`[网络搜索]`、`[AI推断]`。
 **Upgrade mechanism:** After sales confirms → upgrade to `[销售确认]`.
 **Language rule:** Labels follow the conversation language — use Chinese labels when conversing in Chinese, English labels (`[Sales Confirmed]`/`[AI Inferred]`/`[Web Search]`) when conversing in English.
 
@@ -95,7 +95,7 @@ When no EP exists or sales requests directly, collect minimum required inputs:
 | 1 | **Customer name** | Identify account, check for existing EP |
 | 2 | **Who are you meeting?** (names + titles) | Persona matching, stakeholder mapping |
 | 3 | **Meeting objective** | Shape document focus |
-| 4 | **Optional:** Opportunity / customer need context | What's the deal about? |
+| 4 | **Optional**Opportunity / customer need context** | What's the deal about? |
 
 Then:
 1. Confirm the **current sales stage** through interactive dialogue
@@ -261,18 +261,18 @@ Before delivering, validate:
 
 ## 10. Document Output
 
-### Default: HTML (Material Design 3)
+### Default: HTML
 
 Every Call Plan is rendered as a styled HTML file using the Jinja2 template at `templates/call-plan.html.j2`. The agent:
 1. Generates structured data (JSON) from the Call Plan content
 2. Fills the template via `templates/render_cp.py`
 3. Outputs the rendered HTML file
 
-Visual style: Google Material Design 3 (Inter + Noto Sans SC fonts, MD3 color tokens, 12-16px rounded cards, emoji icons, Tailwind CSS utility classes, pill badges for stance/category/tier).
+Visual style: Compact document layout (Inter + Noto Sans SC, minimal borders, tight spacing, no external JS dependencies).
 
 ### On-Demand: PDF / Word
 
-- **PDF** — Generated from HTML via headless Chrome or weasyprint
+- **PDF** — `render_cp.py output.pdf` (headless Chrome)
 - **Word (.docx)** — Generated via python-docx (clean business format)
 
 Sales requests these explicitly; agent does not auto-generate.
@@ -288,23 +288,6 @@ Sales requests these explicitly; agent does not auto-generate.
 Example: `CP_MinghuaHeavy_2026-05-15_Discovery-CTO.html`
 
 MilestoneBrief = condensed version of the EP Roadmap milestone description (2-4 English words, kebab-case). CP and its corresponding PMR use the same `{Date}_{MilestoneBrief}` suffix for easy pairing.
-
-### HTML 生成方式（强制）
-
-**不允许从零手写 HTML 或跳过 render 脚本。** 必须按以下顺序操作：
-
-1. 将 Call Plan 内容整理为符合 `templates/sample_data.json` schema 的 JSON 对象
-2. 调用 `templates/render_cp.py` 填充 `templates/call-plan.html.j2` 模板
-3. 不得修改 J2 模板中的 CSS class、颜色变量、字体或布局结构
-4. 若 render 脚本执行失败，停止并报错，**不得 fallback 为手写 HTML**
-
-**REQUIRED: Load `templates/sample_data.json` before generating output — this defines the expected JSON structure.**
-
-**Pre-render Checklist（全部 ✅ 才输出最终文件）：**
-- [ ] JSON 数据符合 `sample_data.json` 中定义的所有 key 和类型
-- [ ] 调用了 `render_cp.py`（不是手写 HTML）
-- [ ] 输出 HTML 中不含任何硬编码的 `style="color:..."` 或内联颜色
-- [ ] 文件命名遵循 `CP_{Customer}_{Date}_{MilestoneBrief}.html` 规则
 
 ### Storage Architecture
 

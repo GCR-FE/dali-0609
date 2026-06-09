@@ -20,18 +20,18 @@ Every run of this skill executes three stages, in this fixed order:
 
 ## Procedure 1: Control - Core Objective (mandatory)
 
-Given the **Top 3 Strategic Initiatives** from the `business-insight` skill, search the local knowledge base (`./references/`) for **proven architectures and case studies from customers in the same or adjacent industry facing the same business context**, and return ranked, evidence-backed **Solutions 搜索结果**. Search AWS service information using:
+Given the **Top 3 Strategic Initiatives** from the `business-insight` skill, or the uploaded/user input AWS opportunity information, search the local knowledge base (`./references/`) for **proven architectures and case studies from customers in the same or adjacent industry facing the same business context**, and return ranked, evidence-backed **Solutions 搜索结果**. Search AWS service information using:
 - `mcp_aws_docs_search_documentation` (search_phrase=关键词)
 - `mcp_aws_knowledge_aws___search_documentation` (search_phrase=关键词, topics=["reference_documentation"])
 
 ### Required Input
 
-Read **Top 3 Strategic Initiatives** from `business-insight`. Each initiative contains:
+Read **Top 3 Strategic Initiatives** from `business-insight`, or, **opporunity scorecard** uploaded by user or information input by user. Each initiative contains:
 - Title
 - Description
 - Implied potential opportunity
 - Customer industry and sector
-- SWOT/TOWS context
+
 
 ### Knowledge Source
 
@@ -46,7 +46,7 @@ If the references folder nor the AWS documentation does not cover the requested 
 
 ### Step 1: Search Within Loaded Industry Documents
 
-For **each of the Top 3 Strategic Initiatives**, execute the following 4 sub-steps in this exact sequence — do not skip, reorder, or parallelize.
+For **each of the Top 3 Strategic Initiatives** or the opporuntiy scoarecard, execute the following 4 sub-steps in this exact sequence — do not skip, reorder, or parallelize.
 
 #### 1a: Direct Industry + Capability Match
 
@@ -286,7 +286,13 @@ Example: `SS_Haier_2026-05-12.html`
 
 ### On-Demand: PDF
 
-- **PDF** — Generated from HTML via headless Chrome or weasyprint. Sales requests explicitly; agent does not auto-generate.
+**REQUIRED: Load `templates/render_ss.py`** before converting to PDF.
+
+```bash
+python3 skills/solutions-search/templates/render_ss.py input.json output.html output.pdf
+```
+
+PDF is generated via headless Chrome (`--no-pdf-header-footer`). Sales requests explicitly; agent does not auto-generate. Do NOT use `window.print()` or browser Export PDF — the template includes its own fixed page footer.
 
 ## Quality
 

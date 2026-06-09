@@ -1,0 +1,292 @@
+{
+    "customer_name": "明华重工",
+    "meeting_title": "POC 验证方案评审会 — 会后报告",
+    "meeting_date": "2026-03-20",
+    "recorded_by": "Sarah Chen (AM)",
+    "related_document": "Call Plan - POC 验证方案评审会 (2026-03-20)",
+    "outcome_results": [
+        {
+            "number": 1,
+            "target_outcome": "CTO 签字确认 POC 方案 scope，明确两周内启动",
+            "result": "achieved",
+            "evidence": "[销售确认] 刘总当场在 POC scope 文档上签字，确认 3/25 启动 POC kickoff。赵工接受 POC Lead 角色。"
+        },
+        {
+            "number": 2,
+            "target_outcome": "CFO 接受分阶段投资模型，不以预算为由 block",
+            "result": "partial",
+            "evidence": "[销售确认] 马总认可分阶段逻辑\"方向对\"，但表示超过 $2M 需过董事会审批。要求下周提供更详细的 Phase 1 预算拆分。"
+        },
+        {
+            "number": 3,
+            "target_outcome": "IT Director 赵工接受 POC Lead 角色并确认资源投入",
+            "result": "achieved",
+            "evidence": "[销售确认] 赵工当场确认接受 POC Lead，已协调 3 名工程师全职投入 POC。"
+        },
+        {
+            "number": 4,
+            "target_outcome": "获得 CEO 对数字化战略方向的口头支持",
+            "result": "not_achieved",
+            "evidence": "[AI推断] CEO 陈总未出席本次会议（原计划可能参加），CTO 提到将在 Q2 单独向 CEO 汇报。"
+        }
+    ],
+    "fallback_outcome_assessment": "[AI推断] Fallback Outcome（CTO 同意 scope 但不签字，留待内部流程）未触发——主目标已超预期达成，CTO 直接签字。",
+    "stage_progression": {
+        "planned": "Technical Validation → Business Validation",
+        "actual": "Technical Validation → Business Validation",
+        "achieved": true
+    },
+    "sentiment_changes": [
+        {
+            "attendee": "刘总 (CTO)",
+            "stance_before": "Supporter",
+            "stance_after": "Sponsor",
+            "evidence": "[销售确认] 主动签字确认 POC，并表示会亲自参加 kickoff 会议，向 CEO 汇报进展。这是从被动支持到主动推动的质变。"
+        },
+        {
+            "attendee": "赵工 (IT Director)",
+            "stance_before": "Sponsor",
+            "stance_after": "Sponsor",
+            "evidence": "[销售确认] 维持 Sponsor 状态，正式接受 POC Lead 角色，当场确认 3 名工程师全职投入。"
+        },
+        {
+            "attendee": "马总 (CFO)",
+            "stance_before": "Neutral",
+            "stance_after": "Neutral",
+            "evidence": "[销售确认] 未明确表态支持或反对，但对分阶段模式显示出兴趣。关键约束：>$2M 需董事会审批。问了很多 ROI 细节，属于理性审慎而非抗拒。"
+        },
+        {
+            "attendee": "李主任 (采购)",
+            "stance_before": "Non-supporter",
+            "stance_after": "Neutral",
+            "evidence": "[销售确认] 会前有抵触情绪（担心增加采购复杂度），会中听到分阶段方案后态度缓和，主动问了合同条款灵活性。"
+        },
+        {
+            "attendee": "张工 (基础设施组长)",
+            "stance_before": "Neutral",
+            "stance_after": "Supporter",
+            "evidence": "[销售确认] POC 技术方案演示后表达兴趣，主动提出自己团队可以配合做性能测试。赵工指派他为 POC 执行副手。"
+        }
+    ],
+    "key_findings": [
+        {
+            "finding": "采购流程中 >$2M 项目需要董事会审批",
+            "source": "[销售确认] CFO 马总当场说明",
+            "implication": "Phase 1 必须控制在 $2M 以内，或需要额外 4-6 周走董事会流程。直接影响合同拆分策略。"
+        },
+        {
+            "finding": "Azure 已报价，比 AWS 低 20%（仅基础设施层面）",
+            "source": "[销售确认] CTO 刘总 Q&A 环节提及",
+            "implication": "需要在 POC 中证明 Graviton 性价比优势，准备 TCO 对比（含运维成本、培训成本、迁移成本）。"
+        },
+        {
+            "finding": "CTO 计划 Q2 向 CEO 做数字化战略汇报",
+            "source": "[销售确认] 会后闲聊中刘总透露",
+            "implication": "关键时间窗口：POC 结果需在 Q2 汇报前就绪，作为 CTO 的决策依据。倒推 4/15 前完成 POC。"
+        },
+        {
+            "finding": "赵工团队仅 3 人有 AWS 认证，其余 5 人需培训",
+            "source": "[销售确认] 赵工在讨论资源分配时提出",
+            "implication": "POC 启动前需安排 Immersion Day，否则团队 ramp-up 影响 POC 进度。"
+        },
+        {
+            "finding": "客户现有 Oracle 数据库维保合同 2026 年底到期",
+            "source": "[AI推断] 赵工讨论时间线时提到\"年底前要做决定\"",
+            "implication": "如果 Oracle 维保到期是硬 deadline，则全年时间线比预想更紧。可能成为 urgency driver。"
+        },
+        {
+            "finding": "客户内部有团队已在用阿里云做非核心业务",
+            "source": "[网络搜索] 会后查证，明华重工 2025 年招聘信息提及阿里云经验",
+            "implication": "潜在内部竞争：已有阿里云使用习惯的团队可能推荐扩大阿里云使用。需了解具体使用范围和决策者态度。"
+        }
+    ],
+    "info_gap_check": [
+        {
+            "question": "POC 评估的核心成功标准是什么？",
+            "status": "answered",
+            "answer_notes": "[销售确认] 三个维度：性能（延迟 <50ms）、可靠性（99.95% SLA）、成本（vs 现有 -20%）"
+        },
+        {
+            "question": "内部审批流程和时间线",
+            "status": "answered",
+            "answer_notes": "[销售确认] <$2M：CTO+CFO 联签即可（2周）。>$2M：需董事会（额外4-6周）"
+        },
+        {
+            "question": "团队 AWS 熟悉程度",
+            "status": "answered",
+            "answer_notes": "[销售确认] 赵工团队 3 人有 AWS 认证，其余 5 人需培训。赵工建议 immersion day"
+        },
+        {
+            "question": "第一阶段预算天花板",
+            "status": "unanswered",
+            "answer_notes": "[AI推断] CFO 未给出具体数字，仅表示 >$2M 需董事会。需后续 follow up 获取精确数字。"
+        },
+        {
+            "question": "CEO 对数字化投入的态度",
+            "status": "unanswered",
+            "answer_notes": "[AI推断] CEO 未出席，CTO 暗示 CEO 整体支持但要看 ROI。需通过 Q2 汇报间接验证。"
+        }
+    ],
+    "ep_updates": [
+        {
+            "section": "Key Stakeholders",
+            "change_type": "Update",
+            "what_to_write": "刘总 stance: Supporter → Sponsor。新增关键信息：将在 Q2 向 CEO 做数字化战略汇报，POC 结果是核心依据。李主任 stance: Non-supporter → Neutral。"
+        },
+        {
+            "section": "Engagement Roadmap",
+            "change_type": "Update",
+            "what_to_write": "Milestone #2 (POC 方案评审) 状态: Next → Done。Milestone #3 (POC 执行) 已可启动，target: 3/25-4/15。新增 hard deadline: Q2 CTO CEO 汇报前完成。"
+        },
+        {
+            "section": "Estimate & Contingency",
+            "change_type": "Add",
+            "what_to_write": "新增里程碑风险：Phase 1 预算如超 $2M 需董事会审批，增加 4-6 周。Plan B: 控制 Phase 1 scope 在 $2M 以内。新增时间线风险：Oracle 维保年底到期可能加速也可能限制决策窗口。"
+        },
+        {
+            "section": "Win Strategy",
+            "change_type": "Update",
+            "what_to_write": "竞争情报更新：Azure 已正式报价（低 20%），需在 POC 中用实际负载证明 Graviton 综合 TCO 优势。新增：内部存在阿里云使用团队，需评估影响。"
+        },
+        {
+            "section": "Key Stakeholders",
+            "change_type": "Add",
+            "what_to_write": "新增 stakeholder：张工（基础设施组长），POC 执行副手。Stance: Supporter。关键价值：实际执行层面的推动者。"
+        },
+        {
+            "section": "Execution Log",
+            "change_type": "Add",
+            "what_to_write": "Engagement #2 — 2026-03-20 | POC 方案评审 | Result: Stage progression achieved | Key: CTO→Sponsor, CFO $2M 限制, Azure 竞争"
+        }
+    ],
+    "execution_log_update": "Engagement #2 — 2026-03-20 | Attendees: CTO 刘总, IT Dir 赵工, CFO 马总, 采购李主任, 基础设施张工 | Planned: CTO 签字确认 POC + CFO 接受分阶段投资 + CEO 口头支持 | Actual: CTO 签字 ✅，CFO 部分认可（>$2M 限制），CEO 未出席 ❌ | People: 刘总 Supporter→Sponsor, 李主任 Non-supporter→Neutral, 张工 Neutral→Supporter | Key Learning: 采购门槛 $2M，Azure 竞争报价，Oracle 维保年底到期 | Adjustment: Phase 1 scope 需控制 $2M 内，POC deadline 倒推至 4/15",
+    "agent_recommendation": "本次会议获得了阶段相关证据：1) CTO 已正式签字确认 POC（Strong Sponsor signal）；2) 技术评审已通过，POC Lead + 资源已确认；3) CFO 虽未完全 commit 但未 block，分阶段逻辑被接受。建议运行 opportunity-progression 评估是否满足 Business Validation 进入条件。\n\n下一步战略重点：\na) 确保 Phase 1 控制在 $2M 以内避免董事会流程——这是当前最大执行风险\nb) POC kickoff 前准备 Azure TCO 对比材料（含运维、培训、迁移隐性成本）\nc) 利用 CTO Q2 汇报时间窗口倒推 POC 4/15 完成\nd) 安排 Immersion Day 解决团队能力 gap\ne) 关注阿里云内部使用情况，避免被内部团队推荐影响决策\n\n⚠️ 竞争情报更新：Azure 报价已出——建议运行 competitive-intelligence 刷新竞争分析。",
+    "planned_next_steps": [
+        {
+            "step": "CTO 签字确认 POC 方案 scope",
+            "owner": "刘总",
+            "timeline": "会议当天"
+        },
+        {
+            "step": "发送正式 POC 项目计划书",
+            "owner": "Mike Li (SA)",
+            "timeline": "会后 24h"
+        },
+        {
+            "step": "确认 POC kickoff 日期",
+            "owner": "赵工 + Sarah",
+            "timeline": "本周五前"
+        },
+        {
+            "step": "提供定制 TCO 分析给 CFO",
+            "owner": "Sarah Chen",
+            "timeline": "下周一"
+        },
+        {
+            "step": "安排团队培训 (Immersion Day)",
+            "owner": "Sarah Chen",
+            "timeline": "3/28 前"
+        }
+    ],
+    "actual_next_steps": [
+        {
+            "step": "CTO 签字确认 ✅ 已完成",
+            "owner": "刘总",
+            "timeline": "当天完成",
+            "delta": "无偏差——超预期完成"
+        },
+        {
+            "step": "发送 POC 项目计划书 + Phase 1 预算拆分",
+            "owner": "Mike Li + Sarah",
+            "timeline": "3/21 (明天)",
+            "delta": "增加预算拆分内容（应对 CFO 要求）"
+        },
+        {
+            "step": "POC kickoff 会议",
+            "owner": "赵工 + Mike Li",
+            "timeline": "3/25 (已确认)",
+            "delta": "提前1天（CTO 要求尽快启动）"
+        },
+        {
+            "step": "Phase 1 详细预算方案 + Azure TCO 对比",
+            "owner": "Sarah + AWS Economics",
+            "timeline": "3/24（kickoff 前）",
+            "delta": "新增项——应对 CFO $2M 限制和 Azure 竞争"
+        },
+        {
+            "step": "Immersion Day 培训",
+            "owner": "Sarah + AWS Training",
+            "timeline": "3/28",
+            "delta": "确认需求，从可选变为必要（5人需培训）"
+        },
+        {
+            "step": "了解内部阿里云使用情况",
+            "owner": "Sarah Chen",
+            "timeline": "3/25 kickoff 时与赵工确认",
+            "delta": "新增项——应对新发现的内部竞争"
+        }
+    ],
+    "action_items": [
+        {
+            "priority": "High",
+            "action": "准备 Phase 1 预算方案（控制 <$2M）并发送给 CFO",
+            "owner": "Sarah Chen + Mike Li",
+            "eta": "2026-03-24",
+            "status": "Pending"
+        },
+        {
+            "priority": "High",
+            "action": "制作 Graviton vs Azure TCO 对比材料（含运维、培训、迁移隐性成本）",
+            "owner": "Mike Li + AWS Economics",
+            "eta": "2026-03-24",
+            "status": "Pending"
+        },
+        {
+            "priority": "High",
+            "action": "发送 POC 项目计划书（含 Phase 1 预算拆分）",
+            "owner": "Mike Li",
+            "eta": "2026-03-21",
+            "status": "Pending"
+        },
+        {
+            "priority": "Medium",
+            "action": "安排 Immersion Day 培训给赵工团队（5人）",
+            "owner": "Sarah Chen",
+            "eta": "2026-03-28",
+            "status": "Pending"
+        },
+        {
+            "priority": "Medium",
+            "action": "更新 EP: stakeholder stance + 里程碑状态 + 竞争情报 + 新 stakeholder",
+            "owner": "Sarah Chen",
+            "eta": "2026-03-21",
+            "status": "In Progress"
+        },
+        {
+            "priority": "Medium",
+            "action": "了解客户内部阿里云使用范围和决策者态度",
+            "owner": "Sarah Chen",
+            "eta": "2026-03-25",
+            "status": "Pending"
+        },
+        {
+            "priority": "Low",
+            "action": "探索 CTO Q2 汇报具体时间点，确认 POC 交付 hard deadline",
+            "owner": "Sarah Chen",
+            "eta": "2026-03-25",
+            "status": "Pending"
+        },
+        {
+            "priority": "Low",
+            "action": "确认 Oracle 维保到期日期及其对决策时间线的影响",
+            "owner": "Sarah Chen",
+            "eta": "2026-04-01",
+            "status": "Pending"
+        }
+    ],
+    "recap_email": {
+        "subject": "Follow-up: POC 验证方案评审会 — 明华重工 × AWS 2026-03-20",
+        "body": "刘总、赵工、马总、李主任、张工，\n\n感谢各位今天的时间和深入讨论，会议成果非常扎实。\n\n以下是今天的讨论要点和对齐事项：\n- POC scope 已确认签字，3/25 正式 kickoff\n- 赵工担任 POC Lead，张工担任执行副手，AWS 侧 Mike Li 为技术对接人\n- 分阶段投资模式获认可，Phase 1 详细预算方案将于 3/24 前提供\n- 团队培训 (Immersion Day) 计划 3/28 举行\n\n后续行动：\n- 发送正式 POC 项目计划书（含 Phase 1 预算拆分）— Mike Li, 3/21\n- Phase 1 预算方案 + TCO 对比材料提供给马总 — Sarah + Mike, 3/24\n- POC kickoff 会议 — 赵工 + Mike Li, 3/25\n- Immersion Day 培训 — Sarah + AWS Training, 3/28\n\n我们会确保 kickoff 前所有准备工作就绪。如有任何调整或问题，随时联系 Sarah 或 Mike。\n\n祝好，\nSarah Chen"
+    },
+    "last_updated": "2026-03-20"
+}

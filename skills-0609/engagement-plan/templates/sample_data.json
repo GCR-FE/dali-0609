@@ -3,6 +3,7 @@
     "opportunity_name": "Cloud Migration - Data Center Exit",
     "deal_value": "$3.2M TCV",
     "industry": "Retail",
+    "stages": ["Prospect", "Qualified", "Technical Validation", "Business Validation", "Committed", "Closed"],
     "current_stage": "Technical Validation",
     "current_stage_index": 2,
     "target_launch_date": "Q2 2026",
@@ -52,7 +53,7 @@
             "number": 1,
             "target_window": "Week 1-2",
             "description": "CTO 在首次技术交流中确认核心业务痛点和决策流程，授权进入技术评估",
-            "key_stakeholders": "CTO, IT Director",
+            "key_stakeholders": "Sarah Chen (CTO), Tom Li (IT Director)",
             "aws_team": "AM, SA",
             "status": "Done"
         },
@@ -60,7 +61,7 @@
             "number": 2,
             "target_window": "Week 3-4",
             "description": "架构评审后 CTO 确认目标架构方案，同意启动两周 POC 验证",
-            "key_stakeholders": "CTO, Lead Architect",
+            "key_stakeholders": "Sarah Chen (CTO), Tom Li (Lead Architect)",
             "aws_team": "SA, Data Specialist",
             "status": "Next"
         },
@@ -68,7 +69,7 @@
             "number": 3,
             "target_window": "Week 5-7",
             "description": "POC scorecard 全部达标，VP Eng 确认技术满足生产需求",
-            "key_stakeholders": "VP Eng, CTO",
+            "key_stakeholders": "{VP Engineering}, Sarah Chen (CTO)",
             "aws_team": "SA, ProServ",
             "status": "Planned"
         },
@@ -76,7 +77,7 @@
             "number": 4,
             "target_window": "Week 8-9",
             "description": "CFO 审批通过 business case 并确认预算到位",
-            "key_stakeholders": "CFO, Champion",
+            "key_stakeholders": "Michael Torres (CFO), Sarah Chen (CTO)",
             "aws_team": "AM, Deal Desk",
             "status": "Planned"
         },
@@ -84,7 +85,7 @@
             "number": 5,
             "target_window": "Week 10-12",
             "description": "合同签署，implementation kickoff 确认",
-            "key_stakeholders": "Procurement, Legal, EB",
+            "key_stakeholders": "{Procurement}, {Legal}, Michael Torres (CFO)",
             "aws_team": "AM, Legal",
             "status": "Planned"
         }

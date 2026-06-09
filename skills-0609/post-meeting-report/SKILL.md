@@ -72,7 +72,7 @@ Every piece of information must carry a provenance label so sales knows the conf
 | `[Web Search]` | Publicly available information obtained via web search | Check timeliness |
 
 **Labeling granularity:** Each independently verifiable assertion.
-**Display rule:** Only explicitly label `[Sales Confirmed]` and `[Web Search]`; unlabeled = `[AI Inferred]` (default).
+**Display rule:** All three labels must be explicitly annotated: `[Sales Confirmed]`, `[Web Search]`, `[AI Inferred]`.
 **Upgrade mechanism:** After sales confirms → upgrade to `[Sales Confirmed]`.
 
 ---
@@ -82,10 +82,10 @@ Every piece of information must carry a provenance label so sales knows the conf
 **REQUIRED: Load [references/post-meeting-report.md](references/post-meeting-report.md)** before generating. The template has 4 core sections + 1 handoff:
 
 1. **Outcome Assessment** — Auto-pulled objectives/criteria from related document + result (✅ Achieved / ⚠️ Partial / ❌ Not achieved) + stage progression result
-2. **Meeting Insights** — Customer sentiment per attendee + key findings with source and implication + information gap check
+2. **Meeting Notes** — Customer sentiment per attendee + key findings with source and implication
 3. **What Changed — EP Update** — Incremental changes by dimension (stakeholders, Win Strategy, competitive, risks, stage/timeline) + Agent Recommendation
-4. **Next Steps — Planned vs Actual** — Comparison table + Action Items sorted by priority (High first), with owner, ETA, status
-5. **Customer Recap Email** — Key points for sales review before sending (see §6)
+4. **Action Items** — Sorted by priority (High first), with owner, ETA, status
+5. **Customer Recap Email Draft** — Agent drafts directly (see §8)
 
 ---
 
@@ -187,18 +187,18 @@ Sales reviews and edits before sending same day. Customer-facing content only.
 
 ## 7. Document Output
 
-### Default: HTML (Material Design 3)
+### Default: HTML
 
 **REQUIRED: Load `templates/sample_data.json`** for the JSON schema. Then render via `templates/render_pmr.py` using `templates/post-meeting-report.html.j2`. The agent:
 1. Generates structured data (JSON) matching the schema in `sample_data.json`
 2. Fills the template via `templates/render_pmr.py`
 3. Outputs the rendered HTML file
 
-Visual style: Material Design 3 (Inter + Noto Sans SC locally-installed fonts, MD3 color tokens, 16px rounded cards, emoji icons, desktop-optimized fixed-width layout with Tailwind CDN, pill badges for result/stance/priority/status). PDF-optimized: @page margins, break-inside:avoid, compact 9px root font-size.
+Visual style: Compact document layout (Inter + Noto Sans SC, minimal borders, tight spacing, no external JS dependencies).
 
 ### On-Demand: PDF / Word
 
-- **PDF** — Generated from HTML via headless Chrome or weasyprint
+- **PDF** — `render_pmr.py output.pdf` (headless Chrome)
 - **Word (.docx)** — Generated via python-docx (clean business format)
 
 Sales requests these explicitly; agent does not auto-generate.
@@ -214,22 +214,6 @@ Sales requests these explicitly; agent does not auto-generate.
 Example: `PMR_MinghuaHeavy_2026-05-15_Discovery-CTO.html`
 
 MilestoneBrief = Condensed EP Roadmap milestone description (2-4 English words, kebab-case). PMR and its corresponding CP/EB share the same `{Date}_{MilestoneBrief}` suffix for easy pairing (pre-meeting plan ↔ post-meeting report).
-
-### HTML 生成方式（强制）
-
-**不允许从零手写 HTML 或跳过 render 脚本。** 必须按以下顺序操作：
-
-1. 将 PMR 内容整理为符合 `templates/sample_data.json` schema 的 JSON 对象
-2. 调用 `templates/render_pmr.py` 填充 `templates/post-meeting-report.html.j2` 模板
-3. 不得修改 J2 模板中的 CSS class、颜色变量、字体或布局结构
-4. 若 render 脚本执行失败，停止并报错，**不得 fallback 为手写 HTML**
-
-**Pre-render Checklist（全部 ✅ 才输出最终文件）：**
-- [ ] JSON 数据符合 `sample_data.json` 中定义的所有 key 和类型
-- [ ] 调用了 `render_pmr.py`（不是手写 HTML）
-- [ ] Action Items 和 EP Update 部分有完整数据
-- [ ] 输出 HTML 中不含任何硬编码颜色或自创 CSS class
-- [ ] 文件命名遵循 `PMR_{Customer}_{Date}_{MilestoneBrief}.html` 规则
 
 ### Storage Architecture
 

@@ -21,6 +21,7 @@ Do NOT begin the Pre-Generation Dialogue until you understand all rules and the 
 
 ---
 
+
 ## 1. Generation Workflow — Pre-Generation Dialogue
 
 EB generation is **NOT** a one-shot output. EBC/高管拜访准备通常涉及多方协调，agent 和 sales 在生成前需要对话确认。
@@ -127,7 +128,7 @@ Every piece of information must carry a provenance label so sales knows the conf
 | `[网络搜索]` | 通过网络搜索获取的公开信息 | 注意时效 |
 
 **标注粒度：** 每条独立可判断真伪的断言。
-**显示规则：** 只显式标出 `[销售确认]` 和 `[网络搜索]`，无标注 = `[AI推断]`（默认）。
+**显示规则：** 三个标签均需显式标注：`[销售确认]`、`[网络搜索]`、`[AI推断]`。
 **升级机制：** 销售确认后 → 升级为 `[销售确认]`。
 
 ---
@@ -176,7 +177,7 @@ Cover in one focused paragraph:
 
 ## 6. Document Output
 
-### Default: HTML (Material Design 3)
+### Default: HTML
 
 **REQUIRED: Load `templates/sample_data.json` before generating output — this defines the expected JSON structure.**
 
@@ -185,11 +186,11 @@ Every Executive Briefing is rendered as a styled HTML file using `templates/exec
 2. Fills the template via `templates/render_eb.py`
 3. Outputs the rendered HTML file
 
-Visual style: Material Design 3 (Inter + Noto Sans SC locally-installed fonts, MD3 color tokens, 16px rounded cards, emoji icons, desktop-optimized fixed-width layout with Tailwind CDN, pill badges for stance/priority/status). PDF-optimized with @page A4 margins, break-inside:avoid, and print-color-adjust. Includes a prominent "INTERNAL USE ONLY — AWS Confidential" banner.
+Visual style: Compact document layout (Inter + Noto Sans SC, minimal borders, tight spacing, no external JS dependencies). Includes a prominent "INTERNAL USE ONLY — AWS Confidential" banner.
 
 ### On-Demand: PDF / Word
 
-- **PDF** — Generated from HTML via headless Chrome or weasyprint
+- **PDF** — `render_eb.py output.pdf` (headless Chrome)
 - **Word (.docx)** — Generated via python-docx (clean business format)
 
 Sales requests these explicitly; agent does not auto-generate.
@@ -205,22 +206,6 @@ Sales requests these explicitly; agent does not auto-generate.
 Example: `EB_MinghuaHeavy_2026-06-10_EBC-VP-Visit.html`
 
 MilestoneBrief = EP Roadmap milestone 描述精简版（2-4个英文单词，kebab-case）。EB 和对应 PMR 使用相同的 `{Date}_{MilestoneBrief}` 后缀，方便配对。
-
-### HTML 生成方式（强制）
-
-**不允许从零手写 HTML 或跳过 render 脚本。** 必须按以下顺序操作：
-
-1. 将 Executive Briefing 内容整理为符合 `templates/sample_data.json` schema 的 JSON 对象
-2. 调用 `templates/render_eb.py` 填充 `templates/executive-briefing.html.j2` 模板
-3. 不得修改 J2 模板中的 CSS class、颜色变量、字体或布局结构
-4. 若 render 脚本执行失败，停止并报错，**不得 fallback 为手写 HTML**
-
-**Pre-render Checklist（全部 ✅ 才输出最终文件）：**
-- [ ] JSON 数据符合 `sample_data.json` 中定义的所有 key 和类型
-- [ ] 调用了 `render_eb.py`（不是手写 HTML）
-- [ ] 输出 HTML 中包含 "INTERNAL USE ONLY — AWS Confidential" banner
-- [ ] 输出 HTML 中不含任何硬编码颜色或自创 CSS class
-- [ ] 文件命名遵循 `EB_{Customer}_{Date}_{MilestoneBrief}.html` 规则
 
 ### Storage Architecture
 

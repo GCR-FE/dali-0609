@@ -30,7 +30,7 @@
                     "citation_validated": "Yes",
                     "icon": "rocket_launch",
                     "description": "Demand planning, supply planning, and tariff impact modeling with end-to-end visibility across supplier tiers.",
-                    "tags": ["docs.aws.amazon.com", "Direct match", "Strong", "Current"]
+                    "tags": ["docs.aws.amazon.com"]
                 },
                 {
                     "title": "Amazon Forecast Developer Guide",
@@ -42,7 +42,7 @@
                     "citation_validated": "Yes",
                     "icon": "rocket_launch",
                     "description": "ML-based demand forecasting with tariff scenario inputs; historical data ingestion + scenario modeling.",
-                    "tags": ["docs.aws.amazon.com", "Direct match", "Strong", "Current"]
+                    "tags": ["docs.aws.amazon.com"]
                 },
                 {
                     "title": "Manufacturing Predictive Maintenance on AWS",
@@ -54,7 +54,7 @@
                     "citation_validated": "Yes",
                     "icon": "architecture",
                     "description": "IoT sensor ingestion + ML inference pipeline; same data flow pattern applies to supply chain anomaly detection.",
-                    "tags": ["aws.amazon.com/solutions", "Pattern match", "Moderate", "Recent"]
+                    "tags": ["aws.amazon.com/solutions"]
                 },
                 {
                     "title": "Oracle to AWS Migration Playbook",
@@ -66,7 +66,7 @@
                     "citation_validated": "Partial",
                     "icon": "swap_horiz",
                     "description": "Step-by-step Oracle ERP → AWS migration; covers SCM modules, data replication, and coexistence patterns.",
-                    "tags": ["prescriptive-guidance", "Migration", "Moderate", "Current"]
+                    "tags": ["prescriptive-guidance", "Migration"]
                 }
             ],
             "next_step": "Arrange Supply Chain Immersion Day with Haier NA IT leadership to validate tariff scenario models",
@@ -94,7 +94,7 @@
                     "citation_validated": "Yes",
                     "icon": "rocket_launch",
                     "description": "Foundation model hosting, fine-tuning, and RAG for enterprise GenAI applications including smart home context understanding.",
-                    "tags": ["docs.aws.amazon.com", "Direct match", "Strong", "Current"]
+                    "tags": ["docs.aws.amazon.com"]
                 },
                 {
                     "title": "IoT Greengrass ML Inference at Edge",
@@ -106,7 +106,7 @@
                     "citation_validated": "Yes",
                     "icon": "rocket_launch",
                     "description": "Deploy ML models to edge devices for local inference; supports smart home appliance real-time decision making.",
-                    "tags": ["docs.aws.amazon.com", "Direct match", "Strong", "Current"]
+                    "tags": ["docs.aws.amazon.com", "IoT Edge"]
                 },
                 {
                     "title": "Automotive Connected Vehicle Architecture",
@@ -118,7 +118,7 @@
                     "citation_validated": "Yes",
                     "icon": "architecture",
                     "description": "Edge-to-cloud data pipeline for connected devices; same IoT ingestion + ML pattern applies to smart home ecosystem.",
-                    "tags": ["aws.amazon.com/solutions", "Pattern match", "Moderate", "Recent"]
+                    "tags": ["aws.amazon.com/solutions", "Automotive"]
                 }
             ],
             "next_step": "Schedule GenAI Immersion Day with Haier R&D to prototype Bedrock-powered smart home assistant",
@@ -146,7 +146,7 @@
                     "citation_validated": "Yes",
                     "icon": "rocket_launch",
                     "description": "End-to-end e-commerce architecture covering catalog, cart, checkout, and fulfillment with multi-region deployment.",
-                    "tags": ["aws.amazon.com/retail", "Direct match", "Strong", "Current"]
+                    "tags": ["aws.amazon.com/retail"]
                 },
                 {
                     "title": "Multi-Region Application Architecture",
@@ -158,7 +158,7 @@
                     "citation_validated": "Yes",
                     "icon": "architecture",
                     "description": "Active-active multi-region patterns for low-latency global applications; directly applicable to SEA expansion.",
-                    "tags": ["whitepapers", "Pattern match", "Strong", "Current"]
+                    "tags": ["whitepapers", "Active-Active"]
                 },
                 {
                     "title": "Well-Architected Framework — Reliability Pillar",
@@ -170,7 +170,7 @@
                     "citation_validated": "Yes",
                     "icon": "check_circle",
                     "description": "Multi-AZ and multi-region reliability patterns for mission-critical e-commerce workloads.",
-                    "tags": ["Well-Architected", "Lens", "Moderate", "Current"]
+                    "tags": ["Well-Architected", "Reliability"]
                 }
             ],
             "next_step": "Conduct Well-Architected Review of current Alibaba Cloud e-commerce stack to identify migration quick wins",
