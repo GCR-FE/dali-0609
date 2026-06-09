@@ -1,7 +1,7 @@
 ---
 name: "bttroc"
 description: >
-  Turns strategic analysis + AWS solutions into a CXO-ready conversation script.
+  Turns strategic analysis + AWS solutions into a CXO-ready conversation script with value proposition.
   Use whenever sales asks about opportunities, what to pitch, how to position with an executive,
   "有什么机会", "能卖什么", "切入点", "怎么跟高管聊",
   or any hint of identifying where to sell — even if they just say "这个客户有机会吗".
@@ -49,7 +49,7 @@ Procedure 3. **View** — render the HTML/PDF deliverable from the saved record,
 ### Step 1: Inputs
 
 Required Input：
-1. **TOWS-driven Top 3 Strategic Initiatives** — the recommended moves
+1. **TOWS-driven Top 3 Strategic Initiatives** — the recommended moves, OR user's input on the opportunity details
 2. Solutions 搜索结果 (from `solutions-search`)， if content not found in context, run it in the background before proceeding.
 3. competitive intelligence 搜索结果 (from `competitive-intelligence`) if content not found in context, run it in the background before proceeding.
 4. contact profile
